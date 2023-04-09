@@ -1,0 +1,16 @@
+<div class="newDataCounter">
+  <div class="kindOfCounter">
+    <img src={{service.serviceDescription.imgUrl}}>
+    <div>{{service.serviceDescription.title}}</div>
+  </div>
+  <div>
+    Последние показания: {{service.consumption}} {{service.unit}} предоставлены {{service.dateOfConsumption | date:'yyyy-MM-dd HH:mm'}}
+  </div>
+  <div>
+    <input type="text" placeholder="Введите показания" [(ngModel)]="consumption">
+  </div>
+  <div>
+    Тариф за предоставляемую услугу: {{service.tariff}} руб. за {{service.unit}}
+  </div>
+  <button type="submit" class="submitDataButton" (click)="submitData()">Отправить данные</button>
+</div>

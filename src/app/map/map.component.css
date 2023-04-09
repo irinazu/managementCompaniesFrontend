@@ -1,0 +1,126 @@
+.wrapMapAndPanel{
+  display: flex;
+  height: 100%;
+  background-color: white;
+}
+.container {
+  width: 75%;
+}
+.blockWithImgOfHouse {
+  width: 100px;
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+}
+#megaBlock{
+  width: 30%;
+  background-color: white;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /*display: none;*/
+}
+#companies{
+  display: none;
+}
+#comments{
+  display: none;
+}
+#descriptionOfHouse{
+  display: block;
+}
+.imgInBlockWithImgOfHouse{
+  height: 90px;
+}
+.dividerTop {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid #bebebe;
+}
+.dividerBottom{
+  margin-top: 5px;
+  margin-bottom: 0px;
+
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid #bebebe;
+
+}
+.dividerBetweenEntrance{
+  width: 300px;
+  position: absolute;
+  content: "";
+  display: block;
+  border-bottom: 2px solid #000000;
+}
+.dividerBetweenBlocks{
+  width: 300px;
+  display: block;
+  border-bottom: 1px solid #3b784e;
+}
+.repairWork{
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+.informationAboutRepairWork{
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+
+}
+.titleOfBlock{
+  font-size: 15px;
+  font-weight:bold;
+  margin-left: 20px;
+}
+.block{
+  padding-top: 30px;
+  background-color: rgba(190, 190, 190, 0.16);
+  padding-bottom: 30px;
+}
+.otherBlock{
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.BeforeAndAfter{
+  display: block;
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 2px;
+}
+.headOfBlock{
+  display: flex;
+}
+.headOfBlock img{
+  height: 12px;
+  margin-left: 10px;
+}
+.headOfBlock button{
+  border: none;
+  background-color: transparent;
+  height: 15px;
+  margin-top: 3px;
+}
+
+#bodyOfBlockBasement{
+  display: none;
+}
+#bodyOfBlockEntrances{
+  display: none;
+}
+#bodyOfBlockRoof{
+  display: none;
+}
+#megaBlock::-webkit-scrollbar {
+  width: 7px;
+  background-color: #f9f9fd;
+}
+#megaBlock::-webkit-scrollbar-thumb {
+  background-color: rgba(190, 190, 190, 0.27);
+}
+
+.generalInfoAboutHouse, .options, .buttonsShowAndAdd, .addressOfPlace{
+  margin-left: 20px;
+}

@@ -1,0 +1,38 @@
+.wrapDiv{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.listOfFunctionBlock{
+  width: 150px;
+  margin-left: 5%;
+  margin-top: 20px;
+}
+.hoverMemberOption span{
+  pointer-events: none;
+}
+.hoverMemberOption :hover {
+  border-radius: 3px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  background-color: white;
+  padding: 2px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.imgSign img{
+  margin-left: 6px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  width: 20px;
+}
+.descriptionImgSign{
+  margin-left: 3px;
+}
+.memberOption {
+  margin-top: 8px;
+  transition: 0.4s ease-in-out;
+  padding-right: 4px;
+  display: flex;
+  align-items: center;
+}
+

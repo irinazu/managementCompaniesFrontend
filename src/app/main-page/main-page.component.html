@@ -1,0 +1,89 @@
+<div class="block_menuBar">
+  <ul class="menuBar">
+    <li id="mainPageImg">
+      <img src="/assets/images/homeIcon.png" alt="Main">
+    </li>
+    <li><p><a [routerLink]="['privateOffice']">Профиль</a></p></li>
+    <li>
+      <img src="/assets/images/searcherIcon.png" alt="Search">
+    </li>
+    <li>
+      <img src="/assets/images/messageIcon.png" alt="Message">
+    </li>
+    <li>
+      <img src="/assets/images/noticeIcon.png" alt="Notice">
+    </li>
+    <li><p><a href="#">Войти</a></p></li>
+  </ul>
+</div>
+
+<div class="block">
+  <div [routerLink]="['joke']" class="block_content">
+    <img src="/assets/images/newsIcon.png" alt="News">
+    <p>Новости</p>
+  </div>
+  <div [routerLink]="['map']" class="block_content">
+    <img src="/assets/images/housesIcon.png" alt="Houses">
+    <p>Дома</p>
+  </div>
+  <div class="block_content">
+    <img src="/assets/images/managmentCompaniesIcon.png" alt="Management companies">
+    <p>Управляющие компании</p>
+  </div>
+</div>
+
+<div class="loadImg">
+  <div>
+    <input accept="image/*" type="file" multiple value="select" (change)="selectFiles($event)" >
+  </div>
+  <div>
+    <button
+      [disabled]="!selectedFiles"
+      (click)="uploadFiles()">
+      Upload
+    </button>
+  </div>
+  <div>
+    <img *ngFor='let preview of previews' [src]="preview">
+  </div>
+</div>
+
+<div class="showImg" style="background-color: cadetblue;height: 500px;width: 500px" >
+  <div *ngFor="let imgH of imgOfHouseItself">
+    <img [src]="imgH.url">
+  </div>
+  <p>----------------------------------------</p>
+  <div *ngFor="let repairWorkRoof of houseForSend.roofForSend.repairWorkForSend">
+    <div *ngFor="let imgBefore of repairWorkRoof.photoBefore">
+      <img [src]="imgBefore.url">
+    </div>
+    <div *ngFor="let imgAfter of repairWorkRoof.photoAfter">
+      <img [src]="imgAfter.url">
+    </div>
+  </div>
+  <p>----------------------------------------</p>
+  <div *ngFor="let repairWorkBasement of houseForSend.basementForSend.repairWorkForSend">
+    <div *ngFor="let imgBefore of repairWorkBasement.photoBefore">
+      <img [src]="imgBefore.url">
+    </div>
+    <div *ngFor="let imgAfter of repairWorkBasement.photoAfter">
+      <img [src]="imgAfter.url">
+    </div>
+  </div>
+  <p>----------------------------------------</p>
+  <div *ngFor="let entrance of houseForSend.entranceForSend">
+    <div *ngFor="let itself of entrance.photoOfEntrance">
+      <img [src]="itself.url">
+    </div>
+    <div *ngFor="let repairWork of entrance.repairWorkForSend">
+      <div *ngFor="let imgBefore of repairWork.photoBefore">
+        <img [src]="imgBefore.url">
+      </div>
+      <div *ngFor="let imgAfter of repairWork.photoAfter">
+        <img [src]="imgAfter.url">
+      </div>
+    </div>
+  </div>
+</div>
+
+

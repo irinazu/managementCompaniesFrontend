@@ -1,0 +1,42 @@
+.wrapRequest{
+  display: flex;
+  margin-left: 10px;
+}
+.requestCard{
+  width: 500px;
+  height: 100px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  padding: 3px;
+  margin-bottom: 5px;
+}
+.requestCard div{
+  pointer-events: none;
+}
+.createNewRequest{
+  margin-left: 10px;
+}
+.historyOfRequest :hover{
+  transition: 0.4s;
+  box-shadow: 4px 4px 8px 0px rgba(48, 225, 125, 0.35);
+  cursor: pointer;
+}
+.requestCard{
+  transition: 0.4s ease-in-out;
+}
+.createNewRequestButton{
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: rgba(48, 225, 125, 0.16);
+  transition: 0.5s ease-in-out;
+}
+.createNewRequestButton:hover{
+  padding: 10px;
+  background-color: rgba(48, 225, 125, 0.42);
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}
+

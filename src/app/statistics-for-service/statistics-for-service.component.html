@@ -1,0 +1,74 @@
+<div class="charts">
+  <div class="form-group">
+    <form class="selectors">
+      <div class="select-wrapper">
+        <select name="select-category" id="selectYear" class="select">
+          <option value=13>За последние 12 месяцев</option>
+          <option value={{year}} *ngFor="let year of years">{{year}}</option>
+        </select>
+      </div>
+      <input type="submit" value="Найти" (click)="getValue()" class="submitDataButton">
+    </form>
+
+    <div class="checkBoxAndSelector">
+      <form class="checkBox">
+        <div class="select-wrapper check-wrapper" (click)="dropDown()">Choose your interests</div>
+          <div class="hideCheck" id="check-id" style="display: none">
+            <div>
+              <input type="checkbox" id="coding" name="interest" value="coding" />
+              <label for="coding" class="container">Coding</label>
+            </div>
+            <div>
+              <input type="checkbox" id="music" name="interest" value="music" />
+              <label for="music" class="container">Music</label>
+            </div>
+          </div>
+      </form>
+      <div class="select-wrapper select-wrapperMargin" >
+        <select name="select-category" id="selectMonth" class="select" >
+          <option value={{month}} *ngFor="let month of months">{{month}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div id="chartdiv" class="statisticsChart"></div>
+  <div class="statisticsData">
+    <div class="statisticsDataMember">
+      <div class="statisticsDataMemberInner">
+        <span class="valueOfConsumption">{{maxMonth.consumption}} {{maxMonth.unit}}</span>
+        <span class="monthOfConsumption">Месяц наибольшего потребления: {{maxMonth.month}}</span>
+      </div>
+    </div>
+    <div class="statisticsDataMember">
+      <div class="statisticsDataMemberInner">
+        <span class="valueOfConsumption">{{minMonth.consumption}} {{minMonth.unit}}</span>
+        <span class="monthOfConsumption">Месяц наименьшего потребления: {{minMonth.month}}</span>
+      </div>
+    </div>
+    <div class="statisticsDataMember">
+      <div class="statisticsDataMemberInner">
+        <span class="valueOfConsumption">{{averageMedian}} {{minMonth.unit}}</span>
+        <span class="monthOfConsumption">Средний показатель потребления</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="allService">
+    <div class="allServiceDetails">Детали по услугам</div>
+    <div class="certainService" *ngFor="let ser of services.reverse()">
+      <div class="certainServiceMonth">
+        <div class="certainServiceMonthDivFirst">{{ser.month}}</div>
+        <div>{{ser.year}}</div>
+      </div>
+      <div class="certainServiceData">
+        <div>Потреблено за расчетный период: {{ser.consumption}} {{ser.unit}}</div>
+        <div>Тариф: {{ser.tariff}} руб. за 1 {{ser.unit}}</div>
+        <div>Долг за расчетный период: {{ser.dutyForThisMonth}} руб.</div>
+        <div *ngIf="ser.repaid; else notRepaid" class="check">Оплачено</div>
+        <ng-template #notRepaid><div class="check notCheck">Неоплачено</div></ng-template>
+      </div>
+    </div>
+  </div>
+</div>

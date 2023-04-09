@@ -1,0 +1,20 @@
+<div class="paymentsDiv">
+
+  <div class="paymentCards">
+    <div class="paymentCard" *ngFor="let pay of payments">
+      <div class="paymentCardDate">{{pay.date |date:"yyyy-MM-dd"}} {{pay.time}}</div>
+      <div class="paymentCardCertain">
+        <div>
+          <img src="assets/images/ruble.png">
+        </div>
+        <div class="paymentCertain">
+          <div>{{pay.service.serviceDescription.title}}</div>
+          <div class="paymentCertainSumma">{{pay.summa}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sortDiv">
+    <div>За неделю</div>
+  </div>
+</div>

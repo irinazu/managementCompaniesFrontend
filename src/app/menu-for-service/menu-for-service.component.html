@@ -1,0 +1,16 @@
+<div class="menuForService">
+  <div *ngIf="count" class="memberOfMenuFor" [routerLink]="['newDataCounter',id]" (click)="transparentBorder('newInfo')">
+      Новые показания
+    <div class="borderLine" id="newInfo"></div>
+  </div>
+  <div class="memberOfMenuFor" [routerLink]="['historyOfService',id]" (click)="transparentBorder('historyInfo')">Квитанции/История показаний
+    <div class="borderLine" id="historyInfo"></div>
+  </div>
+  <div class="memberOfMenuFor" [routerLink]="['statisticsService',id]" (click)="transparentBorder('statisticsInfo')">Статистика
+    <div class="borderLine" id="statisticsInfo"></div>
+  </div>
+  <div class="memberOfMenuFor" [routerLink]="['debtsOfCertainService',id]" (click)="transparentBorder('deptInfo')">Долг по услуге
+    <div class="borderLine" id="deptInfo"></div>
+  </div>
+</div>
+<router-outlet></router-outlet>

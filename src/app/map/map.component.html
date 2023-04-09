@@ -1,0 +1,194 @@
+<div class="wrapMapAndPanel">
+<div id="megaBlock">
+  <div class="addressOfPlace">{{localities}}, {{thoroughfare}}, {{numberOfHouse}}</div>
+
+  <!--<div  class="blockWithImgOfHouse">
+    <img [src]="img.url" class="imgInBlockWithImgOfHouse" *ngFor="let img of imageOfHouse">
+  </div>-->
+  <div class="blockWithImgOfHouse">
+    <img [src]="imgH.url" *ngFor="let imgH of imgOfHouseItself" class="imgInBlockWithImgOfHouse">
+  </div>
+  <div class="buttonsShowAndAdd">
+    <button type="submit" (click)="showAllPhoto()">Смотреть все</button>
+    <button type="submit" (click)="addNewPhotoFroHouse()">Добавить фото</button>
+  </div>
+  <div class="blocksOfInformation">
+    <div>
+      <div class="options">
+        <span id="titleDescriptionOfHouse" (click)="onDescriptionClick()">Описание дома</span>
+        <span id="titleCompanies" (click)="onCompaniesClick()">Дом обслуживают</span>
+        <span id="titleComments" (click)="onCommentsClick()">Отзывы</span>
+      </div>
+      <div id="descriptionOfHouse">
+        <div class="generalInfoAboutHouse">
+        <p>{{houseForSend.homeCondition}}</p>
+        <div class="entrance">
+          <p>Количество подъездов: {{houseForSend.numberOfEntrance}}</p>
+        </div>
+        <div class="floors">
+          <p>Количество этажей: {{houseForSend.numberOfFloor}}</p>
+        </div>
+        <div class="floors">
+          <p>Количество квартир: {{houseForSend.numberOfFlats}}</p>
+        </div>
+        <div class="floors">
+          <p>Дата основания: {{houseForSend.yearOfConstruction}}</p>
+        </div>
+        <div class="floors">
+          <p>Наличие лифта: {{houseForSend.lift}}</p>
+        </div>
+        <div class="lifts">
+          <div class="historyOfRepairOfLifts">
+            <div class="kindOfRepair"></div>
+            <div class="dateOfRepair"></div>
+            <div class="photo"></div>
+          </div>
+        </div>
+        </div>
+        <div class="otherBlock">
+          <div class="headOfBlock">
+            <span class="titleOfBlock">Крыша</span>
+            <button (click)="clickArrowRoof()"><img src="assets/images/arrowDown.png" alt="arrow" id="arrowInRoof"></button>
+          </div>
+          <div id="bodyOfBlockRoof">
+            <div *ngFor="let repairWorkRoof of houseForSend.roofForSend.repairWorkForSend" class="repairWork">
+              <div class="informationAboutRepairWork">
+                <span>Ремонтная работа</span>
+                <span>Описание: {{repairWorkRoof.description}}</span>
+                <span>Дата: {{repairWorkRoof.date}}</span>
+              </div>
+              <span class="BeforeAndAfter">До</span>
+              <div class="blockWithImgOfHouse">
+                <img [src]="imgBefore.url" *ngFor="let imgBefore of repairWorkRoof.photoBefore" class="imgInBlockWithImgOfHouse">
+              </div>
+              <span class="BeforeAndAfter">После</span>
+              <div class="blockWithImgOfHouse">
+                <img [src]="imgAfter.url" *ngFor="let imgAfter of repairWorkRoof.photoAfter" class="imgInBlockWithImgOfHouse">
+              </div>
+              <div class="dividerBottom"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="headOfBlock">
+            <span class="titleOfBlock">Подвал</span>
+            <button (click)="clickArrowBasement()"><img src="assets/images/arrowDown.png" alt="arrow" id="arrowInBasement"></button>
+          </div>
+          <div id="bodyOfBlockBasement">
+            <div *ngFor="let repairWorkBasement of houseForSend.basementForSend.repairWorkForSend" class="repairWork">
+              <div class="informationAboutRepairWork">
+                <span>Ремонтная работа</span>
+                <span>Описание: {{repairWorkBasement.description}}</span>
+                <span>Дата: {{repairWorkBasement.date}}</span>
+              </div>
+              <span class="BeforeAndAfter">До</span>
+              <div class="blockWithImgOfHouse">
+                <img [src]="imgBefore.url" *ngFor="let imgBefore of repairWorkBasement.photoBefore" class="imgInBlockWithImgOfHouse">
+              </div>
+              <span class="BeforeAndAfter">После</span>
+              <div class="blockWithImgOfHouse">
+                <img [src]="imgAfter.url" *ngFor="let imgAfter of repairWorkBasement.photoAfter" class="imgInBlockWithImgOfHouse">
+              </div>
+              <div class="dividerBottom"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="otherBlock">
+          <div class="headOfBlock">
+            <span class="titleOfBlock">Подъезды</span>
+            <button (click)="clickArrowEntrances()"><img src="assets/images/arrowDown.png" alt="arrow" id="arrowInEntrance"></button>
+          </div>
+          <div id="bodyOfBlockEntrances">
+            <div *ngFor="let entrance of houseForSend.entranceForSend">
+              <span>{{entrance.numberOfEntrance}}</span>
+              <div class="blockWithImgOfHouse">
+                <img [src]="itself.url" *ngFor="let itself of entrance.photoOfEntrance" class="imgInBlockWithImgOfHouse">
+              </div>
+              <div *ngFor="let repairWork of entrance.repairWorkForSend" class="repairWork">
+                <div class="informationAboutRepairWork">
+                  <span>Ремонтная работа</span>
+                  <span>Описание: {{repairWork.description}}</span>
+                  <span>Дата: {{repairWork.date}}</span>
+                </div>
+                <span class="BeforeAndAfter">До</span>
+                <div class="blockWithImgOfHouse">
+                  <img [src]="imgBefore.url" *ngFor="let imgBefore of repairWork.photoBefore" class="imgInBlockWithImgOfHouse">
+                </div>
+                <span class="BeforeAndAfter">После</span>
+                <div class="blockWithImgOfHouse">
+                  <img [src]="imgAfter.url" *ngFor="let imgAfter of repairWork.photoAfter" class="imgInBlockWithImgOfHouse">
+                </div>
+                <div class="dividerBottom"></div>
+              </div>
+              <div class="dividerBetweenEntrance"></div>
+            </div>
+        </div>
+
+      </div>
+      </div>
+      <div id="companies">
+        <p>Название</p><p>За что отвечает</p>
+        <p>Название</p><p>За что отвечает</p>
+        <p>Название</p><p>За что отвечает</p>
+      </div>
+      <div id="comments">
+        <p>Comments</p>
+        <div class="user"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <ya-map id="map"
+    [center]="[57.5262, 38.3061]"
+    [zoom]="11"
+    (yaclick)="onMapClick($event)"
+    >
+    <!--(yacontextmenu)="onMapContextMenu($event)"
+    (balloonopen)="onMapBalloonOpen($event)"-->
+  </ya-map>
+</div>
+</div>
+
+<!--<div class="showImg" style="background-color: cadetblue;height: 500px;width: 500px" >
+  <div *ngFor="let imgH of imgOfHouseItself">
+    <img [src]="imgH.url">
+  </div>
+  <p>----------------------------------------</p>
+  <div *ngFor="let repairWorkRoof of houseForSend.roofForSend.repairWorkForSend">
+    <div *ngFor="let imgBefore of repairWorkRoof.photoBefore">
+      <img [src]="imgBefore.url">
+    </div>
+    <div *ngFor="let imgAfter of repairWorkRoof.photoAfter">
+      <img [src]="imgAfter.url">
+    </div>
+  </div>
+  <p>----------------------------------------</p>
+  <div *ngFor="let repairWorkBasement of houseForSend.basementForSend.repairWorkForSend">
+    <div *ngFor="let imgBefore of repairWorkBasement.photoBefore">
+      <img [src]="imgBefore.url">
+    </div>
+    <div *ngFor="let imgAfter of repairWorkBasement.photoAfter">
+      <img [src]="imgAfter.url">
+    </div>
+  </div>
+  <p>----------------------------------------</p>
+  <div *ngFor="let entrance of houseForSend.entranceForSend">
+    <div *ngFor="let itself of entrance.photoOfEntrance">
+      <img [src]="itself.url">
+    </div>
+    <div *ngFor="let repairWork of entrance.repairWorkForSend">
+      <div *ngFor="let imgBefore of repairWork.photoBefore">
+        <img [src]="imgBefore.url">
+      </div>
+      <div *ngFor="let imgAfter of repairWork.photoAfter">
+        <img [src]="imgAfter.url">
+      </div>
+    </div>
+  </div>
+</div>-->
+

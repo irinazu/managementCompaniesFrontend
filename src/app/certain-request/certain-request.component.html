@@ -1,0 +1,19 @@
+<div class="history">
+  <div><span class="request">Заявка типа: </span></div>
+  <div class="certainRequest">
+    <div><span class="requestTitle">{{certainRequest.title}}</span></div>
+    <div><span>Комментарий: {{certainRequest.commentary}}</span></div>
+  </div>
+
+  <div [ngClass]="{certainBlockOfRequestForCompany:blockRequest.managementCompanyUpdate,
+                  certainBlockOfRequest:blockRequest.userUpdate}" *ngFor="let blockRequest of blocksOfRequest">
+    <div class="timeAndStatus">
+      <span class="status">{{blockRequest.status}}</span>
+      <span class="date">{{blockRequest.date}} в {{blockRequest.time}}</span>
+    </div>
+    <span *ngIf="blockRequest.managementCompanyUpdate; else userUpdateBlock" class="answerCompany">Ответ компании</span>
+    <ng-template #userUpdateBlock><span class="answerUser">Ответ пользователя</span></ng-template>
+    <span class="commentary">{{blockRequest.commentary}}</span>
+    <span class="files">ФАЙЛЫ</span>
+  </div>
+</div>

@@ -1,0 +1,181 @@
+<div class="generalStatistics">
+  <div class="form-group">
+      <form class="selectors">
+        <div class="select-wrapper">
+          <select name="select-category" id="selectYear" class="select">
+            <option value={{year}} *ngFor="let year of years">{{year}}</option>
+          </select>
+        </div>
+        <div class="select-wrapper select-wrapperMargin" >
+          <select name="select-category" id="selectMonth" class="select">
+            <option value={{month}} *ngFor="let month of months">{{month}}</option>
+          </select>
+        </div>
+        <input type="submit" value="Найти" (click)="getValue()" class="submitDataButton">
+      </form>
+  </div>
+
+  <input type="submit" value="Сформировать квитанцию" (click)="createPdf()" class="generateReceipt">
+
+  <div id="divPie" class="generalStatisticsChart"></div>
+  <div class="allService">
+    <div class="certainService" *ngFor="let ser of services">
+      <div class="certainServiceImg">
+        <img src="{{ser.serviceDescription.imgUrl}}">
+      </div>
+      <div class="certainServiceData">
+        <div>{{ser.title}}</div>
+        <div>Потреблено за расчетный период: {{ser.consumption}} {{ser.unit}}</div>
+        <div>Тариф: {{ser.tariff}} руб.</div>
+        <div>Долг за расчетный период: {{ser.dutyForThisMonth}} руб.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tableInPdf" class="h">
+  <div class="tableInPdfHead">
+    <div class="tableInPdfHeadTitle">
+      <div class="tableInPdfHeadTitleGeneralInformation">
+        <div>Единый платежный документ за жилое помещение</div>
+        <div>Коммунальные и прочие платежи за период: февраль 2023 года</div>
+      </div>
+      <div class="tableInPdfHeadTitlePayInformation">
+        Реквизиты для оплаты: Наименование организации, р/с 0000000 в Наименовании банка к/с 000000
+        БИК 00000000 ИНН 00000000 КПП 00000000 ОГРН 00000000 ОКТМО 00000000
+      </div>
+    </div>
+    <div class="tableInPdfHeadMainData">
+      <div>
+        <div>Ф.И.О.: Сойкина Валентина Ивановна</div>
+        <div>Адрес: 558963 г Саратов, ул Никитина, д. 8, кв. 95</div>
+      </div>
+      <div class="tableInPdfHeadMainDataResult">
+        <div>Лицевой счет: 13548498466</div>
+        <div>К оплате: 46666 руб.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tableInPdfInfoAboutCounterTitle">
+    Информация о показаниях индивидуальных приборов учета (ПУ)
+  </div>
+  <table class="tableInPdfInfoAboutCounter">
+    <tr class="tableInPdfInfoAboutCounterHeadLine">
+      <td>Вид услуг</td>
+      <td>Номер прибора учета</td>
+      <td>Дата очередной государственной проверки ПУ</td>
+      <td>Последние показания</td>
+      <td>Дата последних показаний</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterMainLine" *ngFor="let ser of serviceWithCounter">
+      <td>{{ser.serviceDescription.title}}</td>
+      <td>НОМЕР ПУ</td>
+      <td>Дата гос проверки</td>
+      <td>{{ser.consumption}}</td>
+      <td>{{ser.dateOfConsumption|date:"yyyy-MM-dd"}}</td>
+    </tr>
+  </table>
+
+  <div class="tableInPdfInfoAboutCounterTitle">
+    Информация о расчетах с организациями исполнителями
+  </div>
+  <table class="tableInPdfInfoAboutCounter">
+    <tr class="tableInPdfInfoAboutCounterHeadLine">
+      <td rowspan="2">Код организации</td>
+      <td rowspan="2">Наименование организации</td>
+      <td colspan="2">Долг(+) переплата (-) на начало периода, руб.</td>
+      <td colspan="2">Оплачено, руб.</td>
+      <td colspan="2">Начисленно за период, руб.</td>
+      <td colspan="2">Перерасчет, руб.</td>
+      <td colspan="2">Долг(+) переплата (-) на конец периода, руб.</td>
+      <td colspan="2">Сумма к оплате, руб.</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterHeadLine">
+      <td>Услуги</td>
+      <td>Пенни</td>
+      <td>Услуги</td>
+      <td>Пенни</td>
+      <td>Услуги</td>
+      <td>Пенни</td>
+      <td>Услуги</td>
+      <td>Пенни</td>
+      <td>Услуги</td>
+      <td>Пенни</td>
+      <td>Услуги</td>
+      <td>Пенни</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterMainLine" *ngFor="let ser of services">
+      <td>{{ser.codeOfProviderCompany}}</td>
+      <td>{{ser.titleOfProviderCompany}}</td>
+      <td>{{ser.generalDutyForService-ser.dutyForThisMonth}}</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>{{ser.dutyForThisMonth}}</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>{{ser.generalDutyForService}}</td>
+      <td>0</td>
+      <td>{{ser.generalDutyForService}}</td>
+      <td>0</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterMainLine result">
+      <td colspan="12">
+        Итого по услугам
+      </td>
+      <td colspan="2">{{generalResultWithDuty}}</td>
+    </tr>
+  </table>
+
+  <div class="tableInPdfInfoAboutCounterTitle">
+    Расчет размера платы за расчетный период по услугам
+  </div>
+  <table class="tableInPdfInfoAboutCounter">
+    <tr class="tableInPdfInfoAboutCounterHeadLine">
+      <td>Код организации</td>
+      <td>Вид услуги</td>
+      <td>Единица измерения</td>
+      <td>Объем услуги</td>
+      <td>Тариф в руб.</td>
+      <td>Итого начислено за период, руб.</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterMainLine" *ngFor="let ser of services">
+      <td>{{ser.codeOfProviderCompany}}</td>
+      <td>{{ser.serviceDescription.title}}</td>
+      <td>{{ser.unit}}</td>
+      <td>{{ser.consumption}}</td>
+      <td>{{ser.tariff}}</td>
+      <td>{{ser.dutyForThisMonth}}</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterMainLine result">
+      <td colspan="5">
+        Всего начислено за период по услугам
+      </td>
+      <td>{{monthResult}}</td>
+    </tr>
+  </table>
+
+  <div class="tableInPdfInfoAboutCounterTitle">
+    Информация об организациях/исполнителях
+  </div>
+  <table class="tableInPdfInfoAboutCounter">
+    <tr class="tableInPdfInfoAboutCounterHeadLine">
+      <td>Код организации</td>
+      <td>Организация</td>
+      <td>Телефон</td>
+      <td>Email</td>
+      <td>Юр. адресс</td>
+      <td>Собственник компании</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterMainLine" *ngFor="let provider of providersCompany">
+      <td>{{provider.id}}</td>
+      <td>{{provider.title}}</td>
+      <td>{{provider.phone}}</td>
+      <td>{{provider.email}}</td>
+      <td>{{provider.town}}, {{provider.street}}, {{provider.house}}</td>
+      <td>{{provider.surnameOfBoss}} {{provider.nameOfBoss}}, {{provider.patronymicOfBoss}}</td>
+    </tr>
+  </table>
+</div>

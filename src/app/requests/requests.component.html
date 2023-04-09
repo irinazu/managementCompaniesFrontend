@@ -1,0 +1,12 @@
+<div class="wrapRequest">
+  <div class="historyOfRequest">
+    <div class="requestCard" *ngFor="let req of requests" [routerLink]="['requestHistory',req.id]">
+      <div><span>Заявка: {{req.title}}</span></div>
+      <div><span>Комментарий: {{req.commentary}}</span></div>
+    </div>
+  </div>
+  <div class="createNewRequest">
+    <button class="createNewRequestButton" [routerLink]="['createRequest']" >Новая заявка</button>
+  </div>
+  <router-outlet></router-outlet>
+</div>

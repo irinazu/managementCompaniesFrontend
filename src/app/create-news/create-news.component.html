@@ -1,0 +1,28 @@
+<div class="newsCreate">
+  <div class="headOfPagePublication">
+    <div class="publicationFrom">
+      Публикация от:
+    </div>
+    <div class="publicate">
+      <button class="createNewPublication" >Опубликовать</button>
+    </div>
+  </div>
+  <div class="titleOfNews">
+    <input type="text" placeholder="Название">
+  </div>
+  <editor [(ngModel)]="ngModel" apiKey=""
+    [init]="{ plugins: 'lists link image table code help wordcount' }"
+  ></editor>
+
+  <div class="addedTags"></div>
+
+  <div class="searchTag">
+    <input type="text" placeholder="Тэг" (input)="changeTag()">
+  </div>
+
+  <button (click)="sub()">sub</button>
+  <div class="listTagsForAdd"></div>
+  <div class="tagsDiv">
+
+  </div>
+</div>

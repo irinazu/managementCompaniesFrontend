@@ -1,0 +1,46 @@
+.paymentsDiv {
+  width: 30%;
+  position: absolute;
+  top: 60px;
+  left: 20%;
+  display: flex;
+}
+.sortDiv{
+  margin-top: 23px;
+  height: 10%;
+  padding:10px;
+  border-radius: 3px;
+  margin-left: 10%;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0px rgba(86, 190, 159, 0.62);
+
+}
+.sortDiv div{
+  width: 100px;
+}
+.paymentCard{
+  margin-bottom: 20px;
+  width: 300px;
+}
+.paymentCardDate{
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.paymentCardCertain{
+  border-left:3px solid rgba(86, 190, 159, 0.71);
+  border-radius: 3px;
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+
+}
+.paymentCardCertain img{
+  width: 35px;
+}
+.paymentCertain{
+  margin-left: 10px;
+}
+.paymentCertainSumma{
+  font-size: 20px;
+}

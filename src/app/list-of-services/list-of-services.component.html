@@ -1,0 +1,24 @@
+<router-outlet></router-outlet>
+<div class="listOfService">
+  <div class="optionOfService">
+    <div class="descriptionWithImg" routerLink="generalStatistics">
+      <span>Общие показания</span>
+      <img src="assets/images/arrow.png">
+    </div>
+  </div>
+  <div class="optionOfService">
+    <div class="descriptionWithImg" routerLink="payments">
+      <span>История оплаты</span>
+      <img src="assets/images/arrow.png">
+    </div>
+  </div>
+
+  <div (click)="change(ser.counter)" class="optionOfService" [routerLink]="['serviceMenuCounter',ser.id]" *ngFor="let ser of serviceDescription">
+    <div class="descriptionWithImg">
+      <span>{{ser.title}}</span>
+      <img src="assets/images/arrow.png">
+    </div>
+  </div>
+
+</div>
+

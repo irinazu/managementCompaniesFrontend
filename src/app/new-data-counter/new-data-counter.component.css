@@ -1,0 +1,48 @@
+.newDataCounter{
+  padding: 20px 0px 20px 20px;
+  border-radius: 5px;
+  background-color: white;
+  width: 58%;
+  position: absolute;
+  top: 60px;
+  left: 20%;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+
+}
+.newDataCounter div{
+  margin-bottom: 10px;
+}
+.kindOfCounter{
+  display: flex;
+}
+.kindOfCounter img{
+  width: 50px;
+  margin-right: 20px;
+}
+input{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 10px;
+  transition: 0.4s ease-in-out;
+}
+input:focus{
+  outline: 0;
+  border-bottom-color: rgba(48, 225, 125, 0.8);
+  transition: 0.3s;
+}
+.submitDataButton{
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: rgba(48, 225, 125, 0.16);
+  transition: 0.5s ease-in-out;
+  margin-top: 20px;
+}
+.submitDataButton:hover{
+  padding: 10px;
+  background-color: rgba(48, 225, 125, 0.42);
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}

@@ -1,0 +1,106 @@
+.debtsDiv{
+  width: 55%;
+  position: absolute;
+  top: 60px;
+  left: 20%;
+}
+.headDebtsDiv{
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.cardForMonthDebt{
+  display: flex;
+  padding: 20px;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  margin-bottom: 5px;
+  border-left:3px solid rgba(86, 190, 159, 0.71);
+
+}
+
+.generalDebtDescription{
+  display: flex;
+  flex-direction: column;
+}
+.generalDebtDescription div{
+  margin-left: auto;
+  margin-right: auto;
+}
+.generalDebtDescription img{
+  width: 60px;
+}
+.payDiv{
+  display: flex;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+.payDiv{
+  margin-top: 30px;
+}
+.payDiv button{
+  margin-left: 10px;
+  width: 100%;
+}
+.receipt{
+  margin-left: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 40px;
+  border-left:3px solid rgba(86, 190, 159, 0.91);
+}
+.receipt div{
+  width: 50px;
+  height: 40px;
+  margin-left: 10px;
+  display: flex;
+  align-items: center
+}
+.cardForMonthDebtMainBlock{
+  width: 400px;
+}
+.generalDebtSum{
+  display: flex;
+  font-weight: 300;
+  width: 600px;
+}
+.generalDebtSum div{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.submitDataButton{
+  border: none;
+  padding: 5px;
+  border-radius: 4px;
+  background-color: rgba(48, 225, 125, 0.16);
+  transition: 0.5s ease-in-out;
+}
+.submitDataButton:hover{
+  padding: 6px;
+  background-color: rgba(48, 225, 125, 0.42);
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}
+.cardForMonthDebtMainBlockDate{
+  font-size: 17px;
+  text-transform: uppercase;
+}
+.cardForMonthDebtMainBlockDubt{
+  font-weight: 300;
+}
+.generalDebtDescriptionTitle{
+  margin-bottom: auto;
+  margin-top: auto;
+  font-size: 20px;
+}
+.generalDebtSumNumber{
+  font-size: 20px;
+  margin-left: 10px;
+
+}

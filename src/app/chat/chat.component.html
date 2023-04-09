@@ -1,0 +1,83 @@
+<div class="toolbar" role="banner">
+  <img  width="40"  alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="/>
+  <span>Spring Angular Web Socket</span>
+</div>
+
+
+<!--<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+<div class="component">
+  <div class="container-fluid h-100">
+    <div class="row justify-content-center h-100">
+      <div class="card-footer"></div>
+    </div>
+  </div>
+  <div class="col-md-8 col-xl-6 chat">
+    <div class="card">
+      <div class="card-header msg_head">
+        <div class="d-flex bd-highlight">
+          <div class="img_cont">
+          </div>
+          <div class="user_info">
+            <span>Chat con {{ otherUser }}</span>
+          </div>
+        </div>
+      </div>
+      <div #chat id="chat" class="card-body msg_card_body">
+
+        <div *ngFor="let msg of messages | async">
+          <div
+            class="d-flex justify-content-start mb-4"
+            *ngIf="msg.sender === otherUser!; else thisUserMsg"
+          >
+            <div class="img_cont_msg">
+              <img
+                class="rounded-circle user_img_msg"
+              />
+            </div>
+            <div class="msg_cotainer">
+              {{ msg.content }}
+
+            </div>
+          </div>
+
+          <ng-template #thisUserMsg>
+            <div class="d-flex justify-content-end mb-4">
+              <div class="msg_cotainer_send">
+                {{ msg.content }}
+              </div>
+              <div class="img_cont_msg">
+                <img
+                  class="rounded-circle user_img_msg"
+                />
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="input-group">
+          <div class="input-group-append">
+            <span class="input-group-text attach_btn"
+            ><i class="fas fa-paperclip"></i
+            ></span>
+          </div>
+          <textarea
+            [formControl]="newMessage"
+            name=""
+            class="form-control type_msg"
+            placeholder="Type your message..."
+          ></textarea>
+          <div class="input-group-append">
+            <span (click)="sendMsg()" class="input-group-text send_btn"
+            ><i class="material-icons" style="font-size: 36px">send</i></span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->

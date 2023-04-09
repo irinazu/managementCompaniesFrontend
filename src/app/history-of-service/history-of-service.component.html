@@ -1,0 +1,28 @@
+<div class="historyOfService">
+  <div class="descriptionOfService">
+    <div>
+      <img src={{services[0].serviceDescription.imgUrl}}>
+    </div>
+    <div>{{services[0].serviceDescription.title}} в {{services[0].unit}}</div>
+  </div>
+  <div class="mainBlockHistoryOfService">
+    <div class="blockOfServices">
+      <div class="historyOfCertainService" *ngFor="let ser of services">
+        <div class="historyOfCertainServiceData">
+          <div>Дата рассчета показаний: {{ser.dateOfConsumption | date: 'yyyy-MM-dd HH:ss'}}</div>
+          <div>Потреблено {{ser.consumption}} {{ser.unit}}</div>
+          <div>Тариф: {{ser.tariff}} {{ser.unit}}</div>
+          <div>{{ser.dutyForThisMonth}} руб за месяц предоставления показаний</div>
+          <div *ngIf="ser.repaid; else notRepaid">Оплачено</div>
+          <ng-template #notRepaid><div>Неоплачено</div></ng-template>
+        </div>
+        <div class="receipt">
+          <div>Квитанция</div>
+        </div>
+      </div>
+    </div>
+    <div class="orderDiv">
+      <p></p>
+    </div>
+  </div>
+</div>

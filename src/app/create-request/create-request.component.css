@@ -1,0 +1,43 @@
+.wrapRequest{
+  margin-left: 10px;
+}
+.wrapRequest div{
+  margin-bottom: 5px;
+}
+textarea{
+  width: 400px;
+  height: 200px;
+}
+.addressForRequest input,textarea{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 10px;
+  transition: 0.4s ease-in-out;
+}
+input:focus{
+  outline: 0;
+  border-bottom-color: rgba(48, 225, 125, 0.8);
+  transition: 0.3s;
+}
+textarea:focus{
+  outline: 0;
+  border-bottom-color: rgba(48, 225, 125, 0.8);
+  transition: 0.3s;
+}
+input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: rgba(48, 225, 125, 0.16);
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+input[type=file]::file-selector-button:hover {
+  background: rgba(48, 225, 125, 0.42);
+}
+.addressForRequest input{
+  width: 60%;
+}
+

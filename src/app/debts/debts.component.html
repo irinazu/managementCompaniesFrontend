@@ -1,0 +1,25 @@
+<div class="debtsDiv">
+  <div class="headDebtsDiv">
+    <div class="generalDebt">
+      <div class="generalDebtDescription">
+        <div>
+          <img src="{{generalServiceModel.serviceDescription.imgUrl}}">
+        </div>
+        <div class="generalDebtDescriptionTitle">{{generalServiceModel.serviceDescription.title}}</div>
+      </div>
+    </div>
+    <div class="payDiv">
+      <div class="generalDebtSum"><div>Общий долг по услуге:</div> <div class="generalDebtSumNumber">{{generalServiceModel.generalDutyForService}} руб.</div></div>
+      <button type="submit" class="submitDataButton">Оплатить</button>
+    </div>
+  </div>
+  <div class="cardForMonthDebt" *ngFor="let ser of services">
+    <div class="cardForMonthDebtMainBlock">
+      <div class="cardForMonthDebtMainBlockDate">{{ser.month}} {{ser.dateOfConsumption | date: "yyyy"}}</div>
+      <div class="cardForMonthDebtMainBlockDubt">Долг по услуге за расчетный период: {{ser.dutyForThisMonth}} руб.</div>
+    </div>
+    <div class="receipt">
+      <div>Квитанция</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+
+<div class="wrapDiv">
+  <div class="listOfFunctionBlock">
+    <div class="hoverMemberOption">
+      <div class="memberOption" [routerLink]="['requests']">
+        <span class="imgSign"><img src="/assets/images/requestIcon.png"></span>
+        <span class="descriptionImgSign">Заявки</span>
+      </div>
+    </div>
+    <div class="hoverMemberOption">
+      <div class="memberOption" [routerLink]="['listOfService']">
+        <span class="imgSign"><img src="/assets/images/maintenance.png"></span>
+        <span class="descriptionImgSign">Оплата услуг</span>
+      </div>
+    </div>
+    <div class="hoverMemberOption">
+      <div class="memberOption">
+        <span class="imgSign"><img src="/assets/images/chat.png"></span>
+        <span class="descriptionImgSign">Сообщения</span>
+      </div>
+    </div>
+    <div class="hoverMemberOption">
+      <div class="memberOption" [routerLink]="['vote']">
+        <span class="imgSign"><img src="/assets/images/voting-box.png"></span>
+        <span class="descriptionImgSign">Голосования</span>
+      </div>
+    </div>
+    <div class="hoverMemberOption">
+      <div class="memberOption" [routerLink]="['createNews']">
+        <span class="imgSign"><img src="/assets/images/newspaper.png"></span>
+        <span class="descriptionImgSign">Новости</span>
+      </div>
+    </div>
+    <div class="hoverMemberOption">
+      <div class="memberOption">
+        <span class="imgSign"><img src="/assets/images/loudspeaker.png"></span>
+        <span class="descriptionImgSign">Объявления</span>
+      </div>
+    </div>
+    <div class="hoverMemberOption">
+      <div class="memberOption">
+        <span class="imgSign"><img src="/assets/images/bell.png"></span>
+        <span class="descriptionImgSign">Уведомления</span>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+  <div class="newsBlock"></div>
+</div>
