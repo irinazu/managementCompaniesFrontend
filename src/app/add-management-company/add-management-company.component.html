@@ -1,0 +1,54 @@
+<div class="addWorker">
+  <div class="titleAddWorker" >Добавить Управляющую компанию</div>
+
+  <div class="description">Название Управляющей компании</div>
+  <input type="text" placeholder="Название Управляющей компании" id="titleMC" [(ngModel)]="managementCompany.title">
+  <div *ngIf="errorTitle.length!=0" class="error">{{errorTitle}}</div>
+
+  <div class="description">Город</div>
+  <input type="text" placeholder="Город" id="town"  [(ngModel)]="managementCompany.town">
+  <div *ngIf="errorTown.length!=0" class="error">{{errorTown}}</div>
+
+  <div class="description">Улица</div>
+  <input type="text" placeholder="Улица" id="street" [(ngModel)]="managementCompany.street">
+  <div *ngIf="errorStreet.length!=0" class="error">{{errorStreet}}</div>
+
+  <div class="description">Дом</div>
+  <input type="email" placeholder="Дом" id="house"  [(ngModel)]="managementCompany.house">
+  <div *ngIf="errorHouse.length!=0" class="error">{{errorHouse}}</div>
+
+  <div class="description">БИК банка</div>
+  <input type="phone" placeholder="БИК банка" id="bic"  [(ngModel)]="managementCompany.bicBank">
+  <div *ngIf="errorBIC.length!=0" class="error">{{errorBIC}}</div>
+
+  <div class="description">КПП</div>
+  <input type="text" placeholder="КПП" id="kpp"  [(ngModel)]="managementCompany.kpp">
+  <div *ngIf="errorKPP.length!=0" class="error">{{errorKPP}}</div>
+
+  <div class="description">ИНН</div>
+  <input type="text" placeholder="ИНН" id="inn"  [(ngModel)]="managementCompany.inn">
+  <div *ngIf="errorINN.length!=0" class="error">{{errorINN}}</div>
+
+  <div class="description">Лицевой счет</div>
+  <input type="text" placeholder="Лицевой счет" id="checkingAccount"  [(ngModel)]="managementCompany.checkingAccount">
+  <div *ngIf="errorCheckingAccount.length!=0" class="error">{{errorCheckingAccount}}</div>
+
+  <div class="description">Корреспондентский счет</div>
+  <input type="text" placeholder="Корреспондентский счет" id="correspondentAccount" [(ngModel)]="managementCompany.correspondentAccount">
+  <div *ngIf="errorCorrespondentAccount.length!=0" class="error">{{errorCorrespondentAccount}}</div>
+
+  <div class="description">Название банка</div>
+  <input type="text" placeholder="Название банка" id="titleBank"  [(ngModel)]="managementCompany.bankTitle">
+  <div *ngIf="errorTitleBank.length!=0" class="error">{{errorTitleBank}}</div>
+
+  <div class="description">Телефон</div>
+  <input type="text" placeholder="Телефон" id="phone" [(ngModel)]="managementCompany.phone">
+  <div *ngIf="errorPhone.length!=0" class="error">{{errorPhone}}</div>
+
+  <div class="description">Email</div>
+  <input type="text" placeholder="Email" id="email" [(ngModel)]="managementCompany.email">
+  <div *ngIf="errorEmail.length!=0" class="error">{{errorEmail}}</div>
+
+  <button (click)="addMC()" class="addWorkerButton">Добавить</button>
+</div>
+

@@ -1,0 +1,12 @@
+<div class="managementCompaniesForHead">
+  <div class="headMyMC">Заявления Управляющих компаний:</div>
+  <div *ngFor="let mc of managementCompanies" class="certainMC" [routerLink]="['requisitesManagementCompany',mc.id]">
+    <div class="mcTitle">
+      <img src="assets/images/mainPage/right-arrow.png" class="rightArrow">
+      {{mc.title}}</div>
+    <div class="status">
+      <div class="descriptionStatus">{{mc.managementCompanyStatusDTO.titleOfStatus}}</div>
+      <div><img src="assets/images/themesForRequest/{{mc.managementCompanyStatusDTO.filePath}}" class="statusImg"></div>
+    </div>
+  </div>
+</div>

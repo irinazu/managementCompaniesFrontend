@@ -1,16 +1,22 @@
 <div class="newDataCounter">
   <div class="kindOfCounter">
-    <img src={{service.serviceDescription.imgUrl}}>
-    <div>{{service.serviceDescription.title}}</div>
+    <img src="{{serviceDescription.imgUrl}}">
+    <div class="kindOfCounterTitle">{{serviceDescription.title}}</div>
   </div>
+  <div *ngIf="!noLastData" class="lastData">
+    Последние показания: {{service.consumption}} {{service.serviceDescription.unit}} предоставлены {{service.dateOfConsumption | date:'yyyy-MM-dd HH:mm'}}
+  </div>
+
+  <div *ngIf="noLastData">Последних показаний нет</div>
+
+  <div class="inputData">
+    <input type="text" placeholder="Введите показания" [(ngModel)]="consumption" class="inputConsumption">
+    <div class="hint" *ngIf="sameDate">Данные за месяц уже предоставлены</div>
+  </div>
+
   <div>
-    Последние показания: {{service.consumption}} {{service.unit}} предоставлены {{service.dateOfConsumption | date:'yyyy-MM-dd HH:mm'}}
+    Тариф за предоставляемую услугу: {{service.tariff}} руб. за {{serviceDescription.unit}}
   </div>
-  <div>
-    <input type="text" placeholder="Введите показания" [(ngModel)]="consumption">
-  </div>
-  <div>
-    Тариф за предоставляемую услугу: {{service.tariff}} руб. за {{service.unit}}
-  </div>
-  <button type="submit" class="submitDataButton" (click)="submitData()">Отправить данные</button>
+  <div class="hint">(Данные должны предоставлять до 25 числа каждого месяца)</div>
+  <button type="submit" class="submitDataButton" (click)="submitData()" id="submitButton">Отправить данные</button>
 </div>

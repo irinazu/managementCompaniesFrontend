@@ -1,7 +1,6 @@
 .generalStatistics{
   width: 55%;
   position: absolute;
-  top: 60px;
   left: 20%;
 
   /*!!!!!!!!!!!!*/
@@ -14,7 +13,10 @@
   background-color: white;
   box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
 }
-.allService{
+.generalChart{
+  margin-top: 5px;
+}
+.allService,.meteringDevicesBlock{
   padding: 20px 50px;
   background-color: white;
   margin-top: 10px;
@@ -129,6 +131,7 @@ Select
   background-color: rgba(48, 225, 125, 0.16);
 }
 .generateReceipt{
+  font-size: 18px;
   background-color: rgba(48, 225, 125, 0.35);
 }
 .submitDataButton:hover, .generateReceipt:hover{
@@ -211,4 +214,56 @@ table{
 }
 .generateReceipt button{
   width: 100%;
+}
+
+.noData{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+  width: 100%;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/*md*/
+.ipu{
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.ipuIMG{
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+.certainMeteringDevice{
+  display: flex;
+}
+.line{
+  width: 3px;
+  background-color: rgba(86, 190, 159, 0.74);
+  border-radius: 3px;
+}
+.meteringDeviceImgLine{
+  width: 15%;
+  display: flex;
+}
+.description{
+  font-weight: bold;
+}
+.descriptionTitle{
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.meteringDeviceDetails div{
+  margin-bottom: 3px;
 }

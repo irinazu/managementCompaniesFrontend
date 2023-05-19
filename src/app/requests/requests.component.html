@@ -1,12 +1,41 @@
 <div class="wrapRequest">
-  <div class="historyOfRequest">
-    <div class="requestCard" *ngFor="let req of requests" [routerLink]="['requestHistory',req.id]">
-      <div><span>Заявка: {{req.title}}</span></div>
-      <div><span>Комментарий: {{req.commentary}}</span></div>
+  <div class="createNewRequest" *ngxPermissionsOnly="'USER'">
+    <button class="createNewRequestButton" [routerLink]="['createRequest']" >Новая заявка</button>
+  </div>
+  <div *ngIf="showUser" class="showUser">
+    <div>
+      <div>ФИО заявителя: {{userSystem.surname}} {{userSystem.name}} {{userSystem.patronymic}}</div>
+      <div>Лицевой счет: {{userSystem.accountNumber}}</div>
     </div>
   </div>
-  <div class="createNewRequest">
-    <button class="createNewRequestButton" [routerLink]="['createRequest']" >Новая заявка</button>
+  <div class="historyOfRequest">
+
+    <div class="noRequests" *ngIf="requests.length==0">Заявлений нет</div>
+
+    <div class="requestCard" *ngFor="let req of requests" [routerLink]="['requestHistory',req.id]">
+      <div class="headRequest">
+        <div class="headLineAndTheme">
+          <div *ngIf="req.lastStatusDTO.filePath!=null"><img src="../../assets/images/themesForRequest{{req.lastStatusDTO.filePath}}" class="statusImg"></div>
+          <div class="titleAndTheme">
+            <div class="titleOfRequest">Заявка: {{req.title}}</div>
+            <div class="themeOfRequest">{{req.requestThemeDTO.titleOfTheme}}</div>
+          </div>
+        </div>
+        <div class="dateAndStatus">
+          <div class="dateOfRequest">{{req.date|date:"dd-MM-yyyy HH:mm"}}</div>
+          <div [ngClass]=
+                 "{open:checkStatus(req,'открыта'),
+                  reopen:checkStatus(req,'запрос на повторное открытие'),
+                  inProcess:checkStatus(req,'в работе'),
+                  finish:checkStatus(req,'завершена'),
+                  rejection:checkStatus(req,'отклонена')}"
+               class="status">{{req.lastStatusDTO.titleOfStatus}}</div>
+        </div>
+      </div>
+      <div class="managementCompany">Кому: {{req.managementCompanyDTO.title}}</div>
+      <div class="lineUnderManagementCompany"></div>
+      <div class="description" [innerHTML]="req.commentary"></div>
+    </div>
   </div>
   <router-outlet></router-outlet>
 </div>

@@ -1,0 +1,9 @@
+<div class="menuForService">
+  <div class="memberOfMenuFor" [routerLink]="['requests',true]" (click)="transparentBorder('openRequest')">Открытые
+    <div class="borderLine" id="openRequest"></div>
+  </div>
+  <div class="memberOfMenuFor" [routerLink]="['requests',false]" (click)="transparentBorder('closeRequest')">Закрытые
+    <div class="borderLine" id="closeRequest"></div>
+  </div>
+</div>
+<router-outlet></router-outlet>

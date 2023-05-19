@@ -1,0 +1,103 @@
+
+.mainPageImg{
+  height: 35px;
+}
+.mainDescription{
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bigMainPageImg{
+  width: 500px;
+}
+.mainDescriptionText{
+  font-size: 30px;
+}
+.mainDescriptionImg{
+  display: flex;
+  justify-content: center;
+}
+.block_menuBar{
+  background-color: rgba(0, 141, 138, 0.56);
+  box-shadow: -1px 7px 11px 0 rgba(34, 60, 80, 0.2);
+  margin: 0;
+  padding: 5px 0 5px 0;
+}
+.menuBar{
+  margin-left: 150px;
+  display: flex;
+  padding-left: 0;
+  margin-top: 0;
+  vertical-align: center;
+}
+.menuBar div{
+  margin-left: 40px;
+  display: flex;
+  align-items: center;
+}
+.menuBar div:hover{
+  cursor: pointer;
+}
+.menuBar p{
+  text-align: center;
+  opacity: 0.8;
+}
+a{
+  text-decoration: none;
+  color: black;
+  opacity: 0.9;
+}
+.menuBar a:hover{
+  opacity: 1;
+}
+.block{
+  margin-top: 30px;
+  margin-left: 100px;
+  margin-right: 100px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.block img{
+  display: block;
+  width: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  pointer-events: none;
+}
+.menuBar img:hover{
+  opacity: 1;
+}
+#mainPageImg img:hover{
+  opacity: 1;
+}
+.menuBar li p:hover{
+  size: B5;
+}
+.block :hover{
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.45);
+  background-color: rgba(86, 190, 159, 0.62);
+}
+.block_content{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+}
+#mainPageImg img{
+  width: 35px;
+  display: block;
+}
+.block p{
+  text-align: center;
+  margin-bottom: 0;
+  pointer-events: none;
+}
+.block div{
+  background-color: rgba(86, 190, 159, 0.52);
+  width: 150px;
+  height: 150px;
+}

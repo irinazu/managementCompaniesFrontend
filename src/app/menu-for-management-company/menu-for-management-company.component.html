@@ -1,0 +1,9 @@
+<div class="menuForService">
+  <div class="memberOfMenuFor" [routerLink]="['managementCompaniesReview','1']" (click)="transparentBorder('inProcess')">В обработке
+    <div class="borderLine" id="inProcess"></div>
+  </div>
+  <div class="memberOfMenuFor" [routerLink]="['managementCompaniesReview','3']" (click)="transparentBorder('inRejection')">Отклоненные
+    <div class="borderLine" id="inRejection"></div>
+  </div>
+</div>
+<router-outlet></router-outlet>

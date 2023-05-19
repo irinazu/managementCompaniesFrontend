@@ -12,9 +12,11 @@ export class PaymentsComponent implements OnInit {
   constructor(private servicePayment:PaymentService) { }
 
   payments:Payment[]=[];
+  userId:number=0;
+
   ngOnInit(): void {
-    this.servicePayment.getPaymentForUser().subscribe(value => {
-      console.log(value)
+    this.userId=Number(localStorage.getItem("id"));
+    this.servicePayment.getPaymentForUser(this.userId).subscribe(value => {
       this.payments=value
     })
   }

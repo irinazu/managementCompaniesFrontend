@@ -1,0 +1,28 @@
+<div class="meteringDevices">
+  <div class="ipu">Индивидуальные приборы учета для г. {{houseUser.house.town}} ул. {{houseUser.house.street}}
+    д. {{houseUser.house.numberOfHouse}} кв. {{houseUser.numberOfFlat}}  ФИО: {{houseUser.userSystem.surname}}
+    {{houseUser.userSystem.name.charAt(0)}}. {{houseUser.userSystem.patronymic.charAt(0)}}.
+  </div>
+  <div *ngFor="let md of meteringDevices" class="certainMeteringDevice">
+    <div class="meteringDeviceImgLine">
+      <div style="display: flex;align-items: center">
+        <img src="assets/images/{{md.meteringDevicesType.pathImg}}" class="ipuIMG">
+      </div>
+      <div class="line"></div>
+    </div>
+    <div class="meteringDeviceDetails">
+      <div><span class="description">Тип: </span> {{md.meteringDevicesType.title}}</div>
+      <span *ngIf="md.series!=null">
+        <div><span class="description">Серия: </span> {{md.series}}</div>
+        <div><span class="description">Дата установки: </span> {{md.startDate |date:"dd-MM-yyyy"}}</div>
+        <div><span class="description">Дата следующей проверки: </span> {{md.checkDate |date:"dd-MM-yyyy"}}</div>
+        <div><span class="description">Дата окончания эксплуатации: </span> {{md.endDate |date:"dd-MM-yyyy"}}</div>
+      </span>
+
+      <div class="buttons">
+        <button class="updateMeteringDevice" [routerLink]="['addMeteringDevices',md.meteringDevicesType.id,md.id]" *ngIf="md.series!=null">Обновить индивидуальный прибор учета</button>
+        <button class="addMeteringDevice" [routerLink]="['addMeteringDevices',md.meteringDevicesType.id,0]">Добавить индивидуальный прибор учета</button>
+      </div>
+      </div>
+  </div>
+</div>

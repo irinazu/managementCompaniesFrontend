@@ -1,0 +1,27 @@
+.menuForService{
+  display: flex;
+  margin-left: -1122px;
+  margin-bottom: 40px;
+}
+.menuForService div{
+  margin-right: 30px;
+}
+.memberOfMenuFor:hover{
+  cursor: pointer;
+}
+
+.memberOfMenuFor:hover .borderLine{
+  background-color: rgba(0, 0, 0, 0.73);
+  transition: 0.5s ease-in-out;
+  height: 2px;
+}
+.borderLine{
+  transition: 0.5s ease-in-out;
+  width: 100%;
+  height: 2px;
+}
+.memberOfMenuFor:focus .borderLine{
+  background-color: rgba(0, 0, 0, 0.73);
+  transition: 0.5s ease-in-out;
+  height: 2px;
+}

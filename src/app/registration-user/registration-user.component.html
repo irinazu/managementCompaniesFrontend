@@ -1,0 +1,45 @@
+<app-main-menu></app-main-menu>
+
+<div class="addWorker">
+  <div class="titleAddWorker" >Регистрация</div>
+
+  <div class="description">Управляющая компания</div>
+  <form class="formAddMC">
+    <div *ngFor="let mc of managementCompanies" style="margin-top: 5px">
+      <input type="radio" id="{{mc.id}}" name="mcs" value="{{mc.id}}">
+      <label for="{{mc.id}}" style="margin-left: 10px">{{mc.title}}</label>
+    </div>
+  </form>
+  <div *ngIf="errorMC.length!=0" class="error">{{errorMC}}</div>
+
+  <div class="description">Лицевой счет</div>
+  <input type="text" placeholder="Лицевой счет" id="name" [(ngModel)]="user.accountNumber">
+  <div *ngIf="errorAccountNumber.length!=0" class="error">{{errorAccountNumber}}</div>
+
+  <div class="description">Телефон</div>
+  <input type="text" placeholder="+7-000-000-00-00" id="phone" [(ngModel)]="user.phone">
+  <div *ngIf="errorPhone.length!=0" class="error">{{errorPhone}}</div>
+
+  <div class="memberDescriptionNewsTaker">
+    <div>Получать новостную рассылку:</div>
+    <input type="checkbox" id="newsTaker" name="newsTaker" value="bool">
+  </div>
+
+  <div class="description">Логин</div>
+  <input type="text" placeholder="Email" id="email" [(ngModel)]="user.email">
+  <div *ngIf="errorEmail.length!=0" class="error">{{errorEmail}}</div>
+
+  <div class="description">Пароль</div>
+  <input type="password" placeholder="Пароль" id="password" [(ngModel)]="user.password">
+  <div *ngIf="errorPassword.length!=0" class="error">{{errorPassword}}</div>
+
+  <div class="description">Повторите пароль</div>
+  <input type="password" placeholder="Повторите пароль" id="passwordDuplicate" [(ngModel)]="passwordDuplicate">
+  <div *ngIf="errorPasswordDuplicate.length!=0" class="error">{{errorPasswordDuplicate}}</div>
+
+  <div *ngIf="errorExist.length!=0" class="error existError">{{errorExist}}</div>
+
+
+  <button (click)="addWorker()" class="addWorkerButton">Зарегистрироваться</button>
+</div>
+

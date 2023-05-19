@@ -12,8 +12,8 @@ export class PaymentService {
   private URLForMap="http://localhost:8080/payment"
   constructor(private httpClient:HttpClient) { }
 
-  //Список поставщиков
-  getPaymentForUser():Observable<Payment[]>{
-    return this.httpClient.get<Payment[]>(`${this.URLForMap}/getPaymentForUser`);
+  //Список выплат
+  getPaymentForUser(userId:number):Observable<Payment[]>{
+    return this.httpClient.get<Payment[]>(`${this.URLForMap}/getPaymentForUser/${userId}`);
   }
 }

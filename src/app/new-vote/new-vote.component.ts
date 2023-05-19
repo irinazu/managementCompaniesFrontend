@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Voting} from "../modules/voting";
 import {VoteService} from "../services/vote.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-new-vote',
@@ -9,7 +10,14 @@ import {VoteService} from "../services/vote.service";
 })
 export class NewVoteComponent implements OnInit {
 
-  constructor(private voteService: VoteService) {}
+  constructor(private voteService: VoteService,private router:ActivatedRoute) {
+    this.router.paramMap.subscribe(paramMap => {
+      // @ts-ignore
+      this.mode = paramMap.get('mode');
+      this.openVoteInArray=-1;
+      this.ngOnInit();
+    });
+  }
 
   allVotes: Voting[] = [];
   votes: Voting[] = [];
@@ -17,29 +25,44 @@ export class NewVoteComponent implements OnInit {
   periods:string[]=["Сначала новые","Сначала старые"]
   checkConfirms:string[]=["Отмеченные и неотмеченнные","Отмеченные","Неотмеченные"]
   setTheme = new Set();
-  closeOrOpenVoteList:string[]=["Все голосования","Открытые голосования","Закрытые голосования"];
 
   currentCheck:number=-1;
   currentPeriod:number=0;
   currentListTheme:string[]=[];
-  currentCloseOrOpenVote:number=-1;
+
+  mode:string="";
+  role:string="";
 
   ngOnInit(): void {
-    this.voteService.getAllVoteForUser().subscribe(value => {
+    this.mode=this.router.snapshot.params['mode'];
+    this.role=localStorage.getItem("role")!;
+
+    this.voteService.getAllVoteWithMode(this.mode,Number(localStorage.getItem("id")),this.role)
+      .subscribe(value => {
+        this.votes=value;
+        this.allVotes=[...this.votes];
+        this.updateListOfVotes();
+
+      });
+
+
+    /*this.voteService.getAllVoteForUser().subscribe(value => {
       this.votes = value;
       this.allVotes=[...this.votes];
       this.updateListOfVotes();
       //добавляем темы
       this.votes.forEach(x=>this.setTheme.add(x.theme));
-    })
+    })*/
   }
 
   //раскрываем определенное голосование
   clickCertainVote($event: any,i: number) {
+
     let clickMessage = $event.target;
     if (clickMessage.className != "upArrow") {
       if(this.openVoteInArray!=-1){
         if(i!=this.openVoteInArray){
+          console.log(this.openVoteInArray)
           document.getElementsByClassName('certainVote')[this.openVoteInArray].setAttribute('style', "height:150px")
           document.getElementsByClassName('gradientBlock')[this.openVoteInArray].setAttribute('style', "display:block")
         }
@@ -61,21 +84,30 @@ export class NewVoteComponent implements OnInit {
 
   //обновляем выбор в голосовании
   enterCheckOption(numberInArray: number, optionId: number){
-    let elem=this.votes[numberInArray].votingOptionSet.find(x=>x.answerCheck)!;
-    if(elem){
-      if(elem.id===optionId) return;
-      elem.answerCheck=false;
-      elem.voteNumber=elem.voteNumber-1;
-    }
+    if(this.mode=="true"&&this.role!="DISPATCHER"){
 
-    let newElem=this.votes[numberInArray].votingOptionSet.find(x=>x.id===optionId)!;
-    newElem.answerCheck=true;
-    newElem.voteNumber=newElem.voteNumber+1;
+      let elem=this.votes[numberInArray].votingOptionSet.find(x=>x.answerCheck)!;
+      if(elem){
+        //нажали на одно и то же
+        if(elem.id===optionId) return;
 
-    if(elem){
-      this.voteService.updateVoteOption(optionId,elem.id).subscribe();
-    }else {
-      this.voteService.updateVoteOption(optionId,-1).subscribe();
+        //в случае если на другое то старое делаем отрицательным и удаляем вариант ответа
+        elem.answerCheck=false;
+        elem.voteNumber=elem.voteNumber-1;
+      }
+
+      //обновляем новый выбранный элемент
+      let newElem=this.votes[numberInArray].votingOptionSet.find(x=>x.id===optionId)!;
+      newElem.answerCheck=true;
+      newElem.voteNumber=newElem.voteNumber+1;
+
+      //обновляем на сервере
+      if(elem){
+        this.voteService.updateVoteOption(optionId,elem.id,Number(localStorage.getItem("id"))).subscribe();
+      }else {
+        this.voteService.updateVoteOption(optionId,-1,Number(localStorage.getItem("id"))).subscribe();
+      }
+
     }
   }
 
@@ -111,13 +143,6 @@ export class NewVoteComponent implements OnInit {
     this.updateListOfVotes();
   }
 
-  //фильтр открытых закрытых голосований
-  changeCloseOrOpenVote() {
-    // @ts-ignore
-    this.currentCloseOrOpenVote=document.getElementById('selectCloseOrOpenVote').selectedIndex;
-    this.updateListOfVotes();
-  }
-
   //вся фильтрация по каждому пункту
   updateListOfVotes(){
     this.votes=[...this.allVotes];
@@ -149,14 +174,6 @@ export class NewVoteComponent implements OnInit {
       listForDelete.forEach(x=>this.votes.splice(x,1));
     }
 
-    if(this.currentCloseOrOpenVote!=-1){
-      if(this.currentCloseOrOpenVote===1){
-        this.votes=this.votes.filter(x=>!x.closed);
-      }else if(this.currentCloseOrOpenVote===2){
-        this.votes=this.votes.filter(x=>x.closed);
-      }
-    }
-
     if(this.currentPeriod!=-1){
       if(this.currentPeriod===0){
         this.votes.sort( function( a , b){
@@ -172,6 +189,11 @@ export class NewVoteComponent implements OnInit {
         });
       }
     }
+  }
+
+  //в зависимости открытые или уже закрытые голосования
+  checkMode():boolean {
+    return this.mode=="false";
   }
 
 }

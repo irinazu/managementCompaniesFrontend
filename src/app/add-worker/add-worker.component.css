@@ -1,0 +1,130 @@
+.addWorker{
+  width: 70%;
+  position: absolute;
+  left: 20%;
+  background-color: white;
+  padding: 40px;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+}
+input:focus{
+  outline: 0;
+  border-bottom-color: rgba(86, 190, 159, 0.62);
+  transition: 0.3s;
+}
+input{
+  margin-top: 5px;
+  font-size: 16px;
+  width: 96%;
+  border-radius: 3px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 15px;
+  transition: 0.4s ease-in-out;
+}
+.error{
+  margin-top: 5px;
+  color: red;
+  margin-bottom: 20px;
+}
+.titleAddWorker{
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+/*button*/
+.addWorkerButton{
+  margin-top: 20px;
+  font-size: 17px;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  transition: 0.5s ease-in-out;
+  width: 100%;
+  background-color: rgba(86, 190, 159, 0.73);
+
+}
+.addWorkerButton:hover{
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+  background-color: rgba(86, 190, 159, 0.85);
+
+}
+
+.description{
+  margin-top: 30px;
+}
+
+/* *******************
+Select
+******************* */
+
+.select {
+  margin-bottom: 10px;
+  /* Растягиваем блок на 100% родительского блока, для правильного размещения кастомной стрелочки */
+  width: 200px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  /* Убираем браузерную стрелку */
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  /* Задаем свой фон и рамку */
+  /*border: 1px solid #7E9BBD;*/
+  border-radius: 3px 3px 0 0;
+  background-color: transparent;
+  /* Отступы от рамки к тексту */
+  padding: 10px 35px 10px 2px;
+  /* Убираем баузерную обводку*/
+  outline: none;
+  cursor: pointer;
+}
+.selectors{
+  display: flex;
+}
+
+/* Убираем стрелочку в IE 10 и 11 */
+.select::-ms-expand {
+  display: none;
+}
+
+/* По клику - убираем обводку и добавляем свою*/
+.select:focus {
+  outline: none;
+}
+
+/* Делаем .select-wrapper родительским элементом для позиционирования "стрелочки" */
+.select-wrapper {
+  position: relative;
+  width: 200px;
+}
+
+/* Рисуем стрелочку */
+.select-wrapper::before {
+  content: "";
+
+  position: absolute;
+  top: 42%;
+  right: 1px;
+  transform: translateY(-50%);
+
+  display: block;
+
+  /* Рисуем треугольник */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10.4px 6px 0 6px;
+  border-color: #bebebe transparent transparent transparent;
+
+  /* Снимаем клик с треугольника */
+  pointer-events: none;
+}
+.select-wrapperMargin{
+  margin-left: 20px;
+}

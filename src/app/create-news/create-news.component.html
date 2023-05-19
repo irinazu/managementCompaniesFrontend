@@ -1,28 +1,34 @@
 <div class="newsCreate">
-  <div class="headOfPagePublication">
-    <div class="publicationFrom">
-      Публикация от:
-    </div>
-    <div class="publicate">
-      <button class="createNewPublication" >Опубликовать</button>
-    </div>
-  </div>
+  <div class="titleOfBlock">Создать новость</div>
+
   <div class="titleOfNews">
-    <input type="text" placeholder="Название">
+    <input type="text" placeholder="Название" id="nameOfNews">
+    <div *ngIf="errorHeader.length!=0" class="errorHeader">{{errorHeader}}</div>
+    <div *ngIf="errorContent.length!=0" class="errorContent">{{errorContent}}</div>
+
   </div>
   <editor [(ngModel)]="ngModel" apiKey=""
     [init]="{ plugins: 'lists link image table code help wordcount' }"
   ></editor>
 
-  <div class="addedTags"></div>
+  <div class="addedTags" *ngIf="chosenTags.length!=0">
+    <div *ngFor="let chosenTag of chosenTags; index as i" class="chosenTag">#{{chosenTag.title}}
+      <img src="assets/images/free-icon-multiplication-251319.png" class="deleteTag" (click)="deleteTag(i)">
+    </div>
+  </div>
 
   <div class="searchTag">
-    <input type="text" placeholder="Тэг" (input)="changeTag()">
+    <div style="display: flex;flex-direction: column;width: 100%">
+      <input type="text" placeholder="Тэг" (input)="changeTag()" id="inputTag">
+      <div *ngIf="suitableTags.length!=0" class="suitableTagsBlock">
+        <div *ngFor="let suitableTag of suitableTags" (click)="chooseTag(suitableTag)" class="suitableTagFocus">{{suitableTag.title}}</div>
+      </div>
+    </div>
+    <button (click)="createNewTag()" class="createNewTag">Новый тэг</button>
+
   </div>
 
-  <button (click)="sub()">sub</button>
-  <div class="listTagsForAdd"></div>
-  <div class="tagsDiv">
 
-  </div>
+  <button class="createNewPublication" (click)="sub()">Опубликовать</button>
+
 </div>

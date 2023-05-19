@@ -1,6 +1,7 @@
 .menuForService{
   display: flex;
-  margin-left: -30%;
+  margin-left: -860px;
+  margin-bottom: 40px;
 }
 .menuForService div{
   margin-right: 30px;
@@ -8,40 +9,6 @@
 .memberOfMenuFor:hover{
   cursor: pointer;
 }
-/*
-.memberOfMenuForCounter {
-  position: relative;
-  line-height: 30px;
-  display: inline-block;
-  text-align: center;
-  transition: all 0.4s ease-in-out;
-  text-decoration: none;
-  box-sizing: border-box;
-}
-.memberOfMenuForCounter:after {
-  position: absolute;
-  bottom: 0;
-  height: 1px;
-  left: 50%;
-  right: 50%;
-  background: #000000;
-  content: '';
-}
-.memberOfMenuForCounter:before,
-.memberOfMenuForCounter:after {
-  transition: all 0.4s ease-in-out;
-}
-.memberOfMenuForCounter:hover:after,
-.memberOfMenuForCounter:active:after,
-.memberOfMenuForCounter.hover:after {
-  left: 0;
-  right: 0;
-}
-.memberOfMenuForCounter:focus:after{
-  left: 0;
-  right: 0;
-}
-*/
 
 .memberOfMenuFor:hover .borderLine{
   background-color: rgba(0, 0, 0, 0.73);

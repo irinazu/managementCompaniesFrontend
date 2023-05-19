@@ -1,30 +1,61 @@
 .wrapRequest{
-  margin-left: 10px;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  background-color: white;
+  width: 70%;
+  position: absolute;
+  left: 20%;
+  padding: 40px;
 }
-.wrapRequest div{
-  margin-bottom: 5px;
+.addressForRequest div{
+  font-size: 17px;
+  margin-bottom: 10px;
 }
-textarea{
-  width: 400px;
-  height: 200px;
+.addressForRequest input{
+  font-size: 17px;
 }
-.addressForRequest input,textarea{
+
+.requestHead{
+  text-transform: uppercase;
+  align-items: center;
+  letter-spacing:3px;
+  flex-direction: column;
+  font-size: 23px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.lineRequest{
+  margin-top: 5px;
+  width: 70%;
+  height: 5px;
+  display: flex;
+  align-items: center;
+  background-color: rgba(86, 190, 159, 0.62);
+}
+
+.addressForRequest input{
   border-top: none;
   border-left: none;
   border-right: none;
   padding: 10px;
   transition: 0.4s ease-in-out;
+  width: 98%;
 }
 input:focus{
   outline: 0;
-  border-bottom-color: rgba(48, 225, 125, 0.8);
+  border-bottom-color: rgba(86, 190, 159, 0.62);
   transition: 0.3s;
 }
-textarea:focus{
-  outline: 0;
-  border-bottom-color: rgba(48, 225, 125, 0.8);
-  transition: 0.3s;
+input:hover{
+  cursor: text;
 }
+.fileForRequest{
+  margin-top: 20px;
+}
+.fileForRequestInput{
+  font-size: 15px;
+}
+
 input[type=file]::file-selector-button {
   margin-right: 20px;
   border: none;
@@ -37,7 +68,128 @@ input[type=file]::file-selector-button {
 input[type=file]::file-selector-button:hover {
   background: rgba(48, 225, 125, 0.42);
 }
-.addressForRequest input{
-  width: 60%;
+
+
+/* *******************
+Select
+******************* */
+
+.select {
+  margin-bottom: 10px;
+  /* Растягиваем блок на 100% родительского блока, для правильного размещения кастомной стрелочки */
+  width: 400px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  /* Убираем браузерную стрелку */
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  /* Задаем свой фон и рамку */
+  border-radius: 3px 3px 0 0;
+  background-color: transparent;
+  /* Отступы от рамки к тексту */
+  padding: 10px 35px 10px 2px;
+  /* Убираем баузерную обводку*/
+  outline: none;
+  cursor: pointer;
 }
+.selectors{
+  display: flex;
+}
+
+/* Убираем стрелочку в IE 10 и 11 */
+.select::-ms-expand {
+  display: none;
+}
+
+/* По клику - убираем обводку и добавляем свою*/
+.select:focus {
+  outline: none;
+}
+
+/* Делаем .select-wrapper родительским элементом для позиционирования "стрелочки" */
+.select-wrapper {
+  position: relative;
+  width: 400px;
+}
+
+/* Рисуем стрелочку */
+.select-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 42%;
+  right: 1px;
+  transform: translateY(-50%);
+  display: block;
+  /* Рисуем треугольник */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10.4px 6px 0 6px;
+  border-color: #bebebe transparent transparent transparent;
+  /* Снимаем клик с треугольника */
+  pointer-events: none;
+}
+.select-wrapperMargin{
+  margin-left: 20px;
+}
+.select{
+  font-size: 15px;
+}
+.themeOfRequest{
+  font-size: 17px;
+  display: flex;
+  margin: 40px 0 20px 0;
+}
+.typeOfRequestTitle{
+  display: flex;
+  align-items: center;
+}
+.borderForTheme{
+  background-color: rgba(86, 190, 159, 0.62);
+  height: 2px;
+}
+/*описание заявления*/
+.commentaryForRequest{
+  margin-top: 20px;
+  width: 100%;
+}
+
+/*сформирвать заявку*/
+
+.createNewRequest{
+  margin-top: 20px;
+  width: 100%;
+  margin-right: 5px;
+  font-size: 17px;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: rgba(86, 190, 159, 0.34);
+  transition: 0.5s ease-in-out;
+}
+.createNewRequest:hover{
+  padding: 10px;
+  background-color: rgba(86, 190, 159, 0.49);
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}
+
+/*ошибки*/
+.error{
+  color: red;
+  margin-bottom: 5px;
+}
+.form-group{
+  margin-left: 20px;
+}
+
+.fileMention{
+  font-size: 17px;
+  margin-bottom: 5px;
+  margin-top: 40px;
+}
+
 

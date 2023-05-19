@@ -1,0 +1,12 @@
+<div class="confirmDelete">
+  <div class="deleteMessage">Удаление сообщения</div>
+  <div class="deleteMessageConfirm">Вы действительно хотите удалить сообщение?</div>
+  <div class="confirmDeleting">
+    <div class="buttons">
+
+      <button [mat-dialog-close]="false" class="cancel">Отмена</button>
+      <button class="delete" (click)="doOptions()">Удалить</button>
+
+    </div>
+  </div>
+</div>

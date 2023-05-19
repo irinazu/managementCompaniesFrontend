@@ -168,7 +168,9 @@ export class MapComponent implements OnInit{
       const imgFile=new File([blob],"i",{type:"image/png"});
       const finaleFileHandle:ImageModel={
         file:imgFile,
-        url:this.sanitazer.bypassSecurityTrustUrl(window.URL.createObjectURL(imgFile))
+        url:this.sanitazer.bypassSecurityTrustUrl(window.URL.createObjectURL(imgFile)),
+        id:undefined,
+        picBytes:undefined
       };
       imagesHandle.push(finaleFileHandle);
     }

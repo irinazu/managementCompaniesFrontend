@@ -1,0 +1,9 @@
+<div class="menuForService">
+  <div class="memberOfMenuFor" [routerLink]="['vote','true']" (click)="transparentBorder('openVoting')">Открытые голосования
+    <div class="borderLine" id="openVoting"></div>
+  </div>
+  <div class="memberOfMenuFor" [routerLink]="['vote','false']" (click)="transparentBorder('closeVoting')">Закрытые голосования
+    <div class="borderLine" id="closeVoting"></div>
+  </div>
+</div>
+<router-outlet></router-outlet>

@@ -1,0 +1,59 @@
+<div class="votingCreate">
+  <div class="titleOfBlock">Создать голосование</div>
+
+  <input type="text" placeholder="Название" [(ngModel)]="voting.title">
+  <div *ngIf="errorTitle.length!=0" class="error">{{errorTitle}}</div>
+
+  <form id="checkBoxWithHouses">
+    <div class="whomVoting">Голосование назначается: </div>
+    <div *ngFor="let house of houses" class="certainSelect">
+      <input type="checkbox" id={{house.id}} name={{house.id}} value={{house.id}}>
+      <label for={{house.id}}>Город: {{house.town}}; Улица: {{house.street}}; Дом: {{house.numberOfHouse}};</label><br>
+    </div>
+  </form>
+  <div *ngIf="errorWhom.length!=0" class="error">{{errorWhom}}</div>
+
+  <div class="themeOfVoting">
+    <div class="typeOfRequestTitle">Тема голосования:
+    </div>
+    <div class="form-group">
+      <form class="selectors">
+        <div class="select-wrapper">
+          <select name="select-category" id="selectTheme" class="select">
+            <option value={{theme.id}} *ngFor="let theme of votingThemes">{{theme.titleOfTheme}}</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <editor [(ngModel)]="voting.description" apiKey=""
+          [init]="{ plugins: 'lists link image table code help wordcount' }"
+  ></editor>
+  <div *ngIf="errorDescription.length!=0" class="error">{{errorDescription}}</div>
+
+  <div class="closeDate">
+    <div>Дата закрытия голосования:</div>
+    <input type="datetime-local" id="closeDateId">
+
+    <div style="margin-top: 20px">Старая дата:</div>
+    <div style="margin-top: 10px">{{voting.endOfVoting|date:"dd-MM-yyyy HH:mm"}}</div>
+  </div>
+  <div *ngIf="errorDateClose.length!=0" class="error">{{errorDateClose}}</div>
+
+  <div class="addOptionBlock">
+    <input type="text" placeholder="Вариант выбора" id="option">
+    <button class="addOption" (click)="addVotingOption()">Добавить</button>
+  </div>
+  <div *ngIf="errorOption.length!=0" class="error">{{errorOption}}</div>
+
+  <div class="allOption">
+    <div *ngFor="let opt of addedOptions;index as i" class="certainOption">
+      {{opt.option}}
+      <div><img src="assets/images/cross.png" class="cross" (click)="deleteOption(i)"></div>
+    </div>
+  </div>
+
+  <button class="createVoting" (click)="createVoting()">Создать голосование</button>
+</div>
+

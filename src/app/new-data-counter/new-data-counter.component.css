@@ -1,19 +1,21 @@
 .newDataCounter{
-  padding: 20px 0px 20px 20px;
+  padding: 20px 0 20px 20px;
   border-radius: 5px;
   background-color: white;
   width: 58%;
   position: absolute;
-  top: 60px;
   left: 20%;
-  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
 }
 .newDataCounter div{
   margin-bottom: 10px;
 }
 .kindOfCounter{
   display: flex;
+}
+.kindOfCounterTitle{
+  font-weight: bold;
+  font-size: 20px;
 }
 .kindOfCounter img{
   width: 50px;
@@ -43,6 +45,24 @@ input:focus{
   padding: 10px;
   background-color: rgba(48, 225, 125, 0.42);
   transition: 0.5s ;
-  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
   cursor: pointer;
+}
+
+.hint{
+  margin-top: 20px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+.lastData{
+  margin-top: 20px;
+  font-size: 17px;
+}
+.inputData{
+  display: flex;
+}
+.inputConsumption{
+  font-size: 18px;
+  width: 50%;
+  margin-right: 20px;
 }

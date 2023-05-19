@@ -1,0 +1,87 @@
+<div class="personalAccount">
+  <div class="headAccount">
+    <div class="avatarBlock">
+      <div style="display: flex">
+        <div *ngIf="user.imgAvatar!=null"><img [src]="user.imgAvatar.url" class="avatar"></div>
+        <div *ngIf="user.imgAvatar==null" class="avatar"><div class="imgWithLetter">{{user.name.charAt(0).toLocaleUpperCase()}}</div></div>
+
+        <div class="avatarDescription">{{user.surname}} {{user.name}} {{user.patronymic}}</div>
+      </div>
+      <div *ngIf="errorAvatar" class="error">{{errorAvatar}}</div>
+      <div class="fileForAvatar">
+        <button class="general changeAvatar" (click)="changeAvatar()">Изменить аватар</button>
+        <input class="fileForRequestInput" accept="image/*" type="file" name="file" (change)="selectFiles($event)">
+      </div>
+    </div>
+  </div>
+
+  <div class="memberDescription mainDescriptionBegin">
+    <div style="display: flex">
+      <span class="description">Телефон:</span>
+      <span class="mainDescription">{{user.phone}}</span>
+    </div>
+    <button class="general reductionAccount" (click)="changePhone()" *ngIf="!flagPhone">Изменить</button>
+  </div>
+  <div class="change" *ngIf="flagPhone">
+    <input type="text" placeholder="Введите новый телефон" [(ngModel)]="newPhone">
+    <div *ngIf="errorPhone" class="error">{{errorPhone}}</div>
+    <div class="buttons">
+      <button class="general send" (click)="sendPhone()">Отправить</button>
+      <button class="general cancel" (click)="cancelPhone()">Отмена</button>
+    </div>
+  </div>
+
+  <div class="memberDescription">
+    <div style="display: flex">
+      <span class="description">Email:</span>
+      <span class="mainDescription">{{user.email}}</span>
+    </div>
+    <button class="general reductionAccount"  (click)="changeEmail()" *ngIf="!flagEmail">Изменить</button>
+  </div>
+  <div class="change" *ngIf="flagEmail">
+    <input type="text" placeholder="Введите новый Email" [(ngModel)]="newEmail">
+    <div *ngIf="errorEmail" class="error">{{errorEmail}}</div>
+    <div class="buttons">
+      <button class="general send" (click)="sendEmail()">Отправить</button>
+      <button class="general cancel" (click)="cancelEmail()">Отмена</button>
+    </div>
+  </div>
+
+  <div *ngxPermissionsOnly="'USER'" class="memberDescription">
+    <span class="description">Личный счет:</span>
+    <span class="mainDescription">{{user.accountNumber}}</span>
+  </div>
+
+  <div *ngxPermissionsOnly="'USER'" class="memberDescription">
+    <div class="description">Получать новостную рассылку:</div>
+    <input type="checkbox" id="newsTaker" name="newsTaker" value="bool" (change)="changeFlagOnTakeNews()">
+  </div>
+
+  <div *ngxPermissionsExcept="'USER'" class="memberDescription">
+    <div style="display: flex">
+      <span class="description">Адресс проживания:</span>
+      <span class="mainDescription">г. {{user.town}} ул. {{user.street}} д. {{user.house}} кв. {{user.numberOfFlat}}</span>
+    </div>
+  </div>
+
+
+  <button class="general reductionPassword" (click)="changePassword()" *ngIf="!flagPassword">Сменить пароль</button>
+  <div class="change" *ngIf="flagPassword">
+    <input type="password" placeholder="Введите Ваш старый пароль" [(ngModel)]="oldPassword">
+    <div *ngIf="errorPassword" class="error">{{errorPassword}}</div>
+    <div class="error" *ngIf="errorFromServerConfirm">{{errorFromServerConfirm}}</div>
+    <div class="buttons">
+      <button class="general send" (click)="sendPassword()">Отправить</button>
+      <button class="general cancel" (click)="cancelPassword()">Отмена</button>
+    </div>
+  </div>
+
+  <div class="change" *ngIf="flagPasswordTrueFromServer">
+    <input type="password" placeholder="Введите Ваш новый пароль" [(ngModel)]="newPassword">
+    <div *ngIf="errorPassword" class="error">{{errorPassword}}</div>
+    <div class="buttons">
+      <button class="general send" (click)="sendPasswordTrueFromServer()">Отправить</button>
+      <button class="general cancel" (click)="cancelPasswordTrueFromServer()">Отмена</button>
+    </div>
+  </div>
+</div>

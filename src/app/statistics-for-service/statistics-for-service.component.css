@@ -3,7 +3,7 @@
   height: 300px;
   border-radius: 3px;
   background-color: white;
-  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
 
   /*position: absolute;
   top: 20%;
@@ -13,7 +13,6 @@
 .charts{
   width: 58%;
   position: absolute;
-  top: 60px;
   left: 20%;
 }
 .statisticsData{
@@ -202,9 +201,7 @@ Select
   padding: 10px 35px 10px 2px;
   cursor: pointer;
 }
-.form-group{
-  margin-bottom: 10px;
-}
+
 .checkBoxAndSelector{
   display: flex;
 }

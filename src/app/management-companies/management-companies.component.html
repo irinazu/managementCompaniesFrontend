@@ -1,0 +1,15 @@
+<app-main-menu></app-main-menu>
+<div class="managementCompanies">
+  <div class="headCompany">Управляющие компании зарегистрированные в приложении</div>
+  <div style="display: flex">
+    <div class="borderLine"></div>
+    <div class="companies">
+      <div *ngFor="let mc of managementCompanies" class="certainCompany">
+        <div style="display: flex" [routerLink]="['certainManagementCompany',mc.id]"><img src="assets/images/mainPage/right-arrow.png" class="rightArrow">
+          Город: {{mc.town}} Компания: {{mc.title}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer"></div>
+

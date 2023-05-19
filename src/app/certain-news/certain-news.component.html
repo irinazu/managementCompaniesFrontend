@@ -1,0 +1,19 @@
+<div class="certainNews">
+    <div class="topOfNews">
+      <div class="headerNews">{{news.header}}</div>
+      <div>
+        <div class="dateNews">{{news.dateOfPublication|date:"dd-MM-yyyy HH:mm"}}</div>
+        <div *ngIf="checkId()">
+          <button class="reductionButton" [routerLink]="['reductionNews',news.id]">Редактровать</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tagsNews" *ngIf="news.tagList.length!=0">
+      <div class="tags">Тэги: </div>
+      <div class="tag" *ngFor="let tag of news.tagList">{{tag.title}}; </div>
+    </div>
+
+    <div class="contentNews" [innerHTML]="news.content"></div>
+
+</div>

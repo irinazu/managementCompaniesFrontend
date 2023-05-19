@@ -1,0 +1,48 @@
+
+<div class="addWorker">
+  <div class="titleAddWorker" >Добавление пользователя</div>
+
+  <div class="description">Имя</div>
+  <input type="text" placeholder="Имя" id="name" [(ngModel)]="user.name">
+  <div *ngIf="errorName.length!=0" class="error">{{errorName}}</div>
+
+  <div class="description">Фамилия</div>
+  <input type="text" placeholder="Фамилия" id="surname" [(ngModel)]="user.surname">
+  <div *ngIf="errorSurname.length!=0" class="error">{{errorSurname}}</div>
+
+  <div class="description">Отчество</div>
+  <input type="text" placeholder="Отчество" id="patrimony" [(ngModel)]="user.patronymic">
+  <div *ngIf="errorPatrimony.length!=0" class="error">{{errorPatrimony}}</div>
+
+  <div class="description">Лицевой счет</div>
+  <input type="text" placeholder="Лицевой счет" id="accountNumber" [(ngModel)]="user.accountNumber">
+  <div *ngIf="errorAccountNumber.length!=0" class="error">{{errorAccountNumber}}</div>
+
+  <div class="description">Дом</div>
+  <form class="formAddHouse">
+    <div *ngFor="let house of housesMC">
+      <input type="radio" id="houses_{{house.id}}" name="houses" value="{{house.id}}" (change)="houseChoice(house.id)">
+      <label for="{{house.id}}">{{house.town}} {{house.street}} {{house.numberOfHouse}}</label>
+    </div>
+  </form>
+  <div *ngIf="errorHouse.length!=0" class="error">{{errorHouse}}</div>
+
+  <div class="description">Подъезд</div>
+  <form class="formAddEntrance">
+    <div *ngFor="let entrance of entrances">
+      <input type="radio" id="entrances_{{entrance.id}}" name="entrances" value="{{entrance.id}}" (change)="entranceChoice(entrance.id)">
+      <label for="{{entrance.numberOfEntrance}}">{{entrance.numberOfEntrance}}</label>
+    </div>
+  </form>
+  <div *ngIf="errorEntrance.length!=0" class="error">{{errorEntrance}}</div>
+
+  <div class="description">Номер квартиры</div>
+  <input type="text" placeholder="Номер квартиры" id="numberOfFlat" [(ngModel)]="user.numberOfFlat">
+  <div *ngIf="errorFlat.length!=0" class="error">{{errorFlat}}</div>
+
+  <div *ngIf="errorExist.length!=0" class="error existError">{{errorExist}}</div>
+
+  <button (click)="addHead()" class="addWorkerButton">Добавить</button>
+</div>
+
+<div class="footer"></div>

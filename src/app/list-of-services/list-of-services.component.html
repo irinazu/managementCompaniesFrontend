@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div (click)="change(ser.counter)" class="optionOfService" [routerLink]="['serviceMenuCounter',ser.id]" *ngFor="let ser of serviceDescription">
+  <div (click)="change(ser.counter)" class="optionOfService" [routerLink]="['serviceMenuCounter',ser.id,'statisticsService',ser.id]" *ngFor="let ser of serviceDescription">
     <div class="descriptionWithImg">
       <span>{{ser.title}}</span>
       <img src="assets/images/arrow.png">

@@ -10,13 +10,15 @@ import {HouseForSend} from "../modelsForSend/house-for-send";
 import {EntranceForSend} from "../modelsForSend/entrance-for-send";
 import {RepairWork} from "../modules/repair-work";
 import {RepairWorkForSend} from "../modelsForSend/repair-work-for-send";
+import {Request} from "../modules/request";
+import {NgxPermissionsService} from "ngx-permissions";
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.css']
+  styleUrls: ['./main-page.component.css'],
 })
-export class MainPageComponent {
+export class MainPageComponent implements OnInit {
   formData: FormData = new FormData();
 
   selectedFiles?: FileList;
@@ -42,7 +44,11 @@ export class MainPageComponent {
   repairWorkOfRoof:RepairWorkForSend[]=[];
   imgOfHouseItself:ImageModel[]=[];
 
-  constructor(private mapService:MapService,private sanitazer:DomSanitizer) {}
+  permissionRole:string="GUEST";
+
+  constructor(private mapService:MapService,private sanitazer:DomSanitizer,
+              private ngxPermissionsService:NgxPermissionsService) {}
+
   createFImg(imany:ImageModel[]):ImageModel[]{
     const images:any[]=imany;
     const imagesHandle:ImageModel[]=[];
@@ -52,7 +58,9 @@ export class MainPageComponent {
       const imgFile=new File([blob],"i",{type:"image/png"});
       const finaleFileHandle:ImageModel={
         file:imgFile,
-        url:this.sanitazer.bypassSecurityTrustUrl(window.URL.createObjectURL(imgFile))
+        url:this.sanitazer.bypassSecurityTrustUrl(window.URL.createObjectURL(imgFile)),
+        id:undefined,
+        picBytes:undefined
       };
       imagesHandle.push(finaleFileHandle);
     }
@@ -97,6 +105,16 @@ export class MainPageComponent {
 
   }
   ngOnInit(): void {
+    this.permissionRole=localStorage.getItem('role')!;
+    this.ngxPermissionsService.loadPermissions([this.permissionRole]);
+
+    /*let r=new Request();
+    r.title="suspect"
+    this.rs.role.push(r);
+    this.rs.getRole().subscribe(value => {
+      this.rs.role.push(value);
+      console.log(this.rs.role)
+    });*/
 
     this.ebuchi();
     //this.imageInfos = this.getFiles();

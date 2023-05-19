@@ -6,12 +6,12 @@ export class House {
   region:string="";
   town:string="";
   street:string="";
-  numberOfHouse:number=0;
-  numberOfEntrance:number=0;
-  numberOfFloor:number=0;
+  numberOfHouse:string="";
+  numberOfEntrance:string="";
+  numberOfFloor:string="";
   lift:boolean=false;
-  yearOfConstruction:number=0;
-  numberOfFlats:number=0;
+  yearOfConstruction:string="";
+  numberOfFlats:string="";
   homeCondition:string="";
   repairWorks:RepairWork[]=[];
   entrances:Entrance[]=[];

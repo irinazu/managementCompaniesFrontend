@@ -1,49 +1,86 @@
+<app-main-menu></app-main-menu>
 
 <div class="wrapDiv">
   <div class="listOfFunctionBlock">
     <div class="hoverMemberOption">
-      <div class="memberOption" [routerLink]="['requests']">
-        <span class="imgSign"><img src="/assets/images/requestIcon.png"></span>
-        <span class="descriptionImgSign">Заявки</span>
+      <div class="memberOption" [routerLink]="['privateAccount']">
+        <span class="imgSign"><img src="/assets/images/privateAccount.png"></span>
+        <span class="descriptionImgSign">Личный кабинет</span>
       </div>
     </div>
     <div class="hoverMemberOption">
-      <div class="memberOption" [routerLink]="['listOfService']">
+      <div class="memberOption" [routerLink]="['listOfService/generalStatistics']" *ngxPermissionsOnly="'USER'">
         <span class="imgSign"><img src="/assets/images/maintenance.png"></span>
-        <span class="descriptionImgSign">Оплата услуг</span>
+        <span class="descriptionImgSign">Услуги</span>
       </div>
     </div>
     <div class="hoverMemberOption">
-      <div class="memberOption">
+      <div class="memberOption" *ngxPermissionsOnly="'USER'" [routerLink]="['allChat']">
         <span class="imgSign"><img src="/assets/images/chat.png"></span>
         <span class="descriptionImgSign">Сообщения</span>
       </div>
     </div>
-    <div class="hoverMemberOption">
-      <div class="memberOption" [routerLink]="['vote']">
-        <span class="imgSign"><img src="/assets/images/voting-box.png"></span>
-        <span class="descriptionImgSign">Голосования</span>
+
+    <div class="hoverMemberOption" *ngxPermissionsOnly="['DISPATCHER','ACCOUNTANT']">
+      <div class="memberOption" [routerLink]="['housesRequests','-1']">
+        <span class="imgSign"><img src="/assets/images/housesIcon.png"></span>
+        <span class="descriptionImgSign">Дома УК</span>
       </div>
     </div>
-    <div class="hoverMemberOption">
-      <div class="memberOption" [routerLink]="['createNews']">
+
+    <div class="hoverMemberOption" *ngxPermissionsOnly="['DISPATCHER','USER']">
+      <div class="memberOption" [routerLink]="['menuNews','allNews','all']">
         <span class="imgSign"><img src="/assets/images/newspaper.png"></span>
         <span class="descriptionImgSign">Новости</span>
       </div>
     </div>
-    <div class="hoverMemberOption">
-      <div class="memberOption">
-        <span class="imgSign"><img src="/assets/images/loudspeaker.png"></span>
-        <span class="descriptionImgSign">Объявления</span>
+    <div class="hoverMemberOption" *ngxPermissionsOnly="['DISPATCHER','USER']">
+      <div class="memberOption" [routerLink]="['menuVoting','vote','true']" >
+        <span class="imgSign"><img src="/assets/images/voting-box.png"></span>
+        <span class="descriptionImgSign">Голосования</span>
       </div>
     </div>
-    <div class="hoverMemberOption">
-      <div class="memberOption">
-        <span class="imgSign"><img src="/assets/images/bell.png"></span>
-        <span class="descriptionImgSign">Уведомления</span>
+    <div class="hoverMemberOption" *ngxPermissionsOnly="['DISPATCHER','USER']">
+      <div class="memberOption" [routerLink]="['menuRequests','requests','true']">
+        <span class="imgSign"><img src="/assets/images/requestIcon.png"></span>
+        <span class="descriptionImgSign">Заявления</span>
       </div>
     </div>
+    <div class="hoverMemberOption" *ngxPermissionsOnly="['HEAD']">
+      <div class="memberOption" [routerLink]="['managementCompaniesForHead']">
+        <span class="imgSign"><img src="/assets/images/managmentCompaniesIcon.png"></span>
+        <span class="descriptionImgSign">Мои УК</span>
+      </div>
+    </div>
+
+    <div class="hoverMemberOption" *ngxPermissionsOnly="['ADMIN']">
+      <div class="memberOption" [routerLink]="['managementCompaniesForHead']">
+        <span class="imgSign"><img src="/assets/images/managmentCompaniesIcon.png"></span>
+        <span class="descriptionImgSign">Все УК</span>
+      </div>
+    </div>
+
+    <div class="hoverMemberOption" *ngxPermissionsOnly="['HEAD']">
+      <div class="memberOption" [routerLink]="['addManagementCompany']">
+        <span class="imgSign"><img src="/assets/images/plus.png"></span>
+        <span class="descriptionImgSign">Добавить УК</span>
+      </div>
+    </div>
+
+    <div class="hoverMemberOption" *ngxPermissionsOnly="['DISPATCHER']">
+      <div class="memberOption" [routerLink]="['addUser']">
+        <span class="imgSign"><img src="/assets/images/plus.png"></span>
+        <span class="descriptionImgSign">Добавить жителя</span>
+      </div>
+    </div>
+
+    <div class="hoverMemberOption" *ngxPermissionsOnly="['ADMIN']">
+      <div class="memberOption" [routerLink]="['menuForManagementCompanyComponent','managementCompaniesReview',1]">
+        <span class="imgSign"><img src="/assets/images/requestIcon.png"></span>
+        <span class="descriptionImgSign">Заявления о создании УК</span>
+      </div>
+    </div>
+
   </div>
   <router-outlet></router-outlet>
-  <div class="newsBlock"></div>
 </div>

@@ -8,60 +8,75 @@
   </form>
 
   <div class="filterForNewVoteDiv">
-    <div class="select-wrapper">
-      <select (change)="changeCloseOrOpenVote()" name="select-category" id="selectCloseOrOpenVote" class="select">
-        <option value={{closeOrOpenVote}} *ngFor="let closeOrOpenVote of closeOrOpenVoteList">{{closeOrOpenVote}}</option>
-      </select>
-    </div>
     <div class="select-wrapper select-wrapperMargin">
       <select (change)="changePeriod()" name="select-category" id="selectPeriod" class="select">
         <option value={{chosen}} *ngFor="let chosen of periods">{{chosen}}</option>
       </select>
     </div>
-    <div class="select-wrapper select-wrapperMargin" >
+    <!--<div class="select-wrapper select-wrapperMargin" *ngxPermissionsExcept="'DISPATCHER'">
       <select (change)="changeCheck()" name="select-category" id="selectCheck" class="select">
         <option value={{check}} *ngFor="let check of checkConfirms">{{check}}</option>
       </select>
-    </div>
+    </div>-->
   </div>
+
+  <button class="createVoting" [routerLink]="'createVoting'" *ngxPermissionsOnly="'DISPATCHER'">Создать Голосование</button>
+
+  <div *ngIf="votes.length==0" class="noVotes">Голосований нет</div>
 
   <div class="certainVote" *ngFor="let vote of votes;index as i" (click)="clickCertainVote($event,i)">
     <div class="headCertainVote">
-      <div class="titleAndThemeCertainVote">
-        <div class="titleOfCertainVote">{{vote.title}}</div>
-        <div class="themeCertainVote">{{vote.theme}}</div>
+      <div style="display: flex">
+        <div class="titleWithLine">
+          <div class="headLine"></div>
+          <div class="titleAndThemeCertainVote">
+            <div class="titleOfCertainVote">{{vote.title}}</div>
+            <div class="themeCertainVote">{{vote.votingThemeDTO.titleOfTheme}}</div>
+            <button class="updateVoting" [routerLink]="['updateVoting',vote.id]" *ngxPermissionsOnly="'DISPATCHER'">Редактировать</button>
+
+          </div>
+        </div>
+
       </div>
-      <div class="datesCertainVote" [ngClass]="{ closeVote: vote.closed }">
-        <div class="dateStartOfCertainVote" [ngClass]="{ closeVoteText: !vote.closed }"> Голосование открыто: {{vote.start|date:"dd-MM-yyyy HH:mm"}}</div>
-        <div class="dateEndOfCertainVote" [ngClass]="{ closeVoteText: vote.closed }"> Голосование закрыто: {{vote.endOfVoting|date:"dd-MM-yyyy HH:mm"}}</div>
+      <div class="datesCertainVote" [ngClass]="{ closeVote: checkMode() }">
+        <div class="dateStartOfCertainVote" [ngClass]="{ closeVoteText: checkMode() }"> Голосование открыто: {{vote.start|date:"dd-MM-yyyy HH:mm"}}</div>
+        <div class="dateEndOfCertainVote" [ngClass]="{ closeVoteText: checkMode() }"> Голосование закрыто: {{vote.endOfVoting|date:"dd-MM-yyyy HH:mm"}}</div>
       </div>
     </div>
+
+
     <div class="descriptionCertainVote">
+      <div [innerHTML]="vote.description"></div>
       <div class="gradientBlock"></div>
-      {{vote.description}}
     </div>
-    <div class="imagesCertainVote">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+
     <div class="voteLines">
       <div class="wrappingOfCertainOption" *ngFor="let option of vote.votingOptionSet" (click)="enterCheckOption(i,option.id)">
         <div class="optionDescription">{{option.option}}</div>
+
         <div class="optionNumberInfo">
           <div class="certainOption" [style.width] ="countPercent(i,option.voteNumber)+'%'">
             <img *ngIf="option.answerCheck" src="assets/images/free-icon-check-mark-5291043.png" class="checkMark">
           </div>
           <div class="percent">{{countPercent(i,option.voteNumber)}}%</div>
         </div>
+
+        <div class="answersUsers" *ngxPermissionsOnly="'DISPATCHER'">
+          <div class="answered" *ngIf="option.userSystemDTOS.length!=0">Ответили:</div>
+          <div *ngFor="let user of option.userSystemDTOS">
+            <div class="certainUserAnswer">{{user.surname}} {{user.name}} {{user.patronymic}}</div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div *ngxPermissionsOnly="'DISPATCHER'" style="margin-top: 20px;">Проголосовало {{vote.answered}} из {{vote.allMustAnswer}}</div>
     <div class="arrowAndHouse">
       <div class="forWhomCertainVote">
         <div *ngFor="let house of vote.houses" class="certainHouse">#{{house.street}} {{house.numberOfHouse}}</div>
       </div>
       <img src="assets/images/free-icon-up-arrrows-5053186.png" class="upArrow" (click)="closeVote(i)">
     </div>
+
   </div>
 </div>

@@ -15,22 +15,47 @@
       </form>
   </div>
 
-  <input type="submit" value="Сформировать квитанцию" (click)="createPdf()" class="generateReceipt">
+  <input type="submit" value="Сформировать квитанцию" (click)="createPdf()" class="generateReceipt" *ngIf="services.length!=0">
+
+  <div *ngIf="services.length==0" class="noData">Данных нет</div>
 
   <div id="divPie" class="generalStatisticsChart"></div>
-  <div class="allService">
+  <div id="divPieGeneral" class="generalStatisticsChart generalChart"></div>
+
+  <div class="allService" id="detailsInfo">
     <div class="certainService" *ngFor="let ser of services">
       <div class="certainServiceImg">
         <img src="{{ser.serviceDescription.imgUrl}}">
       </div>
       <div class="certainServiceData">
-        <div>{{ser.title}}</div>
-        <div>Потреблено за расчетный период: {{ser.consumption}} {{ser.unit}}</div>
-        <div>Тариф: {{ser.tariff}} руб.</div>
-        <div>Долг за расчетный период: {{ser.dutyForThisMonth}} руб.</div>
+        <div class="description descriptionTitle">{{ser.title}}</div>
+        <div><span class="description">Потреблено за расчетный период: </span>{{ser.consumption}} {{ser.unit}}</div>
+        <div><span class="description">Тариф: </span>{{ser.tariff}} руб.</div>
+        <div><span class="description">Долг за расчетный период: </span> {{ser.dutyForThisMonth}} руб.</div>
+        <div><span class="description">Долг на конец периода: </span> {{ser.generalDutyForService}} руб.</div>
       </div>
     </div>
   </div>
+
+  <div class="meteringDevicesBlock">
+    <div class="ipu">Индивидуальные приборы учета</div>
+    <div *ngFor="let md of userCertain.meteringDevicesDTOS" class="certainMeteringDevice">
+      <div class="meteringDeviceImgLine">
+        <div style="display: flex;align-items: center">
+          <img src="assets/images/{{md.meteringDevicesType.pathImg}}" class="ipuIMG">
+        </div>
+        <div class="line"></div>
+      </div>
+      <div class="meteringDeviceDetails">
+        <div><span class="description">Тип: </span> {{md.meteringDevicesType.title}}</div>
+        <div><span class="description">Серия: </span> {{md.series}}</div>
+        <div><span class="description">Дата установки: </span> {{md.startDate |date:"dd-MM-yyyy"}}</div>
+        <div><span class="description">Дата следующей проверки: </span> {{md.checkDate |date:"dd-MM-yyyy"}}</div>
+        <div><span class="description">Дата окончания эксплуатации: </span> {{md.endDate |date:"dd-MM-yyyy"}}</div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div id="tableInPdf" class="h">
@@ -38,7 +63,7 @@
     <div class="tableInPdfHeadTitle">
       <div class="tableInPdfHeadTitleGeneralInformation">
         <div>Единый платежный документ за жилое помещение</div>
-        <div>Коммунальные и прочие платежи за период: февраль 2023 года</div>
+        <div>Коммунальные и прочие платежи за период: {{monthShow()}} {{year}} года</div>
       </div>
       <div class="tableInPdfHeadTitlePayInformation">
         Реквизиты для оплаты: Наименование организации, р/с 0000000 в Наименовании банка к/с 000000
@@ -47,12 +72,12 @@
     </div>
     <div class="tableInPdfHeadMainData">
       <div>
-        <div>Ф.И.О.: Сойкина Валентина Ивановна</div>
-        <div>Адрес: 558963 г Саратов, ул Никитина, д. 8, кв. 95</div>
+        <div>Ф.И.О.: {{userCertain.userSystemDTO.surname}} {{userCertain.userSystemDTO.name}} {{userCertain.userSystemDTO.patronymic}}</div>
+        <div>Адрес: г. {{house.town}} ул. {{house.street}} д. {{house.numberOfHouse}} кв. {{userCertain.numberOfFlat}}</div>
       </div>
       <div class="tableInPdfHeadMainDataResult">
-        <div>Лицевой счет: 13548498466</div>
-        <div>К оплате: 46666 руб.</div>
+        <div>Лицевой счет: {{userCertain.userSystemDTO.accountNumber}}</div>
+        <div>К оплате: {{generalResultWithDuty}} руб.</div>
       </div>
     </div>
   </div>
@@ -62,18 +87,18 @@
   </div>
   <table class="tableInPdfInfoAboutCounter">
     <tr class="tableInPdfInfoAboutCounterHeadLine">
-      <td>Вид услуг</td>
+      <td>Вид счетчика</td>
       <td>Номер прибора учета</td>
       <td>Дата очередной государственной проверки ПУ</td>
-      <td>Последние показания</td>
-      <td>Дата последних показаний</td>
+      <td>Дата установки</td>
+      <td>Дата замены</td>
     </tr>
-    <tr class="tableInPdfInfoAboutCounterMainLine" *ngFor="let ser of serviceWithCounter">
-      <td>{{ser.serviceDescription.title}}</td>
-      <td>НОМЕР ПУ</td>
-      <td>Дата гос проверки</td>
-      <td>{{ser.consumption}}</td>
-      <td>{{ser.dateOfConsumption|date:"yyyy-MM-dd"}}</td>
+    <tr class="tableInPdfInfoAboutCounterMainLine" *ngFor="let meteringDevice of userCertain.meteringDevicesDTOS">
+      <td>{{meteringDevice.meteringDevicesType.title}}</td>
+      <td>{{meteringDevice.series}}</td>
+      <td>{{meteringDevice.checkDate|date:"yyyy-MM-dd"}}</td>
+      <td>{{meteringDevice.startDate|date:"yyyy-MM-dd"}}</td>
+      <td>{{meteringDevice.endDate|date:"yyyy-MM-dd"}}</td>
     </tr>
   </table>
 
@@ -179,3 +204,4 @@
     </tr>
   </table>
 </div>
+

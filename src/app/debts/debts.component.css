@@ -1,8 +1,10 @@
 .debtsDiv{
   width: 55%;
   position: absolute;
-  top: 60px;
   left: 20%;
+}
+.receipt:hover{
+  cursor: pointer;
 }
 .headDebtsDiv{
   display: flex;
@@ -104,3 +106,91 @@
   margin-left: 10px;
 
 }
+
+/*TABLE*/
+.h{
+  position: absolute;
+  right: 100%;
+  padding: 20px;
+}
+table{
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+.tableInPdfInfoAboutCounterHeadLine{
+  font-weight: bold;
+}
+.tableInPdfInfoAboutCounterHeadLine td{
+  border: 1px solid black;
+  text-align: center;
+}
+.tableInPdfInfoAboutCounterMainLine td{
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px dashed black;
+  text-align: center;
+}
+
+.tableInPdfInfoAboutCounter :last-child {
+  border-bottom: 1px solid black;
+}
+.tableInPdfInfoAboutCounterTitle{
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.result{
+  font-weight: bold;
+}
+.tableInPdfHeadTitle div{
+  text-align: center;
+}
+.tableInPdfHead{
+  margin-bottom: 40px;
+}
+.tableInPdfHeadMainData{
+  display: flex;
+}
+.tableInPdfHeadMainDataResult{
+  margin-left: 40px;
+}
+.tableInPdfHeadTitle{
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.tableInPdfHeadTitleGeneralInformation{
+  font-weight: bold;
+}
+
+.generateReceipt{
+  width: 100%;
+}
+.generateReceipt button{
+  width: 100%;
+}
+
+/*квитанция*/
+.receiptMember{
+  transition: 0.2s;
+}
+.receiptMember:hover{
+  color: #56BE9F;
+}
+
+.noData{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+  width: 100%;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+

@@ -1,19 +1,105 @@
 <div class="history">
-  <div><span class="request">Заявка типа: </span></div>
-  <div class="certainRequest">
-    <div><span class="requestTitle">{{certainRequest.title}}</span></div>
-    <div><span>Комментарий: {{certainRequest.commentary}}</span></div>
+  <div class="historyRequest">История заявления №{{certainRequest.id}}</div>
+
+  <div *ngxPermissionsOnly="'DISPATCHER'" class="showUser">
+    <div>
+      <div>ФИО заявителя: {{userSystem.surname}} {{userSystem.name}} {{userSystem.patronymic}}</div>
+      <div>Лицевой счет: {{userSystem.accountNumber}}</div>
+    </div>
   </div>
 
-  <div [ngClass]="{certainBlockOfRequestForCompany:blockRequest.managementCompanyUpdate,
-                  certainBlockOfRequest:blockRequest.userUpdate}" *ngFor="let blockRequest of blocksOfRequest">
-    <div class="timeAndStatus">
-      <span class="status">{{blockRequest.status}}</span>
-      <span class="date">{{blockRequest.date}} в {{blockRequest.time}}</span>
+  <div class="certainRequest">
+    <div class="lineInMainHead"></div>
+    <div class="mainHead">
+      <div class="titleAndDate">
+        <div class="titleAndThemeWithLineInMainRequestForTitle">
+          <div class="titleAndTheme">
+            <div class="requestTitle">{{certainRequest.title}}</div>
+            <div class="requestTheme">{{certainRequest.requestThemeDTO.titleOfTheme}}</div>
+          </div>
+        </div>
+        <div class="requestDate">{{certainRequest.date|date:"dd-MM-yyyy HH:mm"}}</div>
+      </div>
+
+      <div [innerHTML]="certainRequest.commentary" class="requestMainText"></div>
+
+      <div class="blockWithZoomImgAndCross">
+        <div class="zoomImg"><img [src]="purpose.url"></div>
+        <div class="crossZoomImg" (click)="closePurposeImg()"><img src="assets/images/cross.png" class="crossZoomImg"></div>
+      </div>
+
+      <div class="pictures-img">
+        <img [src]="imgModelRequest.url" (click)="showImg(imgModelRequest,0)" class="imgResource"
+             *ngFor="let imgModelRequest of certainRequest.imageModelsForRequest">
+      </div>
     </div>
-    <span *ngIf="blockRequest.managementCompanyUpdate; else userUpdateBlock" class="answerCompany">Ответ компании</span>
-    <ng-template #userUpdateBlock><span class="answerUser">Ответ пользователя</span></ng-template>
-    <span class="commentary">{{blockRequest.commentary}}</span>
-    <span class="files">ФАЙЛЫ</span>
+  </div>
+
+  <div class="blockSendAnswer">
+    <div class="openBlockForAnswer" (click)="openEditor()">
+      <img src="assets/images/arrowUp.png" class="arrows" *ngIf="editorFlag">
+      <img src="assets/images/arrowDown.png" class="arrows" *ngIf="!editorFlag">
+      Написать ответ
+    </div>
+  </div>
+  <div class="editorAppear" *ngIf="editorFlag" >
+    <div *ngIf="errorComment.length!=0" class="error">{{errorComment}}</div>
+    <editor [(ngModel)]="ngModel" apiKey=""
+            [init]="{ plugins: 'lists link table code help wordcount' }"
+    ></editor>
+
+    <div class="fileAndReopenRequest">
+      <div>
+        <div class="fileMention">Выберите не более 10 изображений</div>
+        <div *ngIf="errorFiles.length!=0" class="error">{{errorFiles}}</div>
+        <label class="fileForRequest">
+          <input class="fileForRequestInput" accept="image/*" type="file" name="file" multiple (change)="selectFiles($event)">
+        </label>
+      </div>
+      <div *ngxPermissionsOnly="'USER'" class="checkBoxReopen">
+        <input type="checkbox" id="reopen" name="reopen">
+        <label for="reopen">Запрос на переоткрытие заявления</label>
+      </div>
+
+      <div class="form-group" *ngxPermissionsOnly="'DISPATCHER'">
+        <form class="selectors">
+          <div class="select-wrapper">
+            <select name="select-category" id="selectStatus" class="select">
+              <option value={{status.titleOfStatus}} *ngFor="let status of statuses">{{status.titleOfStatus}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <div class="blockCreateNewUpdateRequest">
+      <button (click)="createNewUpdateRequest()" class="createNewUpdateRequest">Отправить</button>
+    </div>
+  </div>
+
+  <div class="certainBlockOfRequest" *ngFor="let blockRequest of certainRequest.requestUpdateDTOS;index as i">
+    <div class="timeAndStatus">
+      <div class="blockStatusWithImg">
+        <div *ngIf="blockRequest.requestStatusDTO!=null"><img src="../../assets/images/themesForRequest{{blockRequest.requestStatusDTO.filePath}}" class="statusImg"></div>
+        <div *ngIf="blockRequest.requestStatusDTO!=null" class="statusText">{{blockRequest.requestStatusDTO.titleOfStatus}}</div>
+      </div>
+      <div class="dateUpdate">{{blockRequest.date|date:"dd-MM-yyyy HH:mm"}}</div>
+    </div>
+    <div *ngIf="blockRequest.managementCompanyUpdate" class="answerCompany">{{certainRequest.managementCompanyDTO.title}}</div>
+    <div [innerHTML]="blockRequest.commentary"
+         [ngClass]="{certainBlockOfRequestForCompany:blockRequest.managementCompanyUpdate,
+                  certainBlockOfRequestForUser:blockRequest.userUpdate}"></div>
+    <div class="files">
+
+      <div class="blockWithZoomImgAndCross">
+        <div class="zoomImg"><img [src]="purpose.url"></div>
+        <div class="crossZoomImg" (click)="closePurposeImg()"><img src="assets/images/cross.png" class="crossZoomImg"></div>
+      </div>
+
+      <div class="pictures-img">
+        <img [src]="imgModelRequest.url" (click)="showImg(imgModelRequest,i)" class="imgResource"
+             *ngFor="let imgModelRequest of blockRequest.imageModelsForRequestUpdate">
+      </div>
+    </div>
   </div>
 </div>

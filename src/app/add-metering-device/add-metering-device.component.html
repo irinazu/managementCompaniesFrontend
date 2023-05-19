@@ -1,0 +1,24 @@
+<div class="addMeteringDevice">
+  <div class="titleAddWorker" *ngIf="this.idMeteringDevice==0">Добавление ИПУ ({{meteringDeviceType.title}})</div>
+  <div class="titleAddWorker" *ngIf="this.idMeteringDevice!=0">Обновление ИПУ ({{meteringDeviceType.title}})</div>
+
+  <div class="description">Серия</div>
+  <input type="text" placeholder="Серия" id="series" [(ngModel)]="meteringDevice.series">
+  <div *ngIf="errorSeries.length!=0" class="error">{{errorSeries}}</div>
+
+  <div class="description">Дата установки {{dates[0]|date:"dd-MM-yyyy"}}</div>
+  <input type="date" placeholder="Дата установки" id="startDate" [(ngModel)]="meteringDevice.startDate">
+  <div *ngIf="errorStartDate.length!=0" class="error">{{errorStartDate}}</div>
+
+  <div class="description">Дата проверки {{dates[1]|date:"dd-MM-yyyy"}}</div>
+  <input type="date" placeholder="Дата проверки" id="checkDate" [(ngModel)]="meteringDevice.checkDate">
+  <div *ngIf="errorCheckDate.length!=0" class="error">{{errorCheckDate}}</div>
+
+  <div class="description">Дата снятия {{dates[2]|date:"dd-MM-yyyy"}}</div>
+  <input type="date" placeholder="Дата снятия" id="endDate" [(ngModel)]="meteringDevice.endDate">
+  <div *ngIf="errorEndDate.length!=0" class="error">{{errorEndDate}}</div>
+
+  <button (click)="addMeteringDevice()" class="addMeteringDeviceButton" *ngIf="this.idMeteringDevice==0">Добавить ИПУ</button>
+  <button (click)="addMeteringDevice()" class="addMeteringDeviceButton" *ngIf="this.idMeteringDevice!=0">Обновить ИПУ</button>
+
+</div>

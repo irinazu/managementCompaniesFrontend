@@ -3,33 +3,12 @@
     <form class="selectors">
       <div class="select-wrapper">
         <select name="select-category" id="selectYear" class="select">
-          <option value=13>За последние 12 месяцев</option>
+          <option value=0>За последние 12 месяцев</option>
           <option value={{year}} *ngFor="let year of years">{{year}}</option>
         </select>
       </div>
       <input type="submit" value="Найти" (click)="getValue()" class="submitDataButton">
     </form>
-
-    <div class="checkBoxAndSelector">
-      <form class="checkBox">
-        <div class="select-wrapper check-wrapper" (click)="dropDown()">Choose your interests</div>
-          <div class="hideCheck" id="check-id" style="display: none">
-            <div>
-              <input type="checkbox" id="coding" name="interest" value="coding" />
-              <label for="coding" class="container">Coding</label>
-            </div>
-            <div>
-              <input type="checkbox" id="music" name="interest" value="music" />
-              <label for="music" class="container">Music</label>
-            </div>
-          </div>
-      </form>
-      <div class="select-wrapper select-wrapperMargin" >
-        <select name="select-category" id="selectMonth" class="select" >
-          <option value={{month}} *ngFor="let month of months">{{month}}</option>
-        </select>
-      </div>
-    </div>
   </div>
 
   <div id="chartdiv" class="statisticsChart"></div>

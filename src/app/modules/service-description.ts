@@ -5,4 +5,5 @@ export class ServiceDescription {
   title:string="";
   imgUrl:string="";
   counter:boolean=false;
+  unit:string="";
 }

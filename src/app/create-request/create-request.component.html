@@ -1,21 +1,42 @@
 <div class="wrapRequest">
-  <div class=""><span>Заявка</span></div>
+  <div class="requestHead"><div>Заявление</div>
+    <div class="lineRequest"></div>
+  </div>
+
+  <div class="themeOfRequest">
+    <div class="typeOfRequestTitle">Тема обращения
+    </div>
+    <div class="form-group">
+      <form class="selectors">
+        <div class="select-wrapper">
+          <select name="select-category" id="selectTheme" class="select">
+            <option value={{theme.id}} *ngFor="let theme of themes">{{theme.titleOfTheme}}</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
   <div class="addressForRequest">
-    <div><input type="text" placeholder="Название"></div>
-    <div><input type="text" placeholder="Город"></div>
-    <div><input type="text" placeholder="Улица"></div>
-    <div><input type="text" placeholder="Дом"></div>
-    <div><input type="text" placeholder="Квартира"></div>
+    <div *ngIf="errorEmptyField.length!=0" class="error">{{errorEmptyField}}</div>
+    <div><input type="text" placeholder="Название заявления" id="title" [(ngModel)]="newRequest.title"></div>
   </div>
-  <div class="photoForRequest">
-    <input class="photoForRequestInput" type="file">
-  </div>
-  <div class="typeOfRequest">Тип обращения</div>
+
+  <div *ngIf="errorFiles.length!=0" class="error">{{errorFiles}}</div>
+  <div class="fileMention">Выберите не более 10 изображений</div>
+  <label class="fileForRequest">
+    <input class="fileForRequestInput" accept="image/*" type="file" name="file" multiple (change)="selectFiles($event)">
+  </label>
+
   <div class="commentaryForRequest">
-    <textarea placeholder="Комментарий"></textarea>
+    <div *ngIf="errorComment.length!=0" class="error">{{errorComment}}</div>
+    <editor [(ngModel)]="newRequest.commentary" apiKey=""
+            [init]="{ plugins: 'lists link table code help wordcount' }"
+    ></editor>
   </div>
-  <div class="publicPrivateRequest">
-    <span>Опубликовать заявку</span>
+  <div class="newRequest">
+    <button (click)="createNewRequest()" class="createNewRequest">Оформить заявление</button>
   </div>
 
 </div>

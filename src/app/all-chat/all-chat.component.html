@@ -1,0 +1,22 @@
+<div class="allChats">
+  <div *ngFor="let chat of chats; let i = index"  [routerLink]="['certainChat',chat.id,chat.title]" class="chat">
+
+    <img [src]="chat.imageOfChat.url!" class="certainChatMainImg" *ngIf="checkImgForChat(chat);else withoutImgChat">
+    <ng-template #withoutImgChat>
+      <div class="chatWithoutImg">
+        <p>{{getLetter(chat)}}</p>
+      </div>
+    </ng-template>
+
+    <div class="imgAndMain">
+      <div class="chatMain">
+        <div class="chatMainTitle">{{chat.title}}</div>
+        <div *ngIf="chat.message!=null">{{chat.message.content}}</div>
+        <div *ngIf="chat.message==null">Сообщений пока нет. Будьте первым!</div>
+      </div>
+      <div class="chatDate">
+        <div *ngIf="chat.message!=null">{{chat.message.date | date: "dd-MM-yyyy HH:mm"}}</div>
+      </div>
+    </div>
+  </div>
+</div>

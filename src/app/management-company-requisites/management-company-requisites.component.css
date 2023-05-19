@@ -1,0 +1,176 @@
+.certainMC{
+  width: 70%;
+  position: absolute;
+  left: 20%;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+}
+.certainMC div{
+  margin-bottom: 5px;
+}
+.line{
+  margin-right: 10px;
+  width: 5px;
+  border-radius: 3px;
+  background-color: rgba(86, 190, 159, 0.67);
+}
+.headCertainMC{
+  display: flex;
+  justify-content: space-between;
+
+}
+.titleMC{
+  display: flex;
+  font-weight: bold;
+  font-size: 25px;
+  padding-bottom: 20px;
+}
+.rowTitleMC{
+  font-weight: normal;
+}
+.housesTitle{
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 40px;
+}
+.row{
+  font-weight: bold;
+  opacity: 0.7;
+}
+/*houses*/
+.housesMC{
+  margin-left: 40px;
+  margin-top: 20px;
+}
+.certainHouse{
+  margin-bottom: 15px;
+}
+.rightArrow{
+  margin-right: 10px;
+  transition: 0.3s;
+  opacity: 0.6;
+  width: 20px;
+}
+
+/*status*/
+.status{
+  display: flex;
+}
+.statusImg{
+  width: 30px;
+  margin-left: 20px;
+
+}
+.descriptionStatus{
+  margin-top: 5px;
+}
+
+
+/* *******************
+Select
+******************* */
+
+.select {
+  font-size: 15px;
+  margin-bottom: 10px;
+  /* Растягиваем блок на 100% родительского блока, для правильного размещения кастомной стрелочки */
+  width: 200px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  /* Убираем браузерную стрелку */
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  /* Задаем свой фон и рамку */
+  /*border: 1px solid #7E9BBD;*/
+  border-radius: 3px 3px 0px 0px;
+  background-color: transparent;
+  /* Отступы от рамки к тексту */
+  padding: 10px 35px 10px 2px;
+  /* Убираем баузерную обводку*/
+  outline: none;
+  cursor: pointer;
+}
+.selectors{
+  display: flex;
+}
+
+/* Убираем стрелочку в IE 10 и 11 */
+.select::-ms-expand {
+  display: none;
+}
+
+/* По клику - убираем обводку и добавляем свою*/
+.select:focus {
+  outline: none;
+}
+
+/* Делаем .select-wrapper родительским элементом для позиционирования "стрелочки" */
+.select-wrapper {
+  position: relative;
+  width: 200px;
+}
+
+/* Рисуем стрелочку */
+.select-wrapper::before {
+  content: "";
+
+  position: absolute;
+  top: 42%;
+  right: 1px;
+  transform: translateY(-50%);
+
+  display: block;
+
+  /* Рисуем треугольник */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10.4px 6px 0 6px;
+  border-color: #bebebe transparent transparent transparent;
+
+  /* Снимаем клик с треугольника */
+  pointer-events: none;
+}
+.select-wrapperMargin{
+  margin-left: 20px;
+}
+
+.arrow{
+  width: 20px;
+  height: 20px;
+  margin-right: 20px;
+}
+.reductionStatusArrow{
+  margin-top: 20px;
+  display: flex;
+}
+.reductionStatusArrow:hover{
+  cursor: pointer;
+}
+
+.generalButton{
+  font-size: 17px;
+  border: none;
+  padding: 15px;
+  border-radius: 4px;
+  transition: 0.5s ease-in-out;
+}
+.generalButton:hover{
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}
+.updateStatus{
+  height: 30%;
+  margin-left: 40px;
+  width: 30%;
+  background-color: rgba(86, 128, 190, 0.54);
+}
+.updateStatus:hover{
+  background-color: rgba(86, 128, 190, 0.73);
+}

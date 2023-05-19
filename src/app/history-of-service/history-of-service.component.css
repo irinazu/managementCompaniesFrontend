@@ -1,9 +1,36 @@
 .historyOfService{
-  width: 70%;
+  width: 55%;
   position: absolute;
-  top: 60px;
   left: 20%;
 }
+/*head title*/
+.historyDescription{
+  display: flex;
+  flex-direction: column;
+}
+.historyDescription div{
+  margin-left: auto;
+  margin-right: auto;
+}
+.historyDescription img{
+  width: 60px;
+}
+.historyDescriptionTitle{
+  margin-bottom: auto;
+  margin-top: auto;
+  font-size: 20px;
+}
+.headHistoryDiv{
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+
 .historyOfCertainService{
   display: flex;
   border-left:3px solid rgba(86, 190, 159, 0.71);
@@ -17,6 +44,7 @@
   width: 350px;
 }
 .receipt{
+  width: 100px;
   margin-left: 20px;
   margin-top: auto;
   margin-bottom: auto;
@@ -24,7 +52,6 @@
   border-left:3px solid rgba(86, 190, 159, 0.91);
 }
 .receipt div{
-  width: 50px;
   height: 70px;
   margin-left: 10px;
   display: flex;
@@ -34,29 +61,235 @@
 .mainBlockHistoryOfService{
   display: flex;
 }
-.orderDiv{
-  padding: 20px;
-  margin-left: 20px;
-  background-color: white;
-  border-radius: 3px;
-  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-}
+
 .blockOfServices{
-  width: 70%;
+  width: 100%;
 }
 .historyOfCertainServiceData div{
   padding: 3px;
 }
-.descriptionOfService{
+
+
+/*оплачено-неоплачено*/
+.check{
+  font-weight: 500;
+  margin-top: 10px;
+}
+.notCheck{
+  color: #56b0cc;
+}
+
+/*дата представления рассчета*/
+.dateService{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+
+/* *******************
+Select
+******************* */
+
+.select {
+  margin-bottom: 10px;
+  /* Растягиваем блок на 100% родительского блока, для правильного размещения кастомной стрелочки */
+  width: 200px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  /* Убираем браузерную стрелку */
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  /* Задаем свой фон и рамку */
+  /*border: 1px solid #7E9BBD;*/
+  border-radius: 3px 3px 0 0;
+  background-color: transparent;
+  /* Отступы от рамки к тексту */
+  padding: 10px 35px 10px 2px;
+  /* Убираем баузерную обводку*/
+  outline: none;
+  cursor: pointer;
+}
+.selectors{
   display: flex;
+}
+
+/* Убираем стрелочку в IE 10 и 11 */
+.select::-ms-expand {
+  display: none;
+}
+
+/* По клику - убираем обводку и добавляем свою*/
+.select:focus {
+  outline: none;
+}
+
+/* Делаем .select-wrapper родительским элементом для позиционирования "стрелочки" */
+.select-wrapper {
+  position: relative;
+  width: 200px;
+}
+
+/* Рисуем стрелочку */
+.select-wrapper::before {
+  content: "";
+
+  position: absolute;
+  top: 42%;
+  right: 1px;
+  transform: translateY(-50%);
+
+  display: block;
+
+  /* Рисуем треугольник */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10.4px 6px 0 6px;
+  border-color: #bebebe transparent transparent transparent;
+
+  /* Снимаем клик с треугольника */
+  pointer-events: none;
+}
+.select-wrapperMargin{
+  margin-left: 20px;
+}
+.submitDataButton{
+  margin-left: 10px;
+}
+.submitDataButton, .generateReceipt{
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  transition: 0.5s ease-in-out;
+  margin-bottom: 9px;
+}
+.submitDataButton{
+  background-color: rgba(48, 225, 125, 0.16);
+}
+.form-group{
+  margin-bottom: 10px;
+}
+.submitDataButton:hover, .generateReceipt:hover{
+  padding: 10px;
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}
+.submitDataButton:hover{
+  background-color: rgba(48, 225, 125, 0.42);
+}
+.generateReceipt:hover{
+  background-color: rgba(48, 225, 125, 0.68);
+}
+
+/*квитанция*/
+.receipt:hover{
+  cursor: pointer;
+}
+.receiptMember{
+  transition: 0.2s;
+}
+.receiptMember:hover{
+  color: #56BE9F;
+}
+
+/*TABLE*/
+.h{
+  position: absolute;
+  right: 100%;
+  padding: 20px;
+}
+table{
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+.tableInPdfInfoAboutCounterHeadLine{
+  font-weight: bold;
+}
+.tableInPdfInfoAboutCounterHeadLine td{
+  border: 1px solid black;
+  text-align: center;
+}
+.tableInPdfInfoAboutCounterMainLine td{
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px dashed black;
+  text-align: center;
+}
+
+.tableInPdfInfoAboutCounter :last-child {
+  border-bottom: 1px solid black;
+}
+.tableInPdfInfoAboutCounterTitle{
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.result{
+  font-weight: bold;
+}
+.tableInPdfHeadTitle div{
+  text-align: center;
+}
+.tableInPdfHead{
+  margin-bottom: 40px;
+}
+.tableInPdfHeadMainData{
+  display: flex;
+}
+.tableInPdfHeadMainDataResult{
+  margin-left: 40px;
+}
+.tableInPdfHeadTitle{
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.tableInPdfHeadTitleGeneralInformation{
+  font-weight: bold;
+}
+
+.generateReceipt{
+  width: 100%;
+}
+.generateReceipt button{
+  width: 100%;
+}
+
+.noData{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+  width: 100%;
   border-radius: 3px;
   background-color: white;
-  width: 83%;
-  margin-bottom: 10px;
-  padding: 8px;
-  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
-.descriptionOfService img{
-  width: 30px;
-  margin-right: 10px;
+.status{
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  justify-content: center;
+}
+.statusImg{
+  margin-left: auto;
+  margin-right: auto;
+  width: 50px;
+  height: 50px;
+}
+.statusDescription{
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.6;
+  font-size: 14px;
+  margin-top: 5px;
 }

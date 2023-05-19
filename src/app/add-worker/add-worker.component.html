@@ -1,0 +1,56 @@
+<div class="addWorker">
+  <div class="titleAddWorker" *ngIf="idWorker==0">Добавление сотрудника в {{managementCompany.title}}</div>
+  <div class="titleAddWorker" *ngIf="idWorker!=0">Обновление сотрудника в {{managementCompany.title}}</div>
+
+  <div class="form-group">
+    <form class="selectors">
+      <div class="select-wrapper">
+        <select name="select-category" id="selectPost" class="select">
+          <option value={{post.id}} *ngFor="let post of posts">{{post.simpleTitle}}</option>
+        </select>
+      </div>
+    </form>
+  </div>
+
+  <div class="description">Имя</div>
+  <input type="text" placeholder="Имя" id="name" [(ngModel)]="worker.name">
+  <div *ngIf="errorName.length!=0" class="error">{{errorName}}</div>
+
+  <div class="description">Фамилия</div>
+  <input type="text" placeholder="Фамилия" id="surname" [(ngModel)]="worker.surname">
+  <div *ngIf="errorSurname.length!=0" class="error">{{errorSurname}}</div>
+
+  <div class="description">Отчество</div>
+  <input type="text" placeholder="Отчество" id="patrimony" [(ngModel)]="worker.patronymic">
+  <div *ngIf="errorPatrimony.length!=0" class="error">{{errorPatrimony}}</div>
+
+  <div class="description">Email</div>
+  <input type="email" placeholder="Email" id="email" [(ngModel)]="worker.email">
+  <div *ngIf="errorEmail.length!=0" class="error">{{errorEmail}}</div>
+
+  <div class="description">Телефон</div>
+  <input type="phone" placeholder="+7-000-000-00-00" id="phone" [(ngModel)]="worker.phone">
+  <div *ngIf="errorPhone.length!=0" class="error">{{errorPhone}}</div>
+
+  <div class="description">Город</div>
+  <input type="text" placeholder="Город" id="town" [(ngModel)]="worker.town">
+  <div *ngIf="errorTown.length!=0" class="error">{{errorTown}}</div>
+
+  <div class="description">Улица</div>
+  <input type="text" placeholder="Улица" id="street" [(ngModel)]="worker.street">
+  <div *ngIf="errorStreet.length!=0" class="error">{{errorStreet}}</div>
+
+  <div class="description">Дом</div>
+  <input type="text" placeholder="Дом" id="house" [(ngModel)]="worker.house">
+  <div *ngIf="errorHouse.length!=0" class="error">{{errorHouse}}</div>
+
+  <div class="description">Квартира</div>
+  <input type="text" placeholder="Квартира" id="flat" [(ngModel)]="worker.numberOfFlat">
+  <div *ngIf="errorFlat.length!=0" class="error">{{errorFlat}}</div>
+
+
+  <button (click)="addWorker()" class="addWorkerButton" *ngIf="idWorker==0">Добавить сотрудника</button>
+  <button (click)="addWorker()" class="addWorkerButton" *ngIf="idWorker!=0">Обновить данные сотрудника</button>
+
+</div>
+

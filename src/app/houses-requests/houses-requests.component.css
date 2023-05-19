@@ -1,0 +1,132 @@
+.housesRequests{
+  width: 65%;
+  position: absolute;
+  left: 20%;
+}
+.housesRequestsWrap,.mc{
+  background-color: white;
+  padding: 40px;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+}
+.descriptionHouse{
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 17px;
+}
+.descriptionMember{
+  display: flex;
+  margin-bottom: auto;
+  margin-top: auto;
+  margin-right: 10px;
+}
+.line{
+  border-radius: 3px;
+  margin-right: 10px;
+  width: 5px;
+  background-color: rgba(86, 190, 159, 0.66);
+}
+.certainHouse{
+  display: flex;
+  justify-content: space-between;
+  transition: 0.3s;
+  margin-bottom: 15px;
+}
+.certainHouse:hover{
+  cursor: pointer;
+  color: #56BE9F;
+}
+
+/*стрелка*/
+.rightArrow{
+  opacity: 0.7;
+  margin-right: 5px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 30px;
+}
+.certainHouse:hover .rightArrow{
+  opacity: 1;
+}
+.mcTitle{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/*buttons*/
+.generalButton{
+  font-size: 17px;
+  border: none;
+  padding: 15px;
+  border-radius: 4px;
+  transition: 0.5s ease-in-out;
+}
+.generalButton:hover{
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}
+.update{
+  width: 150px;
+  background-color: rgba(86, 190, 159, 0.38);
+}
+.update:hover{
+  background-color: rgba(86, 190, 159, 0.58);
+}
+
+.mcForHouses{
+  justify-content: space-between;
+  display: flex;
+  margin-bottom: 10px;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  padding: 40px;
+}
+.titleMC{
+  font-size: 20px;
+  font-weight: bold;
+}
+.addHouse{
+  width: 50%;
+  height: 50%;
+  background-color: rgba(86, 190, 159, 0.73);
+}
+
+.addHouse:hover{
+  background-color: rgba(86, 190, 159, 0.85);
+}
+
+/*accounter buttons*/
+
+.debtor{
+  background-color: rgba(86, 128, 190, 0.54);
+}
+.debtor:focus{
+  background-color: rgba(86, 128, 190, 0.82);
+}
+.checkTheMeter{
+  background-color: rgba(86, 190, 159, 0.54);
+}
+.checkTheMeter:focus{
+  background-color: rgba(86, 190, 159, 0.78);
+}
+.replaceTheMeter{
+  background-color: rgba(128, 86, 190, 0.54);
+}
+.replaceTheMeter:focus{
+  background-color: rgba(128, 86, 190, 0.77);
+}
+.receipt{
+  background-color: rgba(99, 217, 213, 0.54);
+}
+.receipt:focus{
+  background-color: rgba(86, 190, 187, 0.89);
+}
+.reportButtons{
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+}
+.reportButtons button{
+  margin-bottom: 5px;
+}

@@ -1,0 +1,57 @@
+.loginBlock{
+  background-color: rgba(0, 141, 138, 0.34);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.loginBlockInputs{
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  background-color: white;
+  border-radius: 3px;
+  padding: 40px;
+  width: 350px;
+}
+.loginBlockInputs input{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 10px;
+  transition: 0.4s ease-in-out;
+  width: 98%;
+  font-size: 20px;
+}
+input:focus{
+  outline: 0;
+  border-bottom-color: rgb(87, 150, 131);
+  transition: 0.3s;
+}
+input:hover{
+  cursor: text;
+}
+
+.loginOnServer{
+  margin-top: 40px;
+  width: 100%;
+  margin-right: 5px;
+  font-size: 17px;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: rgba(40, 80, 152, 0.32);
+  transition: 0.5s ease-in-out;
+}
+.loginOnServer:hover{
+  padding: 10px;
+  background-color: rgba(40, 80, 152, 0.4);
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}
+
+.error{
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: red;
+}

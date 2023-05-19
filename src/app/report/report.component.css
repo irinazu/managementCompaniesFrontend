@@ -1,0 +1,285 @@
+#report{
+  width: 50%;
+  position: absolute;
+  left: 20%;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+}
+#debts,#check,#replace,#receipt{
+  padding: 40px;
+}
+.form-group{
+  width: 50%;
+  position: absolute;
+  left: 20%;
+}
+.reportDescription{
+  font-weight: bold;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.titleService,.titleServiceMD{
+  font-weight: bold;
+}
+.titleService{
+  margin-right: 10px;
+}
+.flatUser{
+  display: flex;
+  justify-content: space-between;
+}
+.flatUserCertain,.flatUserCertainReceipt{
+  margin-right: 40px;
+}
+.flatUserCertainReceipt{
+  display: flex;
+  align-items: center;
+  width: 80%;
+}
+.flatUserCertainMD{
+  margin-right: 10px;
+}
+.serviceDebt{
+  font-size: 18px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.generalDebts{
+  margin-top: 15px;
+  font-size: 20px;
+}
+.flatUserDescription{
+  width: 40%;
+}
+.flatUserDescriptionWithMD{
+  width: 100%;
+}
+.line{
+  margin-top: 20px;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(190, 190, 190, 0.45);
+}
+
+.flatUserWithLine{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.flatUserReceipt{
+  display: flex;
+  margin-bottom: 20px;
+}
+.flatUserWithLineMD{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.flatUserWithLineHead{
+  justify-content: space-between;
+  display: flex;
+  width: 300px;
+}
+.lineBetweenDescriptionAndUser,.lineBetweenDescriptionAndUserMD{
+  margin-bottom: 7px;
+  width: 3px;
+  border-radius: 3px;
+  background-color: rgba(190, 190, 190, 0.67);
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.lineBetweenDescriptionAndUserMD{
+  margin-right: 20px;
+}
+.titleServiceMD{
+  width: 30%;
+}
+.series{
+  width: 23%;
+}
+.dateCheck{
+  width: 46%;
+}
+
+
+/*buttons*/
+.createPDF{
+  font-size: 17px;
+  border: none;
+  padding: 15px;
+  border-radius: 4px;
+  transition: 0.5s ease-in-out;
+  width: 100%;
+  background-color: rgba(86, 128, 190, 0.54);
+}
+.createPDF:hover{
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+  background-color: rgba(86, 128, 190, 0.7);
+}
+.flat{
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+
+/* *******************
+Select
+******************* */
+
+.select {
+  margin-bottom: 10px;
+  /* Растягиваем блок на 100% родительского блока, для правильного размещения кастомной стрелочки */
+  width: 200px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  /* Убираем браузерную стрелку */
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  /* Задаем свой фон и рамку */
+  /*border: 1px solid #7E9BBD;*/
+  border-radius: 3px 3px 0 0;
+  background-color: transparent;
+  /* Отступы от рамки к тексту */
+  padding: 10px 35px 10px 2px;
+  /* Убираем баузерную обводку*/
+  outline: none;
+  cursor: pointer;
+}
+.selectors{
+  display: flex;
+}
+
+/* Убираем стрелочку в IE 10 и 11 */
+.select::-ms-expand {
+  display: none;
+}
+
+/* По клику - убираем обводку и добавляем свою*/
+.select:focus {
+  outline: none;
+}
+
+/* Делаем .select-wrapper родительским элементом для позиционирования "стрелочки" */
+.select-wrapper {
+  position: relative;
+  width: 200px;
+}
+
+/* Рисуем стрелочку */
+.select-wrapper::before {
+  content: "";
+
+  position: absolute;
+  top: 42%;
+  right: 1px;
+  transform: translateY(-50%);
+
+  display: block;
+
+  /* Рисуем треугольник */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10.4px 6px 0 6px;
+  border-color: #bebebe transparent transparent transparent;
+
+  /* Снимаем клик с треугольника */
+  pointer-events: none;
+}
+.select-wrapperMargin{
+  margin-left: 20px;
+}
+
+.submitDataButton{
+  margin-left: 10px;
+  background-color: rgba(48, 225, 125, 0.16);
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  transition: 0.5s ease-in-out;
+  margin-bottom: 9px;
+}
+.submitDataButton:hover{
+  padding: 10px;
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+  background-color: rgba(48, 225, 125, 0.42);
+}
+
+/*TABLE*/
+.h{
+  /*display: block;*/
+
+  position: absolute;
+  right: 100%;
+  padding: 20px;
+  /*width: 100px;*/
+  /*position: absolute;
+  top: 60px;
+  left: 20%;*/
+}
+table{
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+.tableInPdfInfoAboutCounterHeadLine{
+  font-weight: bold;
+}
+.tableInPdfInfoAboutCounterHeadLine td{
+  border: 1px solid black;
+  text-align: center;
+}
+.tableInPdfInfoAboutCounterMainLine td{
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px dashed black;
+  text-align: center;
+}
+
+.tableInPdfInfoAboutCounter :last-child {
+  border-bottom: 1px solid black;
+}
+.tableInPdfInfoAboutCounterTitle{
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.result{
+  font-weight: bold;
+}
+.tableInPdfHeadTitle div{
+  text-align: center;
+}
+.tableInPdfHead{
+  margin-bottom: 40px;
+}
+.tableInPdfHeadMainData{
+  display: flex;
+}
+.tableInPdfHeadMainDataResult{
+  margin-left: 40px;
+}
+.tableInPdfHeadTitle{
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.tableInPdfHeadTitleGeneralInformation{
+  font-weight: bold;
+}
+.noData{
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: 40px;
+}
+
+

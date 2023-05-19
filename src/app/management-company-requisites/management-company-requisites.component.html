@@ -1,0 +1,74 @@
+
+<div class="certainMC">
+  <div class="headCertainMC">
+    <div class="titleMC">
+      <span class="rowTitleMC">Управляющая компания:</span>
+      <div style="margin-left: 10px">{{managementCompany.title}}</div>
+    </div>
+    <div class="status">
+      <div class="descriptionStatus">{{managementCompany.managementCompanyStatusDTO.titleOfStatus}}</div>
+      <div><img src="assets/images/themesForRequest/{{managementCompany.managementCompanyStatusDTO.filePath}}" class="statusImg"></div>
+    </div>
+  </div>
+  <div style="display: flex">
+    <div class="line"></div>
+    <div>
+      <div><span class="row">Адресс:</span> {{managementCompany.town}} {{managementCompany.street}} {{managementCompany.house}}</div>
+      <div><span class="row">Email:</span> {{managementCompany.email}}</div>
+      <div><span class="row">Телефон:</span> {{managementCompany.phone}}</div>
+      <div><span class="row">ФИО представителя:</span> {{managementCompany.surnameOfBoss}} {{managementCompany.nameOfBoss}} {{managementCompany.patronymicOfBoss}}</div>
+      <div><span class="row">ИНН:</span> {{managementCompany.inn}}</div>
+      <div><span class="row">КПП:</span> {{managementCompany.kpp}}</div>
+      <div><span class="row">Расчетный счет:</span> {{managementCompany.checkingAccount}}</div>
+      <div><span class="row">Корреспондентсчкий счет:</span> {{managementCompany.correspondentAccount}}</div>
+      <div><span class="row">Название банка:</span> {{managementCompany.bankTitle}}</div>
+      <div><span class="row">БИК Банка:</span> {{managementCompany.bicBank}}</div>
+      <div><span class="row">Время работы:</span> {{managementCompany.timeOfWork}}</div>
+    </div>
+  </div>
+
+  <div *ngIf="managementCompany.causeRejection!=null" style="color: red">
+    <div style="font-weight: bold;margin-top: 20px">Причина отказа: </div>
+    <div [innerHTML]="managementCompany.causeRejection"></div>
+  </div>
+  <div class="reductionStatusArrow" (click)="openReductionStatus()" *ngxPermissionsOnly="'ADMIN'">
+    <img src="assets/images/arrowDown.png" class="arrow" *ngIf="!flagOpenReductionStatus">
+    <img src="assets/images/arrowUp.png" class="arrow" *ngIf="flagOpenReductionStatus">
+    <div>Редактировать статус</div>
+  </div>
+
+  <div class="reductionStatus" *ngIf="flagOpenReductionStatus">
+    <div style="display: flex">
+
+      <div class="form-group">
+        <form class="selectors">
+          <div class="select-wrapper">
+            <select name="select-category" id="selectStatus" class="select">
+              <option value={{status.id}} *ngFor="let status of statuses">{{status.titleOfStatus}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+
+      <button class="generalButton updateStatus" (click)="updateStatus()">Обновить статус</button>
+
+    </div>
+
+    <div style="margin-bottom: 20px;font-weight: bold">Причина отказа</div>
+    <editor [(ngModel)]="ngModel" apiKey=""
+            [init]="{ plugins: 'lists link table code help wordcount' }"
+    ></editor>
+
+  </div>
+
+
+  <div class="housesTitle">Дома подключенные к системе: <span *ngIf="managementCompany.housesDTO.length==0">подключенных домов еще нет</span></div>
+
+  <div class="housesMC">
+    <div *ngFor="let house of managementCompany.housesDTO" class="certainHouse">
+      <div style="display: flex"><img src="assets/images/mainPage/right-arrow.png" class="rightArrow">
+        Улица: {{house.street}} {{house.numberOfHouse}}</div>
+    </div>
+  </div>
+
+</div>

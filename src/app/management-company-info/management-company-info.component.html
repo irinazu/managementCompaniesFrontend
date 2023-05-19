@@ -1,0 +1,30 @@
+<app-main-menu></app-main-menu>
+
+<div class="certainMC">
+  <div class="titleMC"><span class="rowTitleMC">Управляющая компания:</span> {{managementCompany.title}}</div>
+  <div style="display: flex">
+    <div class="line"></div>
+    <div>
+      <div><span class="row">Адресс:</span> {{managementCompany.town}} {{managementCompany.street}} {{managementCompany.house}}</div>
+      <div><span class="row">Email:</span> {{managementCompany.email}}</div>
+      <div><span class="row">Телефон:</span> {{managementCompany.phone}}</div>
+      <div><span class="row">ФИО представителя:</span> {{managementCompany.surnameOfBoss}} {{managementCompany.nameOfBoss}} {{managementCompany.patronymicOfBoss}}</div>
+      <div><span class="row">ИНН:</span> {{managementCompany.inn}}</div>
+      <div><span class="row">КПП:</span> {{managementCompany.kpp}}</div>
+      <div><span class="row">Расчетный счет:</span> {{managementCompany.checkingAccount}}</div>
+      <div><span class="row">Корреспондентсчкий счет:</span> {{managementCompany.correspondentAccount}}</div>
+      <div><span class="row">Название банка:</span> {{managementCompany.bankTitle}}</div>
+      <div><span class="row">БИК Банка:</span> {{managementCompany.bicBank}}</div>
+      <div><span class="row">Время работы:</span> {{managementCompany.timeOfWork}}</div>
+    </div>
+  </div>
+
+  <div class="housesTitle">Дома подключенные к системе:</div>
+  <div class="housesMC">
+    <div *ngFor="let house of managementCompany.housesDTO" class="certainHouse">
+      <div style="display: flex"><img src="assets/images/mainPage/right-arrow.png" class="rightArrow">
+        Улица: {{house.street}} {{house.numberOfHouse}}</div>
+    </div>
+  </div>
+
+</div>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Params} from "@angular/router";
 import {ServicesService} from "../services/services.service";
 import {ServiceDescription} from "../modules/service-description";
+import {Subject, Subscription, switchMap, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-menu-for-service',
@@ -9,32 +10,43 @@ import {ServiceDescription} from "../modules/service-description";
   styleUrls: ['./menu-for-service.component.css']
 })
 export class MenuForServiceComponent implements OnInit {
-  public count = false;
 
-  public onChange(counterExist: boolean): void {
-    this.count=counterExist;
+  private destroy$ = new Subject<undefined>();
+
+  constructor(private router: ActivatedRoute,private service:ServicesService) {
+    this.router.paramMap.subscribe(paramMap => {
+      // @ts-ignore
+      this.id = paramMap.get('id');    // get param from dictonary
+      this.ngOnInit();                    // load your data
+    });
   }
-  constructor(private router: ActivatedRoute,private service:ServicesService) { }
 
+  public count = false;
   id:number=0;
-
   serviceDescription:ServiceDescription=new ServiceDescription();
-  ngOnInit(): void {
-    this.id=this.router.snapshot.params['id'];
 
+  ngOnInit(): void {
+
+    console.log(this.id+ "IN MENU FOR SERVICE");
+
+
+    document.getElementById("statisticsInfo")!.setAttribute('style',"background-color:rgba(0, 0, 0, 0.73);height:2px;");
+
+    this.id=this.router.snapshot.params['id'];
 
     this.service.getCertainDescriptionService(this.id).subscribe(value => {
       this.serviceDescription=value;
       this.count=value.counter;
-      console.log(value)
     })
   }
 
+  public onChange(counterExist: boolean): void {
+    this.count=counterExist;
+  }
   transparentBorder(info:string) {
     for(let i of document.getElementsByClassName("borderLine")){
       i.setAttribute('style','background-color:')
     }
-    // @ts-ignore
-    document.getElementById(info).setAttribute('style',"background-colour:rgba(0, 0, 0, 0.73)");
+    document.getElementById(info)!.setAttribute('style',"background-color:rgba(0, 0, 0, 0.73)");
   }
 }

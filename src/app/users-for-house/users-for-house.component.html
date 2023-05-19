@@ -1,0 +1,28 @@
+<div class="usersForHouse">
+  <div class="houseForUser">Город:{{house.town}} Улица: {{house.street}} Дом: {{house.numberOfHouse}}
+    <div style="opacity: 0.5;font-size: 16px;margin-top: 5px">Количество пользователей: {{userSystems.length}}</div>
+  </div>
+
+  <div class="usersBlock">
+    <div *ngFor="let userSystem of userSystems" class="certainUserSystem">
+      <div class="blockUserSystem">
+      <div class="verticalLine"></div>
+        <div class="userDescription">
+          <div class="nameUserSystem">
+            <div>ФИО: {{userSystem.name}}</div>
+            <div>{{userSystem.surname}}</div>
+            <div>{{userSystem.patronymic}}</div>
+          </div>
+          <div>Номер квартиры: {{userSystem.numberOfFlat}}</div>
+          <div>Номер телефона: {{userSystem.phone}}</div>
+          <div>Email: {{userSystem.email}}</div>
+          <div>Номер личного счета: {{userSystem.accountNumber}}</div>
+        </div>
+      </div>
+      <div *ngxPermissionsOnly="'DISPATCHER'" class="buttons">
+        <button class="requestsCertainUserSystem" (click)="go(userSystem.id)">Заявления</button>
+        <button class="meteringDevices" [routerLink]="['meteringDevices',userSystem.id]">Индивидуальные приборы учета</button>
+      </div>
+    </div>
+  </div>
+</div>

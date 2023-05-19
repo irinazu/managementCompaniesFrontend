@@ -1,0 +1,19 @@
+<div class="managementCompaniesForHead">
+  <div class="headMyMC">Управляющие компании:</div>
+  <div *ngIf="managementCompanies.length==0" class="noCompanies">Нет добавленных Управляющих компаний</div>
+  <div *ngFor="let mc of managementCompanies" class="certainMC" [routerLink]="['requisitesManagementCompany',mc.id]">
+    <div class="mcTitle">
+      <img src="assets/images/mainPage/right-arrow.png" class="rightArrow">
+      {{mc.title}}
+    </div>
+    <div class="buttons" *ngIf="mc.managementCompanyStatusDTO.id==2||role=='ADMIN'" >
+      <button class="generalButton workers" [routerLink]="['workers',mc.id]">Сотрудники</button>
+      <button class="generalButton houses" [routerLink]="['housesRequests',mc.id]">Дома</button>
+      <button class="generalButton news" [routerLink]="['allNews',mc.id]">Новости</button>
+    </div>
+    <div class="status">
+      <div class="descriptionStatus">{{mc.managementCompanyStatusDTO.titleOfStatus}}</div>
+      <img src="assets/images/themesForRequest/{{mc.managementCompanyStatusDTO.filePath}}" class="statusImg">
+    </div>
+  </div>
+</div>

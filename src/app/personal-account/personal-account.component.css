@@ -1,0 +1,161 @@
+.personalAccount{
+  width: 70%;
+  position: absolute;
+  left: 20%;
+  background-color: white;
+  padding: 40px;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+}
+.avatarBlock{
+  display: flex;
+  flex-direction: column;
+}
+.avatar{
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgba(86, 190, 159, 0.82);
+}
+.imgWithLetter{
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.headAccount{
+  display: flex;
+}
+.avatarDescription{
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 20px;
+}
+.description{
+  margin-top: auto;
+  margin-bottom: auto;
+  font-weight: bold;
+}
+.mainDescription{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+}
+.memberDescription{
+  width: 50%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainDescriptionBegin{
+  margin-top: 20px;
+}
+/*buttons*/
+.general{
+  font-size: 15px;
+  border: none;
+  border-radius: 4px;
+  transition: 0.5s ease-in-out;
+}
+.general{
+  padding: 10px;
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}
+.reductionAccount{
+  width: 100px;
+  height: 50%;
+  background-color: rgba(86, 190, 159, 0.54);
+}
+.reductionAccount:hover{
+  background-color: rgba(86, 190, 159, 0.73);
+}
+.reductionPassword{
+  margin-top: 40px;
+  width: 50%;
+  height: 50%;
+  background-color: rgba(86, 138, 190, 0.54);
+}
+.reductionPassword:hover{
+  background-color: rgba(86, 138, 190, 0.75);
+}
+
+/*change*/
+.change{
+  border: dashed 2px rgba(86, 138, 190, 0.75);
+  margin-top: 30px;
+  padding: 40px;
+}
+input[type=text]:focus,input[type=password]:focus{
+  outline: 0;
+  border-bottom-color: rgba(86, 190, 159, 0.62);
+  transition: 0.3s;
+}
+input[type=text],[type=file],[type=password]{
+  margin-top: 5px;
+  font-size: 16px;
+  width: 96%;
+  border-radius: 3px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 15px;
+  transition: 0.4s ease-in-out;
+}
+.buttons{
+  display: flex;
+  justify-content: space-between;
+}
+.send{
+  margin-top: 40px;
+  width: 48%;
+  height: 50%;
+  background-color: rgba(86, 138, 190, 0.54);
+}
+.send:hover{
+  background-color: rgba(86, 138, 190, 0.75);
+}
+.cancel{
+  margin-top: 40px;
+  width: 48%;
+  height: 50%;
+  background-color: white;
+  border: solid 2px rgba(86, 138, 190, 0.75);
+}
+.cancel:hover{
+  background-color: rgba(245, 246, 245, 0.62);
+}
+.error{
+  color: red;
+  margin-top: 10px;
+}
+.changeAvatar{
+  margin-top: 20px;
+  width: 48%;
+  height: 50%;
+  background-color: rgba(86, 138, 190, 0.29);
+}
+.changeAvatar:hover{
+  background-color: rgba(86, 138, 190, 0.48);
+
+}
+
+input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: rgba(48, 225, 125, 0.16);
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+input[type=file]::file-selector-button:hover {
+  background: rgba(48, 225, 125, 0.42);
+}
+.fileForAvatar{
+  display: flex;
+  margin-top: 20px;
+
+}

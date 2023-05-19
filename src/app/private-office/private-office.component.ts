@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NgxPermissionsService} from "ngx-permissions";
 
 @Component({
   selector: 'app-private-office',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrivateOfficeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ngxPermissionsService:NgxPermissionsService) { }
+
+  permissionRole:string="GUEST";
 
   ngOnInit(): void {
+    this.permissionRole=localStorage.getItem('role')!;
+    this.ngxPermissionsService.loadPermissions([this.permissionRole]);
   }
 
 }

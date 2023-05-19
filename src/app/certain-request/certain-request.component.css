@@ -1,49 +1,117 @@
 .history{
-  margin-left: 5px;
+  width: 65%;
+  position: absolute;
+  left: 20%;
+  z-index: 1;
+
 }
-.certainRequest{
-  border-radius: 10px 10px 0% 0%;
-  width: 90%;
-  background-color: white;
+.historyRequest{
+  font-size: 19px;
+  margin-bottom: 20px;
+}
+.mainHead{
+  margin-left: 10px;
+  width: 100%;
+}
+.titleAndDate{
+  display: flex;
+  justify-content: space-between;
+}
+.titleAndThemeWithLineInMainRequestForTitle{
+  display: flex;
+}
+.lineInMainHead{
+  border-radius: 3px;
+  width: 8px;
+  background-color: rgba(86, 190, 159, 0.45);
+}
+.lineInMainRequestForTitle{
+  border-radius: 3px;
+  height: 100%;
+  background-color: rgba(86, 190, 159, 0.22);
+}
+.blockStatusWithImg{
+  display: flex;
+}
+.commentary{
+  padding: 10px;
+  background-color: #7f7fd5;
+}
+.statusImg{
+  width: 40px;
+  opacity: 0.9;
+}
+.dateUpdate,.requestDate,.requestTheme{
+  font-weight: 300;
+}
+.titleAndTheme{
   display: flex;
   flex-direction: column;
+}
+.requestMainText{
+  margin-top: 40px;
+}
+.certainRequest{
+  border-radius: 3px;
+  box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  width: 100%;
+  background-color: white;
+  display: flex;
   margin-bottom: 2px;
-  padding: 10px;
+  padding: 20px;
 }
 .certainBlockOfRequest{
-  width: 90%;
+  width: 100%;
   background-color: white;
   display: flex;
   flex-direction:column;
-  margin-bottom: 2px;
-  padding: 10px;
+  margin-bottom: 4px;
+  padding: 20px;
+  border-bottom: solid 1px rgba(190, 190, 190, 0.56);
+  box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
 }
 .certainBlockOfRequestForCompany{
-  width: 90%;
-  background-color: rgba(66, 160, 87, 0.13);
+  border-radius: 3px;
+  background-color: rgba(86, 190, 159, 0.2);
   display: flex;
-  flex-direction:column;
-  margin-bottom: 2px;
+  margin-top: 20px;
+  padding: 10px;
+}
+.certainBlockOfRequestForUser{
+  border-radius: 3px;
+  background-color: rgba(86, 122, 190, 0.2);
+  margin-top: 20px;
   padding: 10px;
 }
 .timeAndStatus{
   display: flex;
   justify-content: space-between;
+  padding: 10px 10px 0 10px;
 }
-.date{
+.dateOfRequest{
+  font-weight: 300;
   opacity: 0.5;
 }
 .answerCompany{
   display: flex;
   justify-content: flex-start;
+  padding-left: 10px;
+  margin-top: 20px;
+  font-weight: bolder;
+  font-size: 18px;
+}
+.statusText{
+  font-size: 17px;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 20px;
 }
 .answerUser{
   display: flex;
   justify-content: flex-end;
 }
-.commentary{
-  margin-top: 20px;
-}
+
 .requestTitle{
   font-weight: bold;
   font-size: 20px;
@@ -55,3 +123,237 @@
   margin-bottom: 10px;
   margin-top: 10px;
 }
+.files{
+  margin-top: 20px;
+  padding-left: 10px;
+}
+
+/*ответ*/
+.blockSendAnswer{
+  width: 100%;
+  padding: 20px;
+  border-radius: 3px;
+  box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  background-color: white;
+  display: flex;
+  margin-bottom: 20px;
+}
+.openBlockForAnswer{
+  transition: 0.3s;
+  display: flex;
+}
+.openBlockForAnswer:hover{
+  color: rgb(86, 190, 159);
+  cursor: pointer;
+}
+.arrows{
+  width: 20px;
+  margin-right: 10px;
+}
+.editorAppear{
+  width: 100%;
+  margin-bottom: 40px;
+  padding: 20px;
+}
+
+/*создать обновление*/
+.createNewUpdateRequest{
+  margin-top: 20px;
+  width: 100%;
+  margin-right: 5px;
+  font-size: 17px;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: rgba(86, 190, 159, 0.73);
+  transition: 0.5s ease-in-out;
+}
+.createNewUpdateRequest:hover{
+  padding: 10px;
+  background-color: rgba(86, 190, 159, 0.85);
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}
+.blockCreateNewUpdateRequest{
+  width: 100%;
+}
+
+/*выбор файла*/
+.fileAndReopenRequest{
+  display: flex;
+  justify-content: space-between;
+}
+.fileMention,.checkBoxReopen{
+  font-size: 17px;
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+.fileForRequest{
+  margin-top: 20px;
+}
+.fileForRequestInput{
+  font-size: 15px;
+}
+input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: rgba(48, 225, 125, 0.16);
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+input[type=file]::file-selector-button:hover {
+  background: rgba(48, 225, 125, 0.42);
+}
+
+/*ошибки*/
+.error{
+  color: red;
+  font-size: 17px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+/*изображения заявления*/
+.imgResource{
+  max-width: 10%;
+}
+.imgRequest{
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
+}
+.imgResource:hover{
+  cursor: zoom-in;
+  filter: blur(1px);
+}
+.pictures-img{
+  margin-top: 10px;
+}
+.zoomBlock{
+  display: flex;
+}
+.zoomImg{
+  margin-left: auto;
+  margin-right: auto;
+}
+.zoomImg img{
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.blockWithZoomImgAndCross{
+  padding: 10px;
+  display: none;
+  left:0;
+  right:0;
+  margin: 0 auto;
+  background-color: white;
+  position: absolute;
+  z-index: 4444;
+  box-shadow: rgba(0,0,0,.5) 0 0 0 10000vh;
+}
+.crossZoomImg{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+  transition: 0.3s;
+}
+.crossZoomImg:hover{
+  cursor: pointer;
+  opacity: 1;
+  width: 22px;
+}
+
+
+
+/* *******************
+Select
+******************* */
+
+.select {
+  margin-bottom: 10px;
+  /* Растягиваем блок на 100% родительского блока, для правильного размещения кастомной стрелочки */
+  width: 200px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  /* Убираем браузерную стрелку */
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  /* Задаем свой фон и рамку */
+  /*border: 1px solid #7E9BBD;*/
+  border-radius: 3px 3px 0px 0px;
+  background-color: transparent;
+  /* Отступы от рамки к тексту */
+  padding: 10px 35px 10px 2px;
+  /* Убираем баузерную обводку*/
+  outline: none;
+  cursor: pointer;
+}
+.selectors{
+  display: flex;
+}
+
+/* Убираем стрелочку в IE 10 и 11 */
+.select::-ms-expand {
+  display: none;
+}
+
+/* По клику - убираем обводку и добавляем свою*/
+.select:focus {
+  outline: none;
+}
+
+/* Делаем .select-wrapper родительским элементом для позиционирования "стрелочки" */
+.select-wrapper {
+  position: relative;
+  width: 200px;
+}
+
+/* Рисуем стрелочку */
+.select-wrapper::before {
+  content: "";
+
+  position: absolute;
+  top: 42%;
+  right: 1px;
+  transform: translateY(-50%);
+
+  display: block;
+
+  /* Рисуем треугольник */
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10.4px 6px 0 6px;
+  border-color: #bebebe transparent transparent transparent;
+
+  /* Снимаем клик с треугольника */
+  pointer-events: none;
+}
+.select-wrapperMargin{
+  margin-left: 20px;
+}
+.form-group{
+  display: flex;
+  align-items: flex-end;
+}
+
+/*показ заявителя*/
+.showUser{
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  padding: 20px;
+  display: flex;
+  margin-bottom: 20px;
+  font-size: 17px;
+  font-weight: bold;
+}
+

@@ -1,0 +1,43 @@
+<div class="addWorker">
+  <div class="titleAddWorker" *ngIf="idHouse==0">Добавление дома в УК {{managementCompany.title}}</div>
+  <div class="titleAddWorker" *ngIf="idHouse!=0">Обновление дома в УК {{managementCompany.title}}</div>
+
+  <div class="description">Регион</div>
+  <input type="text" placeholder="Регион" id="region" [(ngModel)]="house.region">
+  <div *ngIf="errorRegion.length!=0" class="error">{{errorRegion}}</div>
+
+  <div class="description">Город</div>
+  <input type="text" placeholder="Город" id="town" [(ngModel)]="house.town">
+  <div *ngIf="errorTown.length!=0" class="error">{{errorTown}}</div>
+
+  <div class="description">Улица</div>
+  <input type="text" placeholder="Улица" id="street" [(ngModel)]="house.street">
+  <div *ngIf="errorStreet.length!=0" class="error">{{errorStreet}}</div>
+
+  <div class="description">Дом</div>
+  <input type="text" placeholder="Дом" id="numberOfHouse" [(ngModel)]="house.numberOfHouse">
+  <div *ngIf="errorNumberOfHouse.length!=0" class="error">{{errorNumberOfHouse}}</div>
+
+  <div class="description">Количество подъездов</div>
+  <input type="text" placeholder="Количество подъездов" id="entrancesCount" [(ngModel)]="house.numberOfEntrance">
+  <div *ngIf="errorNumberOfEntrance.length!=0" class="error">{{errorNumberOfEntrance}}</div>
+
+  <div class="description">Количество этажей</div>
+  <input type="text" placeholder="Количество этажей" id="numberOfFloor" [(ngModel)]="house.numberOfFloor">
+  <div *ngIf="errorNumberOfFloor.length!=0" class="error">{{errorNumberOfFloor}}</div>
+
+  <div class="description">Год основания</div>
+  <input type="text" placeholder="Год основания" id="yearOfConstruction" [(ngModel)]="house.yearOfConstruction">
+  <div *ngIf="errorYearOfConstruction.length!=0" class="error">{{errorYearOfConstruction}}</div>
+
+  <div class="description">Количество квартир</div>
+  <input type="text" placeholder="Количество квартир" id="numberOfFlats" [(ngModel)]="house.numberOfFlats">
+  <div *ngIf="errorNumberOfFlats.length!=0" class="error">{{errorNumberOfFlats}}</div>
+
+
+  <button (click)="addHouse()" class="addWorkerButton">
+    <span *ngIf="idHouse==0">Добавить дом</span>
+    <span *ngIf="idHouse!=0">Обновить данные дома</span>
+  </button>
+</div>
+

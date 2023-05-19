@@ -1,0 +1,35 @@
+<div class="workers">
+  <div class="mcForUsers">
+    <div class="titleMC">
+      <div>Управляющая компания: {{mc.title}}</div>
+      <div style="opacity: 0.5;font-size: 16px;margin-top: 5px">Количество работников: {{workers.length}}</div>
+    </div>
+    <button class="generalButton createNewWorker" [routerLink]="['addWorker',mc.id,0]">Создать нового сотрудника</button>
+  </div>
+
+  <div class="usersBlock">
+    <div *ngFor="let userSystem of workers" class="certainUserSystem">
+      <div class="blockUserSystem">
+        <div class="verticalLine"></div>
+        <div class="userDescription">
+          <div class="nameUserSystem">
+            <div>ФИО: {{userSystem.name}}</div>
+            <div>{{userSystem.surname}}</div>
+            <div>{{userSystem.patronymic}}</div>
+          </div>
+          <div class="address">
+            <div>Адресс: Город: {{userSystem.town}}</div>
+            <div> Улица: {{userSystem.street}}</div>
+            <div> Номер квартиры: {{userSystem.numberOfFlat}}</div>
+          </div>
+          <div>Номер телефона: {{userSystem.phone}}</div>
+          <div>Email: {{userSystem.email}}</div>
+          <div>Должность: {{userSystem.roleDTO.simpleTitle}}</div>
+        </div>
+      </div>
+      <div>
+        <button class="generalButton update" [routerLink]="['addWorker',mc.id,userSystem.id]" >Изменить</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,9 @@ import {string} from "@amcharts/amcharts4/core";
 import html2canvas from 'html2canvas';
 import {ProviderCompanyService} from "../services/provider-company.service";
 import {ProviderCompany} from "../modules/provider-company";
+import {FlatUser} from "../modules/flat-user";
+import {House} from "../modules/house";
+import {HouseService} from "../services/house.service";
 
 @Component({
   selector: 'app-general-statistics',
@@ -17,19 +20,7 @@ import {ProviderCompany} from "../modules/provider-company";
 })
 export class GeneralStatisticsComponent implements OnInit {
 
-  months=[
-    'Январь',
-    'Февраль',
-    'Март',
-    'Апрель',
-    'Май',
-    'Июнь',
-    'Июль',
-    'Август',
-    'Сентябрь',
-    'Ноябрь',
-    'Декабрь',
-  ];
+  months=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Ноябрь','Декабрь'];
   years:number[]=[];
 
   services:ServiceModel[]=[];
@@ -37,74 +28,104 @@ export class GeneralStatisticsComponent implements OnInit {
   generalResultWithDuty:number=0;
   monthResult:number=0;
   serviceWithCounter:ServiceModel[]=[];
+  chart:any;
+  title:any;
+  generalChart:any;
+  generalTitle:any;
 
-  constructor(private service:ServicesService,private serviceProvider:ProviderCompanyService) { }
+  userId:number=0;
+  userCertain:FlatUser=new FlatUser();
+
+  year:number=0;
+  month:number=0;
+  house:House=new House();
+
+  constructor(private service:ServicesService,private serviceProvider:ProviderCompanyService,
+              private serviceHouse:HouseService) { }
 
   ngOnInit(): void {
+    this.userId=Number(localStorage.getItem("id"));
+    this.year=new Date().getFullYear();
+    this.month=new Date().getMonth();
 
-    var chart = am4core.create("divPie", am4charts.PieChart);
-    chart.padding(20,10,20,10);
-    //chart.radius = am4core.percent(70);
+    //находим дом
+    this.serviceHouse.getHouseForCertainUser(this.userId).subscribe(value => {
+      this.house=value;
+    })
 
-    var pieSeries = chart.series.push(new am4charts.PieSeries());
-    pieSeries.dataFields.value = "dutyForThisMonth";
+    this.createMonthChart("dutyForThisMonth","divPie");
+    this.createGeneralChart("generalDutyForService","divPieGeneral");
+    this.formChartAndData(this.year,this.month);
+
+    this.getYears();
+
+  }
+
+  createMonthChart(dataMember:string,htmlElement:string) {
+    this.chart = am4core.create(htmlElement, am4charts.PieChart);
+    this.chart.padding(20,10,20,10);
+
+    let pieSeries = this.chart.series.push(new am4charts.PieSeries());
+    pieSeries.dataFields.value = dataMember;
     pieSeries.dataFields.category = "title";
     pieSeries.labels.template.disabled = true;
     pieSeries.ticks.template.disabled = true;
 
-    chart.legend = new am4charts.Legend();
-    chart.legend.position = "right";
-    chart.innerRadius = am4core.percent(60);
+    this.chart.legend = new am4charts.Legend();
+    this.chart.legend.position = "right";
+    this.chart.innerRadius = am4core.percent(60);
 
-    var label = pieSeries.createChild(am4core.Label);
+    let label = pieSeries.createChild(am4core.Label);
     label.text = "{values.value.sum} руб";
     label.horizontalCenter = "middle";
     label.verticalCenter = "middle";
-    label.fontSize = 25;
-
-    //Данные за определенный месяц
-    this.service.getAllServicesForDate(new Date().getFullYear(),new Date().getMonth()).subscribe(value => {
-
-      value.forEach(x=>this.generalResultWithDuty+=x.generalDutyForService);
-      value.forEach(x=>this.monthResult+=x.dutyForThisMonth);
-      for(let i=0;i<value.length;i++){
-        if(value[i].serviceDescription.counter){
-          this.serviceWithCounter.push(value[i]);
-        }
-      }
-      this.getInfoForGeneralReceipt(value);
-
-      chart.data=value;
-      this.services=value;
-      value.forEach(x=>x.title=x.serviceDescription.title);
-
-      var title = chart.titles.create();
-      title.text = "Подсчет за "+this.months[value[0].monthNumber]+" "+value[0].year;
-      // @ts-ignore
-      document.getElementById('selectMonth').value= this.months[value[0].monthNumber];
-      // @ts-ignore
-      document.getElementById('selectYear').value= value[0].year;
-      title.marginBottom=15;
-    })
-
-    //Года за которые можно получить данные
-    this.service.getYears().subscribe(value => {
-      this.years=value;
-    })
-
+    label.fontSize = 20;
+    this.title = this.chart.titles.create();
+    this.title.fontSize=18;
 
   }
 
-  getValue() {
-    var selectYear = document.getElementById("selectYear");
-    var selectMonth = document.getElementById("selectMonth");
+  createGeneralChart(dataMember:string,htmlElement:string) {
+    this.generalChart = am4core.create(htmlElement, am4charts.PieChart);
+    this.generalChart.padding(20,10,20,10);
 
+    let pieSeries = this.generalChart.series.push(new am4charts.PieSeries());
+    pieSeries.dataFields.value = dataMember;
+    pieSeries.dataFields.category = "title";
+    pieSeries.labels.template.disabled = true;
+    pieSeries.ticks.template.disabled = true;
+
+    this.generalChart.legend = new am4charts.Legend();
+    this.generalChart.legend.position = "right";
+    this.generalChart.innerRadius = am4core.percent(60);
+
+    let label = pieSeries.createChild(am4core.Label);
+    label.text = "{values.value.sum} руб";
+    label.horizontalCenter = "middle";
+    label.verticalCenter = "middle";
+    label.fontSize = 20;
+    this.generalTitle = this.generalChart.titles.create();
+    this.generalChart.fontSize=18;
+  }
+
+  //Года за которые можно получить данные
+  getYears(){
+    this.service.getYears().subscribe(value => {
+      this.years=value;
+    })
+  }
+
+  getValue() {
     // @ts-ignore
-    var valueYear = selectYear.value;
+    let valueYear = document.getElementById("selectYear").value;
     // @ts-ignore
-    var valueMonth = selectMonth.value;
-    console.log(valueYear);
-    console.log(valueMonth);
+    let valueMonth = document.getElementById("selectMonth").value;
+    let indexOfMonth=this.months.indexOf(valueMonth);
+
+    this.year=valueYear;
+    this.month=indexOfMonth;
+
+    this.formChartAndData(valueYear,indexOfMonth);
 
   }
 
@@ -117,12 +138,12 @@ export class GeneralStatisticsComponent implements OnInit {
       var width = pdf.internal.pageSize.getWidth();
       var height = canvas.height * width / canvas.width;
       pdf.addImage(contentDataURL, 'PNG',0, 0, width, height);
-      pdf.save('output.pdf');
+      pdf.save(this.userCertain.numberOfFlat+"_"+this.userCertain.userSystemDTO.surname+"_"+this.userCertain.userSystemDTO.name+"_"+this.userCertain.userSystemDTO.patronymic+'.pdf');
     });
   }
 
   getInfoForGeneralReceipt(value:ServiceModel[]){
-    this.serviceProvider.getProviderCompanyForHouse().subscribe(providers=>{
+    this.serviceProvider.getProviderCompaniesForHouse(this.house.id).subscribe(providers=>{
       this.providersCompany=providers;
 
       for(let i=0;i<value.length;i++){
@@ -136,5 +157,55 @@ export class GeneralStatisticsComponent implements OnInit {
     })
   }
 
+  //Данные за определенный месяц
+  private formChartAndData(year:number,month:number) {
+    this.services=[];
+    this.providersCompany=[];
+    this.generalResultWithDuty=0;
+    this.monthResult=0;
+    this.serviceWithCounter=[];
+
+    this.service.getAllServicesForDate(year,month,this.userId).subscribe(certainUser => {
+      if(certainUser.serviceDTOS.length!=0){
+        document.getElementById("divPie")!.style.display="block";
+        document.getElementById("divPieGeneral")!.style.display="block";
+        document.getElementById("detailsInfo")!.style.display="block";
+
+
+        this.userCertain=certainUser;
+
+        let value=certainUser.serviceDTOS;
+        value.forEach(x=>this.generalResultWithDuty+=x.generalDutyForService);
+        value.forEach(x=>this.monthResult+=x.dutyForThisMonth);
+        for(let i=0;i<value.length;i++){
+          if(value[i].serviceDescription.counter){
+            this.serviceWithCounter.push(value[i]);
+          }
+        }
+        this.getInfoForGeneralReceipt(value);
+        this.chart.data=value;
+        this.generalChart.data=value;
+        this.services=value;
+        value.forEach(x=>x.title=x.serviceDescription.title);
+
+        //this.title = this.chart.titles.create();
+        this.title.text = "Начисление за "+this.months[value[0].monthNumber]+" "+value[0].year;
+        this.generalTitle.text = "Начисление за "+this.months[value[0].monthNumber]+" "+value[0].year+" c долгом";
+
+        (<HTMLInputElement>document.getElementById('selectMonth')).value= this.months[value[0].monthNumber];
+        (<HTMLInputElement>document.getElementById('selectYear')).value= String(value[0].year);
+        this.title.marginBottom=15;
+      }else {
+        document.getElementById("divPie")!.style.display="none";
+        document.getElementById("divPieGeneral")!.style.display="none";
+        document.getElementById("detailsInfo")!.style.display="none";
+
+      }
+    })
+  }
+
+  monthShow():string {
+    return this.months[this.month];
+  }
 
 }

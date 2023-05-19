@@ -1,0 +1,14 @@
+<div class="block_menuBar">
+  <div class="menuBar">
+    <div>
+      <img src="/assets/images/homeIcon.png" alt="Main" [routerLink]="['']" class="mainPageImg">
+    </div>
+    <div><p><a (click)="allMC()">Все Управляющие компании</a></p></div>
+    <div *ngxPermissionsExcept="['USER','ADMIN','DISPATCHER','HEAD','ACCOUNTANT']"><p><a (click)="infoForManagementCompany()">Для Управляющих компаний</a></p></div>
+    <div *ngxPermissionsOnly="['USER','ADMIN','DISPATCHER','HEAD','ACCOUNTANT']"><p><a (click)="profileUser()">Профиль</a></p></div>
+    <div *ngxPermissionsExcept="['USER','ADMIN','DISPATCHER','HEAD','ACCOUNTANT']"><p><a (click)="login()">Войти</a></p></div>
+    <div *ngxPermissionsOnly="['USER','ADMIN','DISPATCHER','HEAD','ACCOUNTANT']" (click)="logOut()"><p><a>Выйти</a></p></div>
+    <div *ngxPermissionsExcept="['USER','ADMIN','DISPATCHER','HEAD','ACCOUNTANT']" (click)="registration()"><p><a>Зарегистрироваться</a></p></div>
+
+  </div>
+</div>

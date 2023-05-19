@@ -15,4 +15,10 @@ export class ProviderCompanyService {
   getProviderCompanyForHouse():Observable<ProviderCompany[]>{
     return this.httpClient.get<ProviderCompany[]>(`${this.URLForMap}/getProviderCompanyForHouse`);
   }
+
+  //Список поставщиков Адекватная версия
+  getProviderCompaniesForHouse(idHouse:number):Observable<ProviderCompany[]>{
+    return this.httpClient.get<ProviderCompany[]>(`${this.URLForMap}/getProviderCompaniesForHouse/${idHouse}`);
+  }
+
 }

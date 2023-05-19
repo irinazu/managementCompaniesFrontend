@@ -1,22 +1,6 @@
-<div class="block_menuBar">
-  <ul class="menuBar">
-    <li id="mainPageImg">
-      <img src="/assets/images/homeIcon.png" alt="Main">
-    </li>
-    <li><p><a [routerLink]="['privateOffice']">Профиль</a></p></li>
-    <li>
-      <img src="/assets/images/searcherIcon.png" alt="Search">
-    </li>
-    <li>
-      <img src="/assets/images/messageIcon.png" alt="Message">
-    </li>
-    <li>
-      <img src="/assets/images/noticeIcon.png" alt="Notice">
-    </li>
-    <li><p><a href="#">Войти</a></p></li>
-  </ul>
-</div>
+<app-main-menu></app-main-menu>
 
+<!--
 <div class="block">
   <div [routerLink]="['joke']" class="block_content">
     <img src="/assets/images/newsIcon.png" alt="News">
@@ -31,7 +15,57 @@
     <p>Управляющие компании</p>
   </div>
 </div>
+-->
+<div class="mainPage">
+  <div class="mainDescription">
+    <div class="mainDescriptionText">Обеспечивает качественное взаимодействие Управляющих Компаний и жителей</div>
+    <div class="mainDescriptionImg">
+      <img src="assets/images/mainPage/mainPageImg.png" class="bigMainPageImg">
+    </div>
+  </div>
 
+
+  <div class="blockColour">
+    <div class="whom">Жителю</div>
+    <div class="userBlock">
+      <div class="userBlockImg">
+        <img src="assets/images/mainPage/singleHouse.png" class="usersImg">
+      </div>
+      <div class="blockDescription blockDescriptionUser">
+        <div class="userBlockDescriptionDivs">
+          <div class="userBlockDescriptionDivsInner">
+          <div class="point"><img src="assets/images/mainPage/right-arrow.png" class="right-arrow"><div class="pointText">Получайте полную информацию по предоставленным услугам ЖКХ</div></div>
+          <div class="point"><img src="assets/images/mainPage/right-arrow.png" class="right-arrow"><div class="pointText">Своевременно устанавливайте связь с Вашей Управляющей Компанией</div></div>
+          <div class="point"><img src="assets/images/mainPage/right-arrow.png" class="right-arrow"><div class="pointText">Отслеживайте работу Вашей Управляющей Компанией</div></div>
+          <div class="point"><img src="assets/images/mainPage/right-arrow.png" class="right-arrow"><div class="pointText">Получайте новости и обновления связанные с Вашей Управляющей Компанией</div></div>
+          <div class="point"><img src="assets/images/mainPage/right-arrow.png" class="right-arrow"><div class="pointText">Учавствуйте в жизни Вашего жилищного хозяйтсва, присоединяйтесь к чатам ваших домов, учавствуйте в голосованиях</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="whom">Управляющей компании</div>
+  <div class="userBlock">
+    <div class="blockDescription blockDescriptionCompany">
+      <div class="userBlockDescriptionDivs">
+        <div class="userBlockDescriptionDivsInner">
+          <div class="point"><img src="assets/images/mainPage/right-arrow.png" class="right-arrow"><div class="pointText">Получайте отчет по услугам потребляемым, жителями</div></div>
+          <div class="point"><img src="assets/images/mainPage/right-arrow.png" class="right-arrow"><div class="pointText">Оповещайте жителей о важных событиях</div></div>
+          <div class="point"><img src="assets/images/mainPage/right-arrow.png" class="right-arrow"><div class="pointText">Делитесь новостями по Вашей Управляющей Компании</div></div>
+          <div class="point"><img src="assets/images/mainPage/right-arrow.png" class="right-arrow"><div class="pointText">Принимайте заявления от жителей</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="userBlockImg">
+      <img src="assets/images/mainPage/lens_houses.png" class="usersImg">
+    </div>
+  </div>
+
+  <div class="footer"></div>
+</div>
+
+<!--
 <div class="loadImg">
   <div>
     <input accept="image/*" type="file" multiple value="select" (change)="selectFiles($event)" >
@@ -85,5 +119,5 @@
     </div>
   </div>
 </div>
-
+-->
 

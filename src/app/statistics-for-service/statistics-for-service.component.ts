@@ -12,57 +12,48 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class StatisticsForServiceComponent implements OnInit {
 
-  constructor(private service:ServicesService,private router:ActivatedRoute) { }
+  constructor(private service:ServicesService,private router:ActivatedRoute) {
+    this.router.paramMap.subscribe(paramMap => {
+      // @ts-ignore
+      this.id = paramMap.get('id');
+      this.ngOnInit();
+    });
+  }
   maxMonth:ServiceModel=new ServiceModel();
   minMonth:ServiceModel=new ServiceModel();
   averageMedian:number=0;
   services:ServiceModel[]=[];
-  months=[
-    'Январь',
-    'Февраль',
-    'Март',
-    'Апрель',
-    'Май',
-    'Июнь',
-    'Июль',
-    'Август',
-    'Сентябрь',
-    'Ноябрь',
-    'Декабрь',
-  ];
-  monthsChange=[
-    'Января',
-    'Февраля',
-    'Марта',
-    'Апреля',
-    'Мая',
-    'Июня',
-    'Июля',
-    'Августа',
-    'Сентября',
-    'Ноября',
-    'Декабря',
-  ];
+  months=['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Ноябрь', 'Декабрь',];
+  monthsChange=['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Ноября', 'Декабря',];
   years:any[]=[];
 
+  chart:any;
+  title:any;
+  categoryAxis:any;
+  valueAxis:any;
+
+  userId:number=0;
+  serviceDescriptionId:number=0;
+
   ngOnInit(): void {
-    let chart = am4core.create("chartdiv", am4charts.XYChart);
+    this.userId=Number(localStorage.getItem("id"));
+    this.serviceDescriptionId=Number(this.router.snapshot.params['id']);
 
-    chart.marginRight = 400;
-    chart.padding(40,20,40,20);
-    var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-    categoryAxis.dataFields.category = "month";
-    categoryAxis.renderer.grid.template.location = 0;
-    categoryAxis.renderer.minGridDistance = 20;
-    categoryAxis.renderer.grid.template.strokeWidth = 0;
-    //categoryAxis.title.text = "Local country offices";
+    this.chart = am4core.create("chartdiv", am4charts.XYChart);
 
-    var  valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.renderer.grid.template.strokeWidth = 1;
-    valueAxis.title.text = "кВт*ч";
+    this.chart.marginRight = 400;
+    this.chart.padding(40,20,40,20);
+    this.categoryAxis = this.chart.xAxes.push(new am4charts.CategoryAxis());
+    this.categoryAxis.dataFields.category = "month";
+    this.categoryAxis.renderer.grid.template.location = 0;
+    this.categoryAxis.renderer.minGridDistance = 20;
+    this.categoryAxis.renderer.grid.template.strokeWidth = 0;
+
+    this.valueAxis = this.chart.yAxes.push(new am4charts.ValueAxis());
+    this.valueAxis.renderer.grid.template.strokeWidth = 1;
 
     // Create series
-    var series = chart.series.push(new am4charts.ColumnSeries());
+    let series = this.chart.series.push(new am4charts.ColumnSeries());
     series.dataFields.valueY = "consumption";
     series.dataFields.categoryX = "month";
     series.name = "Research";
@@ -76,34 +67,64 @@ export class StatisticsForServiceComponent implements OnInit {
       "dataField": "valueY"
     });
     series.columns.template.width = am4core.percent(70);
-    var title = chart.titles.create();
-    //title.text = "Электроэнергия";   //!!!!!!!!!!!!
-    title.marginBottom=30;
-    chart.cursor = new am4charts.XYCursor();
+    this.title = this.chart.titles.create();
+    this.title.marginBottom=30;
+    this.chart.cursor = new am4charts.XYCursor();
+
+    this.getNewDataForNewPeriod(0)
+
+    this.getYears();
+  }
+
+  //фильтр по временному промежутку
+  getValue(){
+    // @ts-ignore
+    let valueYear = document.getElementById("selectYear").value;
+    if(valueYear===0){
+      this.getNewDataForNewPeriod(0)
+    }else {
+      this.getNewDataForNewPeriod(valueYear)
+    }
+  }
+
+  //Получение данныхс сервера для построения графика
+  getNewDataForNewPeriod(valueYear:number){
 
     //Получение данныхс сервера для построения графика
-    this.service.getTopDataForService(this.router.snapshot.params['id']).subscribe(value => {
-      chart.data=value;
-      var start = this.monthsChange[value[0].monthNumber];
-      var y = value[0].year;
-      var end =  this.months[value[value.length-1].monthNumber];
-      var yE = value[value.length-1].year;
-      categoryAxis.title.text = "В период с "+start+" "+y+ " по "+end+" "+yE;
+    this.service.getTopDataForService(this.serviceDescriptionId,valueYear,this.userId).subscribe(value => {
+
+      this.services=value;
+      this.title.text = value[0].serviceDescription.title;
+      this.title.fontSize="22";
+
+      value.forEach(x=>x.month=this.months[x.monthNumber])
+
+      this.chart.data=value;
+      this.valueAxis.title.text =value[0].unit;
+
+      let start = this.monthsChange[value[0].monthNumber];
+      let y = value[0].year;
+      let end =  this.months[value[value.length-1].monthNumber];
+      let yE = value[value.length-1].year;
+      this.categoryAxis.title.text = "В период с "+start+" "+y+ " по "+end+" "+yE;
       this.indicatorsCount(value);
     })
+  }
 
-    this.service.getDataForService(this.router.snapshot.params['id']).subscribe(value => {
-      this.services=value;
-      title.text = value[0].serviceDescription.title;
-      value.forEach(x=>x.month=this.months[x.monthNumber])
-    })
+  dropDown(){
+    let el = document.getElementsByClassName('hideCheck');
+    // @ts-ignore
+    el[0].style.display === 'none' ? el[0].style.display = 'flex' : el[0].style.display = 'none';
+  }
 
-    //Года за которые можно получить данные
+  //Года за которые можно получить данные
+  getYears(){
     this.service.getYears().subscribe(value => {
       this.years=value;
     })
   }
 
+  //подсчет среднего, минимального, большего
   indicatorsCount(value:any){
 
     //Минимуму и максимум
@@ -115,8 +136,8 @@ export class StatisticsForServiceComponent implements OnInit {
     this.maxMonth=value[maxIndex];
 
     //Среднее
-    var consumptions = [];
-    for (var i of value) {
+    let consumptions = [];
+    for (let i of value) {
       consumptions.push(i.consumption);
     }
 
@@ -133,26 +154,5 @@ export class StatisticsForServiceComponent implements OnInit {
       this.averageMedian=consumptions[(len-1)/2];
     }
   }
-
-  getValue() {
-    var selectYear = document.getElementById("selectYear");
-    var selectMonth = document.getElementById("selectMonth");
-
-    // @ts-ignore
-    var valueYear = selectYear.value;
-    // @ts-ignore
-    var valueMonth = selectMonth.value;
-    console.log(valueYear);
-    console.log(valueMonth);
-
-  }
-
-  dropDown(){
-
-    var el = document.getElementsByClassName('hideCheck');
-    // @ts-ignore
-    el[0].style.display === 'none' ? el[0].style.display = 'flex' : el[0].style.display = 'none';
-  }
-
 
 }

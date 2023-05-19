@@ -1,0 +1,114 @@
+.managementCompaniesForHead{
+  width: 70%;
+  position: absolute;
+  left: 20%;
+}
+.mcTitle{
+  width: 40%;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-size: 25px;
+  font-weight: bold;
+}
+.headMyMC{
+  margin-bottom: 10px;
+  font-size: 22px;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  padding: 20px;
+}
+.certainMC{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  padding: 40px;
+}
+.rightArrow{
+  margin-right: 5px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 30px;
+}
+.houses{
+  margin-left: 10px;
+  width: 75px;
+  background-color: rgba(86, 190, 159, 0.54);
+}
+.houses:hover{
+  background-color: rgba(86, 190, 159, 0.73);
+}
+.news{
+  margin-left: 10px;
+  width: 100px;
+  background-color: rgba(128, 86, 190, 0.54);
+}
+.news:hover{
+  background-color: rgba(128, 86, 190, 0.7);
+}
+
+.generalButton{
+  font-size: 17px;
+  border: none;
+  padding: 15px;
+  border-radius: 4px;
+  transition: 0.5s ease-in-out;
+}
+.generalButton:hover{
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}
+.workers{
+  width: 150px;
+  background-color: rgba(86, 128, 190, 0.54);
+}
+.workers:hover{
+  background-color: rgba(86, 128, 190, 0.73);
+}
+.buttons{
+  display: flex;
+  width: 40%;
+}
+.noCompanies{
+  margin-top: 20px;
+  font-size: 20px;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  padding: 20px;
+}
+.certainMC{
+  display: flex;
+  justify-content: space-between;
+  transition: 0.3s;
+  margin-bottom: 15px;
+}
+.certainMC:hover{
+  cursor: pointer;
+  color: #56BE9F;
+}
+
+/*status*/
+.status{
+  width: 20%;
+  display: flex;
+  justify-content: right;
+}
+.statusImg{
+  width: 30px;
+  margin-left: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.descriptionStatus{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+
+

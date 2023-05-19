@@ -1,0 +1,43 @@
+.certainNews{
+  width: 70%;
+  position: absolute;
+  left: 20%;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  padding: 40px;
+}
+.tagsNews{
+  font-size: 15px;
+  opacity: 0.6;
+  display: flex;
+  margin-top: 20px;
+}
+.headerNews{
+  font-size: 25px;
+  font-weight: bold;
+}
+.topOfNews{
+  display: flex;
+  justify-content: space-between;
+}
+/*редактирование*/
+.reductionButton{
+  margin-top: 10px;
+  width: 100%;
+  font-size: 17px;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: rgba(86, 190, 159, 0.54);
+  transition: 0.5s ease-in-out;
+}
+.reductionButton:hover{
+  padding: 10px;
+  background-color: rgba(86, 190, 159, 0.73);
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}
+
+

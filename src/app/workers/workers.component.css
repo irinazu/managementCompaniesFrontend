@@ -1,0 +1,80 @@
+.workers{
+  width: 65%;
+  position: absolute;
+  left: 20%;
+}
+.usersBlock{
+  background-color: white;
+  padding: 40px;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+}
+.certainUserSystem div{
+  margin-bottom: 10px;
+}
+.certainUserSystem{
+  margin-bottom: 60px;
+}
+.blockUserSystem{
+  display: flex;
+}
+.verticalLine{
+  margin-right: 10px;
+  width: 5px;
+  background-color: rgba(86, 190, 159, 0.44);
+  border-radius: 3px;
+}
+.nameUserSystem{
+  display: flex;
+  font-weight: bold;
+}
+.nameUserSystem div{
+  margin-right: 5px;
+}
+
+.update{
+  width: 100%;
+  background-color: rgba(86, 190, 159, 0.54);
+}
+.update:hover{
+  background-color: rgba(86, 190, 159, 0.73);
+}
+.address{
+  display: flex;
+}
+.address div{
+  margin-right: 5px;
+}
+/*workers*/
+.mcForUsers{
+  justify-content: space-between;
+  display: flex;
+  margin-bottom: 10px;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  padding: 40px;
+}
+.titleMC{
+  font-size: 20px;
+  font-weight: bold;
+}
+.createNewWorker{
+  width: 50%;
+  height: 50%;
+  background-color: rgba(86, 190, 159, 0.73);
+}
+.createNewWorker:hover{
+  background-color: rgba(86, 190, 159, 0.85);
+}
+.generalButton{
+  font-size: 17px;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  transition: 0.5s ease-in-out;
+
+}
+.generalButton:hover{
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}

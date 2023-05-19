@@ -1,0 +1,78 @@
+.meteringDevices{
+  width: 60%;
+  position: absolute;
+  left: 20%;
+  padding: 40px;
+  border-radius: 3px;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+}
+
+.ipu{
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.ipuIMG{
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+}
+.certainMeteringDevice{
+  display: flex;
+  margin-bottom: 40px;
+}
+.line{
+  width: 3px;
+  background-color: rgba(86, 190, 159, 0.74);
+  border-radius: 3px;
+}
+.meteringDeviceImgLine{
+  width: 15%;
+  display: flex;
+}
+.description{
+  font-weight: bold;
+}
+.descriptionTitle{
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.meteringDeviceDetails div{
+  margin-bottom: 3px;
+}
+
+/*button*/
+.buttons{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.addMeteringDevice,.updateMeteringDevice{
+  margin-bottom: 5px;
+  width: 49%;
+  font-size: 17px;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  transition: 0.5s ease-in-out;
+}
+.addMeteringDevice:hover,.updateMeteringDevice:hover{
+  padding: 10px;
+  transition: 0.5s ;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  cursor: pointer;
+}
+.addMeteringDevice{
+  background-color: rgba(86, 128, 190, 0.54);
+}
+.addMeteringDevice:hover{
+  background-color: rgba(86, 128, 190, 0.82);
+}
+.updateMeteringDevice{
+  background-color: rgba(86, 190, 159, 0.59);
+}
+.updateMeteringDevice:hover{
+  background-color: rgba(86, 190, 159, 0.78);
+}

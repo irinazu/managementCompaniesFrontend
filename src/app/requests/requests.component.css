@@ -1,42 +1,142 @@
 .wrapRequest{
-  display: flex;
-  margin-left: 10px;
+  width: 70%;
+  position: absolute;
+  left: 20%;
 }
+.noRequests{
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+  width: 100%;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
 .requestCard{
-  width: 500px;
-  height: 100px;
+  width: 100%;
   background-color: white;
   border-radius: 5px;
-  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-  padding: 3px;
-  margin-bottom: 5px;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  padding: 20px;
+  margin-bottom: 20px;
 }
 .requestCard div{
   pointer-events: none;
 }
 .createNewRequest{
-  margin-left: 10px;
+  width: 104%;
+  display: flex;
+  justify-content: right;
+  margin-bottom: 20px;
+}
+/*описание карточки*/
+.headLineAndTheme{
+  display: flex;
+}
+
+.headRequest{
+  display: flex;
+  justify-content: space-between;
+}
+
+.statusImg{
+  width: 40px;
+  opacity: 0.9;
+}
+
+.lineUnderManagementCompany{
+  height: 5px;
+  width: 100%;
+  background-color: rgba(86, 190, 159, 0.36);
+  border-radius: 3px;
+}
+.description{
+  margin-top: 20px;
+}
+.titleOfRequest{
+  font-size: 19px;
+  font-weight: bold;
+}
+.titleAndTheme,.dateAndStatus{
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+.dateAndStatus{
+  justify-content: right;
+}
+
+.status{
+  font-size: 17px;
+  display: flex;
+  justify-content: right;
+}
+.themeOfRequest{
+  font-weight: 300;
+  font-size: 17px;
+}
+
+.managementCompany{
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+.dateOfRequest{
+  display: flex;
+  justify-content: right;
+  font-weight: 300;
 }
 .historyOfRequest :hover{
   transition: 0.4s;
-  box-shadow: 4px 4px 8px 0px rgba(48, 225, 125, 0.35);
+  box-shadow: 4px 4px 8px 0 rgba(48, 225, 125, 0.35);
   cursor: pointer;
 }
 .requestCard{
   transition: 0.4s ease-in-out;
 }
 .createNewRequestButton{
+  font-size: 18px;
   border: none;
-  padding: 8px;
+  padding: 10px;
   border-radius: 4px;
-  background-color: rgba(48, 225, 125, 0.16);
+  background-color: rgba(86, 190, 159, 0.53);
   transition: 0.5s ease-in-out;
 }
 .createNewRequestButton:hover{
-  padding: 10px;
-  background-color: rgba(48, 225, 125, 0.42);
+  background-color: rgba(86, 190, 159, 0.73);
   transition: 0.5s ;
-  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
   cursor: pointer;
 }
 
+/*status*/
+.reopen{
+  color: rgb(28 173 181);
+}
+.inProcess{
+  color: rgb(220 174 10);
+}
+.finish{
+  color: rgb(10 160 110);
+}
+.rejection{
+  color: rgb(219 58 60);
+}
+.open{
+  color: rgb(24 95 141);
+}
+
+.showUser{
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  padding: 20px;
+  display: flex;
+  margin-bottom: 20px;
+  font-size: 17px;
+  font-weight: bold;
+}

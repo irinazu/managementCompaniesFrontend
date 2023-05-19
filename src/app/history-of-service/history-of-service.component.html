@@ -1,28 +1,206 @@
 <div class="historyOfService">
-  <div class="descriptionOfService">
-    <div>
-      <img src={{services[0].serviceDescription.imgUrl}}>
-    </div>
-    <div>{{services[0].serviceDescription.title}} в {{services[0].unit}}</div>
+
+  <div class="form-group">
+    <form class="selectors">
+      <div class="select-wrapper">
+        <select name="select-category" id="selectYear" class="select">
+          <option value=0>Все квитанции</option>
+          <option value={{year}} *ngFor="let year of years">{{year}}</option>
+        </select>
+      </div>
+      <div class="select-wrapper select-wrapperMargin" >
+        <select name="select-category" id="selectMonth" class="select">
+          <option value=-1>-</option>
+          <option value={{month}} *ngFor="let month of months">{{month}}</option>
+        </select>
+      </div>
+      <input type="submit" value="Найти" (click)="getValue()" class="submitDataButton">
+    </form>
   </div>
-  <div class="mainBlockHistoryOfService">
-    <div class="blockOfServices">
-      <div class="historyOfCertainService" *ngFor="let ser of services">
-        <div class="historyOfCertainServiceData">
-          <div>Дата рассчета показаний: {{ser.dateOfConsumption | date: 'yyyy-MM-dd HH:ss'}}</div>
-          <div>Потреблено {{ser.consumption}} {{ser.unit}}</div>
-          <div>Тариф: {{ser.tariff}} {{ser.unit}}</div>
-          <div>{{ser.dutyForThisMonth}} руб за месяц предоставления показаний</div>
-          <div *ngIf="ser.repaid; else notRepaid">Оплачено</div>
-          <ng-template #notRepaid><div>Неоплачено</div></ng-template>
+
+  <div class="headHistoryDiv">
+    <div class="history">
+      <div class="historyDescription">
+        <div>
+          <img src="{{serviceDescription.imgUrl}}">
         </div>
-        <div class="receipt">
-          <div>Квитанция</div>
-        </div>
+        <div class="historyDescriptionTitle">{{serviceDescription.title}} в {{serviceDescription.unit}}</div>
       </div>
     </div>
-    <div class="orderDiv">
-      <p></p>
+  </div>
+
+  <div class="mainBlockHistoryOfService">
+    <div class="blockOfServices">
+      <div *ngIf="flatUsers.length==0" class="noData">Данных по запросу нет</div>
+      <div class="historyOfCertainService" *ngFor="let flatUser of flatUsers">
+        <div class="historyOfCertainServiceData">
+          <div>Дата рассчета показаний: <span class="dateService">{{flatUser.serviceDTOReceipt.month}} {{flatUser.serviceDTOReceipt.year}}</span></div>
+          <div>Потреблено: {{flatUser.serviceDTOReceipt.consumption}} {{flatUser.serviceDTOReceipt.unit}}</div>
+          <div>Тариф: {{flatUser.serviceDTOReceipt.tariff}} {{flatUser.serviceDTOReceipt.unit}}</div>
+          <div>Начислено {{flatUser.serviceDTOReceipt.dutyForThisMonth}} руб за расчетный месяц</div>
+        </div>
+        <div class="receipt">
+          <div (click)="createReceipt(flatUser)" class="receiptMember">Квитанция</div>
+        </div>
+
+        <div class="status">
+          <img src="assets/images/receiptPayNotPay/paid.png" class="statusImg" *ngIf="flatUser.serviceDTOReceipt.repaid">
+          <img src="assets/images/receiptPayNotPay/notPaid.png" class="statusImg" *ngIf="!flatUser.serviceDTOReceipt.repaid">
+
+          <div class="statusDescription" *ngIf="flatUser.serviceDTOReceipt.repaid">Оплачено</div >
+          <div class="statusDescription" *ngIf="!flatUser.serviceDTOReceipt.repaid">Неоплачено</div>
+
+        </div>
+
+      </div>
     </div>
   </div>
+</div>
+
+<!--PDF-->
+<div id="tableInPdf" class="h">
+  <div class="tableInPdfHead">
+    <div class="tableInPdfHeadTitle">
+      <div class="tableInPdfHeadTitleGeneralInformation">
+        <div>Единый платежный документ за жилое помещение</div>
+        <div>Коммунальные и прочие платежи за период: {{monthShow(userCertain.serviceDTOReceipt.monthNumber)}} {{userCertain.serviceDTOReceipt.year}} года</div>
+      </div>
+      <div class="tableInPdfHeadTitlePayInformation">
+        Реквизиты для оплаты: Наименование организации, р/с 0000000 в Наименовании банка к/с 000000
+        БИК 00000000 ИНН 00000000 КПП 00000000 ОГРН 00000000 ОКТМО 00000000
+      </div>
+    </div>
+    <div class="tableInPdfHeadMainData">
+      <div>
+        <div>Ф.И.О.: {{userCertain.userSystemDTO.surname}} {{userCertain.userSystemDTO.name}} {{userCertain.userSystemDTO.patronymic}}</div>
+        <div>Адрес: г. {{house.town}} ул. {{house.street}} д. {{house.numberOfHouse}} кв. {{userCertain.numberOfFlat}}</div>
+      </div>
+      <div class="tableInPdfHeadMainDataResult">
+        <div>Лицевой счет: {{userCertain.userSystemDTO.accountNumber}}</div>
+        <div>К оплате: {{userCertain.serviceDTOReceipt.generalDutyForService}} руб.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tableInPdfInfoAboutCounterTitle">
+    Информация о показаниях индивидуальных приборов учета (ПУ)
+  </div>
+  <table class="tableInPdfInfoAboutCounter">
+    <tr class="tableInPdfInfoAboutCounterHeadLine">
+      <td>Вид счетчика</td>
+      <td>Номер прибора учета</td>
+      <td>Дата очередной государственной проверки ПУ</td>
+      <td>Дата установки</td>
+      <td>Дата замены</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterMainLine" *ngFor="let meteringDevice of userCertain.meteringDevicesDTOS">
+      <td>{{meteringDevice.meteringDevicesType.title}}</td>
+      <td>{{meteringDevice.series}}</td>
+      <td>{{meteringDevice.checkDate|date:"yyyy-MM-dd"}}</td>
+      <td>{{meteringDevice.startDate|date:"yyyy-MM-dd"}}</td>
+      <td>{{meteringDevice.endDate|date:"yyyy-MM-dd"}}</td>
+    </tr>
+  </table>
+
+  <div class="tableInPdfInfoAboutCounterTitle">
+    Информация о расчетах с организациями исполнителями
+  </div>
+  <table class="tableInPdfInfoAboutCounter">
+    <tr class="tableInPdfInfoAboutCounterHeadLine">
+      <td rowspan="2">Код организации</td>
+      <td rowspan="2">Наименование организации</td>
+      <td colspan="2">Долг(+) переплата (-) на начало периода, руб.</td>
+      <td colspan="2">Оплачено, руб.</td>
+      <td colspan="2">Начисленно за период, руб.</td>
+      <td colspan="2">Перерасчет, руб.</td>
+      <td colspan="2">Долг(+) переплата (-) на конец периода, руб.</td>
+      <td colspan="2">Сумма к оплате, руб.</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterHeadLine">
+      <td>Услуги</td>
+      <td>Пенни</td>
+      <td>Услуги</td>
+      <td>Пенни</td>
+      <td>Услуги</td>
+      <td>Пенни</td>
+      <td>Услуги</td>
+      <td>Пенни</td>
+      <td>Услуги</td>
+      <td>Пенни</td>
+      <td>Услуги</td>
+      <td>Пенни</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterMainLine">
+      <td>{{userCertain.serviceDTOReceipt.codeOfProviderCompany}}</td>
+      <td>{{userCertain.serviceDTOReceipt.titleOfProviderCompany}}</td>
+      <td>{{userCertain.serviceDTOReceipt.generalDutyForService-userCertain.serviceDTOReceipt.dutyForThisMonth}}</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>{{userCertain.serviceDTOReceipt.dutyForThisMonth}}</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>{{userCertain.serviceDTOReceipt.generalDutyForService}}</td>
+      <td>0</td>
+      <td>{{userCertain.serviceDTOReceipt.generalDutyForService}}</td>
+      <td>0</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterMainLine result">
+      <td colspan="12">
+        Итого по услугам
+      </td>
+      <td colspan="2">{{userCertain.serviceDTOReceipt.generalDutyForService}}</td>
+    </tr>
+  </table>
+
+  <div class="tableInPdfInfoAboutCounterTitle">
+    Расчет размера платы за расчетный период по услугам
+  </div>
+  <table class="tableInPdfInfoAboutCounter">
+    <tr class="tableInPdfInfoAboutCounterHeadLine">
+      <td>Код организации</td>
+      <td>Вид услуги</td>
+      <td>Единица измерения</td>
+      <td>Объем услуги</td>
+      <td>Тариф в руб.</td>
+      <td>Итого начислено за период, руб.</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterMainLine">
+      <td>{{userCertain.serviceDTOReceipt.codeOfProviderCompany}}</td>
+      <td>{{userCertain.serviceDTOReceipt.serviceDescription.title}}</td>
+      <td>{{userCertain.serviceDTOReceipt.unit}}</td>
+      <td>{{userCertain.serviceDTOReceipt.consumption}}</td>
+      <td>{{userCertain.serviceDTOReceipt.tariff}}</td>
+      <td>{{userCertain.serviceDTOReceipt.dutyForThisMonth}}</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterMainLine result">
+      <td colspan="5">
+        Всего начислено за период по услугам
+      </td>
+      <td>{{userCertain.serviceDTOReceipt.dutyForThisMonth}}</td>
+    </tr>
+  </table>
+
+  <div class="tableInPdfInfoAboutCounterTitle">
+    Информация об организациях/исполнителях
+  </div>
+  <table class="tableInPdfInfoAboutCounter">
+    <tr class="tableInPdfInfoAboutCounterHeadLine">
+      <td>Код организации</td>
+      <td>Организация</td>
+      <td>Телефон</td>
+      <td>Email</td>
+      <td>Юр. адресс</td>
+      <td>Собственник компании</td>
+    </tr>
+    <tr class="tableInPdfInfoAboutCounterMainLine" *ngFor="let provider of providersCompany">
+      <td>{{provider.id}}</td>
+      <td>{{provider.title}}</td>
+      <td>{{provider.phone}}</td>
+      <td>{{provider.email}}</td>
+      <td>{{provider.town}}, {{provider.street}}, {{provider.house}}</td>
+      <td>{{provider.surnameOfBoss}} {{provider.nameOfBoss}} {{provider.patronymicOfBoss}}</td>
+    </tr>
+  </table>
 </div>
