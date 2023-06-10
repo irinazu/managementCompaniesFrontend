@@ -55,8 +55,8 @@ export class RequestService {
 
   /*DISPATCHER*/
   //все заявки диспетчера по УК
-  getRequestsForUser(mode:string,idUser:number,role:string):Observable<Request[]>{
-    return this.httpClient.get<Request[]>(`${this.URLForMap}/getRequestsForUser/${mode}/${idUser}/${role}`);
+  getRequestsForUser(mode:string,idUser:number,role:string,idMC:number):Observable<Request[]>{
+    return this.httpClient.get<Request[]>(`${this.URLForMap}/getRequestsForUser/${mode}/${idUser}/${role}/${idMC}`);
   }
 
   //список статутсов
@@ -64,4 +64,8 @@ export class RequestService {
     return this.httpClient.get<RequestStatus[]>(`${this.URLForMap}/getStatuses`);
   }
 
+  sendEmailAboutRequest(idRequest: number) {
+    return this.httpClient.get<Observable<any>>(`${this.URLForMap}/sendEmailAboutRequest/${idRequest}`);
+
+  }
 }

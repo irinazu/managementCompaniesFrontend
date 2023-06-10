@@ -11,6 +11,8 @@ import {string} from "@amcharts/amcharts4/core";
 import {HouseService} from "../services/house.service";
 import {House} from "../modules/house";
 import {ServiceDescription} from "../modules/service-description";
+import {ManagementCompany} from "../modules/management-company";
+import {ManagementCompaniesService} from "../services/management-companies.service";
 
 @Component({
   selector: 'app-debts',
@@ -22,7 +24,8 @@ export class DebtsComponent implements OnInit {
   constructor(private service:ServicesService,
               private router:ActivatedRoute,
               private serviceProvider:ProviderCompanyService,
-              private serviceHouse:HouseService) {
+              private serviceHouse:HouseService,
+              private managementCompanyService:ManagementCompaniesService) {
     this.router.paramMap.subscribe(paramMap => {
       // @ts-ignore
       this.serviceDescriptionId = paramMap.get('id');
@@ -35,15 +38,23 @@ export class DebtsComponent implements OnInit {
 
   userCertain:FlatUser=new FlatUser();
   flatUsers:FlatUser[]=[];
-  months=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Ноябрь','Декабрь'];
+  months=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
 
   userId:number=0;
   house:House=new House();
   serviceDescriptionId:number=0;
   serviceDescription:ServiceDescription=new ServiceDescription();
+  role:string="";
+  managementCompany:ManagementCompany=new ManagementCompany();
 
   ngOnInit(): void {
-    this.userId=Number(localStorage.getItem("id"));
+    this.role=localStorage.getItem("role")!;
+    if(this.role=="USER"){
+      this.userId=Number(localStorage.getItem("id"));
+    }else {
+      this.userId=Number(localStorage.getItem("idUserForPerson"));
+    }
+
     this.serviceDescriptionId=Number(this.router.snapshot.params['id']);
 
     //долги по услуге
@@ -57,6 +68,10 @@ export class DebtsComponent implements OnInit {
     //находим дом
     this.serviceHouse.getHouseForCertainUser(this.userId).subscribe(value => {
       this.house=value;
+      //находим УК
+      this.managementCompanyService.getMCByHouse(this.house.id).subscribe(result=>{
+        this.managementCompany=result;
+      })
     })
 
     //описание услуги

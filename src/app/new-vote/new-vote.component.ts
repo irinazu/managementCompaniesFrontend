@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Voting} from "../modules/voting";
 import {VoteService} from "../services/vote.service";
 import {ActivatedRoute} from "@angular/router";
+import * as io from "socket.io-client";
+import {RequestUpdate} from "../modules/request-update";
 
 @Component({
   selector: 'app-new-vote',
@@ -32,19 +34,22 @@ export class NewVoteComponent implements OnInit {
 
   mode:string="";
   role:string="";
+  idMC:number=0;
+  socket: any;
+  idUser:number=0;
 
   ngOnInit(): void {
+    this.idMC=Number(localStorage.getItem('idMCFromLSForVote'))!;
     this.mode=this.router.snapshot.params['mode'];
     this.role=localStorage.getItem("role")!;
+    this.idUser=Number(localStorage.getItem("id"));
 
-    this.voteService.getAllVoteWithMode(this.mode,Number(localStorage.getItem("id")),this.role)
+    this.voteService.getAllVoteWithMode(this.mode,this.idUser,this.role,this.idMC)
       .subscribe(value => {
         this.votes=value;
         this.allVotes=[...this.votes];
         this.updateListOfVotes();
-
       });
-
 
     /*this.voteService.getAllVoteForUser().subscribe(value => {
       this.votes = value;
@@ -56,7 +61,7 @@ export class NewVoteComponent implements OnInit {
   }
 
   //раскрываем определенное голосование
-  clickCertainVote($event: any,i: number) {
+  /*clickCertainVote($event: any,i: number) {
 
     let clickMessage = $event.target;
     if (clickMessage.className != "upArrow") {
@@ -71,20 +76,23 @@ export class NewVoteComponent implements OnInit {
       document.getElementsByClassName('gradientBlock')[i].setAttribute('style', "display:none")
       this.openVoteInArray=i;
     }
-  }
+  }*/
 
   //подсчет процентов для конкретного варианта
-  countPercent(numberInArray: number, numberOfVoice: number): any {
+  countPercent(numberInArray: number, numberOfVoice: number,vote:Voting): any {
 
     if (numberOfVoice === 0) {return 0;}
     let generalCount = 0;
-    this.votes[numberInArray].votingOptionSet.forEach(x => generalCount += x.voteNumber);
+    this.votes.find(x=>x.id==vote.id)!.votingOptionSet.forEach(x => generalCount += x.voteNumber);
+    //this.votes[numberInArray].votingOptionSet.forEach(x => generalCount += x.voteNumber);
     return (numberOfVoice * 100 / generalCount).toFixed(2);
   }
 
+
+
   //обновляем выбор в голосовании
-  enterCheckOption(numberInArray: number, optionId: number){
-    if(this.mode=="true"&&this.role!="DISPATCHER"){
+  enterCheckOption(numberInArray: number, optionId: number,voteId:number){
+    if(this.mode=="true"&&this.role=="USER"){
 
       let elem=this.votes[numberInArray].votingOptionSet.find(x=>x.answerCheck)!;
       if(elem){
@@ -103,20 +111,24 @@ export class NewVoteComponent implements OnInit {
 
       //обновляем на сервере
       if(elem){
-        this.voteService.updateVoteOption(optionId,elem.id,Number(localStorage.getItem("id"))).subscribe();
+        this.voteService.updateVoteOption(optionId,elem.id,this.idUser).subscribe(value => {
+          this.socket.emit("updateVote",voteId,optionId,elem.id,this.idUser);
+        });
       }else {
-        this.voteService.updateVoteOption(optionId,-1,Number(localStorage.getItem("id"))).subscribe();
+        this.voteService.updateVoteOption(optionId,-1,this.idUser).subscribe(value => {
+          this.socket.emit("updateVote",voteId,optionId,elem.id,this.idUser);
+        });
       }
 
     }
   }
 
   //закрываем голосование
-  closeVote(i: number) {
+  /*closeVote(i: number) {
     document.getElementsByClassName('certainVote')[i].setAttribute('style', "height:150px")
     document.getElementsByClassName('gradientBlock')[i].setAttribute('style', "display:block")
 
-  }
+  }*/
 
   //фильтр на периоды
   changePeriod() {

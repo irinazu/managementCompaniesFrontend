@@ -17,8 +17,15 @@ export class MenuForRequestComponent implements OnInit {
   public count = false;
   id:number=0;
   serviceDescription:ServiceDescription=new ServiceDescription();
+  modeRequest:string="";
+  idUserPersonal:number=0;
 
   ngOnInit(): void {
+    this.modeRequest=this.router.snapshot.params['modeRequest'];
+    this.idUserPersonal=this.router.snapshot.params['idUserPersonal'];
+    console.log(this.router.snapshot.params['idMC']+"!!!!!!!!!!!!!!!!!");
+
+
     document.getElementById("openRequest")!.setAttribute('style',"background-color:rgba(0, 0, 0, 0.73);height:2px;");
   }
 
@@ -26,6 +33,7 @@ export class MenuForRequestComponent implements OnInit {
     this.count=counterExist;
   }
   transparentBorder(info:string) {
+
     for(let i of document.getElementsByClassName("borderLine")){
       i.setAttribute('style','background-color:')
     }

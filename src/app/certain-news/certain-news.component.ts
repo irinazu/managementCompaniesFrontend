@@ -14,8 +14,10 @@ export class CertainNewsComponent implements OnInit {
   id:number=0;
   news:News=new News();
   idUser:string="";
+  role:string="";
 
   ngOnInit(): void {
+    this.role=localStorage.getItem("role")!;
     this.idUser=localStorage.getItem("id")!;
 
     this.id=this.router.snapshot.params['id'];
@@ -28,4 +30,7 @@ export class CertainNewsComponent implements OnInit {
     return this.idUser==this.news.creator.id.toString();
   }
 
+  checkRole() {
+    return this.role == "HEAD" || this.role == "ADMIN";
+  }
 }

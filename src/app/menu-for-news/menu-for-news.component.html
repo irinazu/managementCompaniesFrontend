@@ -1,8 +1,14 @@
-<div class="menuForService" *ngxPermissionsOnly="'DISPATCHER'">
-  <div class="memberOfMenuFor" [routerLink]="['allNews','all']" (click)="transparentBorder('allNewsMC')">Все новости
+<div class="menuForService" *ngxPermissionsOnly="['DISPATCHER','ADMIN','HEAD']">
+  <div class="memberOfMenuFor" *ngxPermissionsOnly="['DISPATCHER']" [routerLink]="['allNews','all',0]" (click)="transparentBorder('allNewsMC')">Все новости
+    <div class="borderLine" id="allNewsMCDispatcher"></div>
+  </div>
+  <div class="memberOfMenuFor" *ngxPermissionsOnly="['ADMIN','HEAD']" [routerLink]="['allNews','allMC',idMC]" (click)="transparentBorder('allNewsMC')">Все новости
     <div class="borderLine" id="allNewsMC"></div>
   </div>
-  <div class="memberOfMenuFor" [routerLink]="['allNews','worker']" (click)="transparentBorder('workersNews')">Созданные новости
+  <div class="memberOfMenuFor" *ngxPermissionsOnly="['ADMIN','HEAD']"  [routerLink]="['allNews','worker',idMC]" (click)="transparentBorder('workersNews')">Созданные новости
+    <div class="borderLine" id="workersNewsMC"></div>
+  </div>
+  <div class="memberOfMenuFor" *ngxPermissionsOnly="['DISPATCHER']" [routerLink]="['allNews','worker',0]" (click)="transparentBorder('workersNews')">Созданные новости
     <div class="borderLine" id="workersNews"></div>
   </div>
 </div>

@@ -29,7 +29,7 @@
     </div>
 
     <div class="hoverMemberOption" *ngxPermissionsOnly="['DISPATCHER','USER']">
-      <div class="memberOption" [routerLink]="['menuNews','allNews','all']">
+      <div class="memberOption" [routerLink]="['menuNews','allNews','all',0]">
         <span class="imgSign"><img src="/assets/images/newspaper.png"></span>
         <span class="descriptionImgSign">Новости</span>
       </div>
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div class="hoverMemberOption" *ngxPermissionsOnly="['DISPATCHER','USER']">
-      <div class="memberOption" [routerLink]="['menuRequests','requests','true']">
+      <div class="memberOption" (click)="goToRequests()">
         <span class="imgSign"><img src="/assets/images/requestIcon.png"></span>
         <span class="descriptionImgSign">Заявления</span>
       </div>

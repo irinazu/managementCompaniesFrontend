@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {ProviderCompany} from "../modules/provider-company";
 import {Observable} from "rxjs";
+import {ManagementCompany} from "../modules/management-company";
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,4 @@ export class ProviderCompanyService {
   getProviderCompaniesForHouse(idHouse:number):Observable<ProviderCompany[]>{
     return this.httpClient.get<ProviderCompany[]>(`${this.URLForMap}/getProviderCompaniesForHouse/${idHouse}`);
   }
-
 }

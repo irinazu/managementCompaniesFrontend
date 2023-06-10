@@ -9,7 +9,11 @@
     <div class="buttons" *ngIf="mc.managementCompanyStatusDTO.id==2||role=='ADMIN'" >
       <button class="generalButton workers" [routerLink]="['workers',mc.id]">Сотрудники</button>
       <button class="generalButton houses" [routerLink]="['housesRequests',mc.id]">Дома</button>
-      <button class="generalButton news" [routerLink]="['allNews',mc.id]">Новости</button>
+      <button class="generalButton news" (click)="goToNews(mc.id)">Новости</button>
+      <button class="generalButton requests" (click)="goToRequests(mc.id)">Заявления</button>
+      <button class="generalButton addUser" [routerLink]="['addUser',mc.id]">Добавить жителя</button>
+      <button class="generalButton votes" (click)="goToVote(mc.id)">Голосования</button>
+
     </div>
     <div class="status">
       <div class="descriptionStatus">{{mc.managementCompanyStatusDTO.titleOfStatus}}</div>

@@ -5,6 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 import {MeteringDevicesType} from "../modules/metering-devices-type";
 import {HouseService} from "../services/house.service";
 import {HouseUser} from "../modules/house-user";
+import {ServiceModel} from "../modules/service-model";
 
 @Component({
   selector: 'app-metering-devices',
@@ -31,6 +32,7 @@ export class MeteringDevicesComponent implements OnInit {
     //ипу
     this.serviceService.getMeteringDevicesForUser(this.userIdForMeteringDevices).subscribe(value => {
       this.meteringDevices=value;
+      console.log(this.meteringDevices)
     })
 
   }

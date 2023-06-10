@@ -10,6 +10,8 @@ import {ProviderCompanyService} from "../services/provider-company.service";
 import {ProviderCompany} from "../modules/provider-company";
 import {ServiceModel} from "../modules/service-model";
 import {UserSystem} from "../modules/user-system";
+import {ManagementCompaniesService} from "../services/management-companies.service";
+import {ManagementCompany} from "../modules/management-company";
 
 @Component({
   selector: 'app-report',
@@ -21,7 +23,8 @@ export class ReportComponent implements OnInit {
   constructor(private serviceService:ServicesService,
               private routerActive:ActivatedRoute,
               private houseService:HouseService,
-              private serviceProvider:ProviderCompanyService) { }
+              private serviceProvider:ProviderCompanyService,
+              private managementCompanyService:ManagementCompaniesService) { }
 
   houseId:number=0;
   modeReport:string="";
@@ -41,8 +44,9 @@ export class ReportComponent implements OnInit {
   year:number=0;
   month:number=0;
 
-  months=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Ноябрь','Декабрь'];
+  months=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
   years:number[]=[];
+  managementCompany:ManagementCompany=new ManagementCompany();
 
   ngOnInit(): void {
     this.houseId=this.routerActive.snapshot.params["houseId"];
@@ -53,6 +57,11 @@ export class ReportComponent implements OnInit {
     this.houseService.getHouse(this.houseId).subscribe(value => {
       this.house=value;
       this.titlePDF='г. '+this.house.town+"_"+'ул. '+this.house.street+"_"+this.house.numberOfHouse+'.pdf';
+
+      //находим УК
+      this.managementCompanyService.getMCByHouse(this.house.id).subscribe(result=>{
+        this.managementCompany=result;
+      })
     })
 
     //долги

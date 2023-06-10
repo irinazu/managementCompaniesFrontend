@@ -36,13 +36,13 @@
   <div class="allMessages" id="forScrollMessage">
     <div *ngFor="let mes of messages;index as i" class="certainChatMessage" (click)="actionWithMessage($event,mes.id)">
       <div *ngIf="showDate(i)" class="dateBlock">{{returnDate(mes.date)}}</div>
-      <div class="showEditButtonFunction" *ngIf="showEditButtonFunction(mes.date)">
+      <div class="showEditButtonFunction" *ngIf="showEditButtonFunction(mes.date)&&userCheck(mes)">
         <img src="assets/images/chat/free-icon-edit-button-7204760.png" class="editButton" (click)="editMessage(i)">
       </div>
       <div class="forChangePosition" [ngClass]="{userNowPosition:thisUser(mes.user_system_id)}">
 
         <!--аватарка юзера-->
-        <div *ngIf="showImageUser(i)">
+        <div *ngIf="showImageUser(i)&&!userCheck(mes)">
           <img [src]="mes.user_system_object.imgAvatar.url!" class="memberImg" *ngIf="checkImgForUser(mes.user_system_object);else withoutImg">
           <ng-template #withoutImg>
             <div class="memberWithoutImg">

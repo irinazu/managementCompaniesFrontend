@@ -13,9 +13,14 @@ export class PaymentsComponent implements OnInit {
 
   payments:Payment[]=[];
   userId:number=0;
-
+  role:string="";
   ngOnInit(): void {
-    this.userId=Number(localStorage.getItem("id"));
+    this.role=localStorage.getItem("role")!;
+    if(this.role=="USER"){
+      this.userId=Number(localStorage.getItem("id"));
+    }else {
+      this.userId=Number(localStorage.getItem("idUserForPerson"));
+    }
     this.servicePayment.getPaymentForUser(this.userId).subscribe(value => {
       this.payments=value
     })

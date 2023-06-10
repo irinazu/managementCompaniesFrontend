@@ -62,6 +62,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MeteringDevicesComponent } from './metering-devices/metering-devices.component';
 import { AddMeteringDeviceComponent } from './add-metering-device/add-metering-device.component';
+import {MapService} from "./services/map.service";
+import { CertainVoteComponent } from './certain-vote/certain-vote.component';
 
 const mapConfig: YaConfig = {
   apikey: 'ea14d089-f726-44f0-a43c-6edd2b1f636c',
@@ -121,6 +123,7 @@ const mapConfig: YaConfig = {
     PopupMaxSizeComponent,
     MeteringDevicesComponent,
     AddMeteringDeviceComponent,
+    CertainVoteComponent,
   ],
     imports: [
         BrowserModule,
@@ -135,7 +138,7 @@ const mapConfig: YaConfig = {
         NgxPermissionsModule.forRoot(),
         BrowserAnimationsModule
     ],
-  providers: [/*{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },*/],
+  providers: [/*{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },*/MapService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

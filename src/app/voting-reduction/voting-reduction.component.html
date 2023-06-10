@@ -1,5 +1,5 @@
 <div class="votingCreate">
-  <div class="titleOfBlock">Создать голосование</div>
+  <div class="titleOfBlock">Обновить голосование</div>
 
   <input type="text" placeholder="Название" [(ngModel)]="voting.title">
   <div *ngIf="errorTitle.length!=0" class="error">{{errorTitle}}</div>
@@ -54,6 +54,6 @@
     </div>
   </div>
 
-  <button class="createVoting" (click)="createVoting()">Создать голосование</button>
+  <button class="createVoting" (click)="createVoting()">Обновить голосование</button>
 </div>
 

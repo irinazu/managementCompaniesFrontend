@@ -39,12 +39,15 @@ export class VotingReductionComponent implements OnInit {
 
   housesMustDeleting:House[]=[];
   housesMustAdding:House[]=[];
+  idMC: number=0;
 
   ngOnInit(): void {
+    this.idMC=Number(localStorage.getItem('idMCFromLSForVote'))!;
+
     this.voteId=this.router.snapshot.params['voteId'];
 
     //находим дома для отметок
-    this.houseService.getHousesForMC(Number(localStorage.getItem("id"))).subscribe(value => {
+    this.houseService.getHousesForMC(Number(localStorage.getItem("id")),this.idMC).subscribe(value => {
       this.houses=value;
       //находим все темы для голосования
       this.votingService.getAllThemeVoting().subscribe(value => {

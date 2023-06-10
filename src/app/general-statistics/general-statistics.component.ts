@@ -12,6 +12,8 @@ import {ProviderCompany} from "../modules/provider-company";
 import {FlatUser} from "../modules/flat-user";
 import {House} from "../modules/house";
 import {HouseService} from "../services/house.service";
+import {ManagementCompany} from "../modules/management-company";
+import {ManagementCompaniesService} from "../services/management-companies.service";
 
 @Component({
   selector: 'app-general-statistics',
@@ -20,7 +22,7 @@ import {HouseService} from "../services/house.service";
 })
 export class GeneralStatisticsComponent implements OnInit {
 
-  months=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Ноябрь','Декабрь'];
+  months=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
   years:number[]=[];
 
   services:ServiceModel[]=[];
@@ -39,19 +41,32 @@ export class GeneralStatisticsComponent implements OnInit {
   year:number=0;
   month:number=0;
   house:House=new House();
+  role:string="";
+  managementCompany:ManagementCompany=new ManagementCompany();
 
   constructor(private service:ServicesService,private serviceProvider:ProviderCompanyService,
-              private serviceHouse:HouseService) { }
+              private serviceHouse:HouseService,private managementCompanyService:ManagementCompaniesService) { }
 
   ngOnInit(): void {
-    this.userId=Number(localStorage.getItem("id"));
+    this.role=localStorage.getItem("role")!;
+    if(this.role=="USER"){
+      this.userId=Number(localStorage.getItem("id"));
+    }else {
+      this.userId=Number(localStorage.getItem("idUserForPerson"));
+    }
+
     this.year=new Date().getFullYear();
     this.month=new Date().getMonth();
 
     //находим дом
     this.serviceHouse.getHouseForCertainUser(this.userId).subscribe(value => {
       this.house=value;
+      //находим УК
+      this.managementCompanyService.getMCByHouse(this.house.id).subscribe(result=>{
+        this.managementCompany=result;
+      })
     })
+
 
     this.createMonthChart("dutyForThisMonth","divPie");
     this.createGeneralChart("generalDutyForService","divPieGeneral");
@@ -112,6 +127,9 @@ export class GeneralStatisticsComponent implements OnInit {
   getYears(){
     this.service.getYears().subscribe(value => {
       this.years=value;
+      (<HTMLInputElement>document.getElementById("selectYear"))!.value=this.year.toString();
+      (<HTMLInputElement>document.getElementById("selectMonth"))!.value=this.months[this.month].toString();
+
     })
   }
 

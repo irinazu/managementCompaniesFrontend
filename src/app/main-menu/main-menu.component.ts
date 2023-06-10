@@ -34,7 +34,7 @@ export class MainMenuComponent implements OnInit {
       this.router.navigate(['privateOffice','housesRequests',-1]);
     }
     else {
-      this.router.navigate(['privateOffice','menuNews','allNews','all']);
+      this.router.navigate(['privateOffice','menuNews','allNews','all',0]);
     }
   }
 

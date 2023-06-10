@@ -1,9 +1,19 @@
 <div class="allNews">
   <div style="display: flex;align-items: flex-end">
-    <button [routerLink]="'createNews'" *ngxPermissionsOnly="'DISPATCHER'" class="createNews">Создать новость</button>
+    <button [routerLink]="'createNews'" *ngxPermissionsExcept="['USER','ACCOUNTANT']" class="createNews">Создать новость</button>
   </div>
 
   <div class="newsTape">Новостная лента</div>
+
+  <div class="searchTag">
+    <div class="inputAndTag">
+      <input type="text" placeholder="Тэг" (input)="changeTag()" id="inputTag">
+      <div *ngIf="suitableTags.length!=0" class="suitableTagsBlock">
+        <div *ngFor="let suitableTag of suitableTags" (click)="chooseTag(suitableTag.id)" class="suitableTagFocus">{{suitableTag.title}}</div>
+      </div>
+    </div>
+    <button class="allNewsButton" (click)="getAllNews()">Все новости</button>
+  </div>
 
   <div class="listOfNews">
 
@@ -19,7 +29,7 @@
         </div>
         <div>
           <div class="dateNews">{{news.dateOfPublication|date:"dd-MM-yyyy HH:mm"}}</div>
-          <div *ngIf="checkId(news.creator.id)">
+          <div *ngIf="checkId(news.creator.id)||checkRole()">
             <button class="reductionButton" [routerLink]="['reductionNews',news.id]">Редактровать</button>
           </div>
         </div>

@@ -23,8 +23,8 @@ export class StatisticsForServiceComponent implements OnInit {
   minMonth:ServiceModel=new ServiceModel();
   averageMedian:number=0;
   services:ServiceModel[]=[];
-  months=['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Ноябрь', 'Декабрь',];
-  monthsChange=['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября', 'Ноября', 'Декабря',];
+  months=['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь','Октябрь', 'Ноябрь', 'Декабрь',];
+  monthsChange=['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа', 'Сентября','Октября', 'Ноября', 'Декабря',];
   years:any[]=[];
 
   chart:any;
@@ -34,9 +34,14 @@ export class StatisticsForServiceComponent implements OnInit {
 
   userId:number=0;
   serviceDescriptionId:number=0;
-
+  role:string="";
   ngOnInit(): void {
-    this.userId=Number(localStorage.getItem("id"));
+    this.role=localStorage.getItem("role")!;
+    if(this.role=="USER"){
+      this.userId=Number(localStorage.getItem("id"));
+    }else {
+      this.userId=Number(localStorage.getItem("idUserForPerson"));
+    }
     this.serviceDescriptionId=Number(this.router.snapshot.params['id']);
 
     this.chart = am4core.create("chartdiv", am4charts.XYChart);

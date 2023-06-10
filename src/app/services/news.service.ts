@@ -20,8 +20,8 @@ export class NewsService {
   }
 
   //создать новую статью
-  createNewNews(newNews:News,idWorker:number):Observable<any>{
-    return this.httpClient.post<Observable<any>>(`${this.URL}/createNews/${idWorker}`,newNews);
+  createNewNews(newNews:News,idWorker:number,idMC:number):Observable<any>{
+    return this.httpClient.post<Observable<any>>(`${this.URL}/createNews/${idWorker}/${idMC}`,newNews);
   }
 
   //создать новую статью
@@ -30,8 +30,8 @@ export class NewsService {
   }
 
   //все статьи
-  getAllNews(idUser:number,role:string):Observable<News[]>{
-    return this.httpClient.get<News[]>(`${this.URL}/getAllNews/${idUser}/${role}`);
+  getAllNews(idUser:number,role:string,tag:number):Observable<News[]>{
+    return this.httpClient.get<News[]>(`${this.URL}/getAllNews/${idUser}/${role}/${tag}`);
   }
 
   //определенная статья
@@ -41,11 +41,11 @@ export class NewsService {
 
   /*dispatcher*/
   //определенная статья
-  getAllNewsCreatedByWorker(id:string):Observable<News[]>{
-    return this.httpClient.get<News[]>(`${this.URL}/getAllNewsCreatedByWorker/${id}`);
+  getAllNewsCreatedByWorker(id:string,tag:number):Observable<News[]>{
+    return this.httpClient.get<News[]>(`${this.URL}/getAllNewsCreatedByWorker/${id}/${tag}`);
   }
 
-  getAllNewsForMC(idMC: number) :Observable<News[]>{
-    return this.httpClient.get<News[]>(`${this.URL}/getAllNewsForMC/${idMC}`);
+  getAllNewsForMC(idMC: number,tag:number) :Observable<News[]>{
+    return this.httpClient.get<News[]>(`${this.URL}/getAllNewsForMC/${idMC}/${tag}`);
   }
 }

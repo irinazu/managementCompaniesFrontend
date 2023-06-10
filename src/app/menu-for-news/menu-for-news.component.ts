@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-menu-for-news',
@@ -7,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuForNewsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activateRouter:ActivatedRoute) { }
   public count = false;
+  idMC:number=0;
 
   ngOnInit(): void {
     document.getElementById("allNewsMC")!.setAttribute('style',"background-color:rgba(0, 0, 0, 0.73);height:2px;");
-
+    this.idMC=this.activateRouter.snapshot.params["idMC"];
   }
 
   public onChange(counterExist: boolean): void {

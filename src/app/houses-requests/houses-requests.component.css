@@ -9,6 +9,7 @@
   box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
 }
 .descriptionHouse{
+  width: 40%;
   display: flex;
   margin-top: auto;
   margin-bottom: auto;
@@ -123,6 +124,7 @@
   background-color: rgba(86, 190, 187, 0.89);
 }
 .reportButtons{
+  width: 30%;
   display: flex;
   flex-direction: column;
   justify-content: right;

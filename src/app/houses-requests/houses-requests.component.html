@@ -12,12 +12,14 @@
     <div *ngFor="let house of houses" class="certainHouse" (click)="openUsersForCertainHouse(house.id)">
       <div class="descriptionHouse">
         <img src="assets/images/mainPage/right-arrow.png" class="rightArrow">
-        <div class="descriptionMember"><span style="font-weight: bold">Город:</span><span style="margin-left: 5px">{{house.town}}</span></div>
-        <div class="descriptionMember"><span style="font-weight: bold">Улица:</span><span style="margin-left: 5px">{{house.street}}</span></div>
-        <div class="descriptionMember"><span style="font-weight: bold">Дом: </span><span style="margin-left: 5px">{{house.numberOfHouse}}</span></div>
-      </div>
+        <div>
+          <div class="descriptionMember"><span style="font-weight: bold">Город: </span><span style="margin-left: 5px">{{house.town}}</span></div>
+          <div class="descriptionMember"><span style="font-weight: bold">Улица: </span><span style="margin-left: 5px">{{house.street}}</span></div>
+          <div class="descriptionMember"><span style="font-weight: bold">Дом: </span><span style="margin-left: 5px">{{house.numberOfHouse}}</span></div>
+        </div>
+        </div>
 
-      <div class="reportButtons" *ngxPermissionsOnly="'ACCOUNTANT'">
+      <div class="reportButtons" *ngxPermissionsExcept="'DISPATCHER'">
         <button class="generalButton debtor" [routerLink]="['report',house.id,'debts']">Отчет по должникам</button>
         <button class="generalButton checkTheMeter" [routerLink]="['report',house.id,'check']">Отчет по срокам проверки приборов учета</button>
         <button class="generalButton replaceTheMeter" [routerLink]="['report',house.id,'replace']">Отчет по срокам замены приборов учета</button>
@@ -25,7 +27,7 @@
 
       </div>
 
-      <button *ngxPermissionsOnly="'HEAD'" class="generalButton update" [routerLink]="['addHouse',managementCompany.id,house.id]">Изменить</button>
+      <button *ngxPermissionsOnly="['HEAD','ADMIN']" class="generalButton update" [routerLink]="['addHouse',managementCompany.id,house.id]">Изменить</button>
     </div>
   </div>
 </div>

@@ -5,7 +5,7 @@ import {House} from "../modules/house";
 import {HouseService} from "../services/house.service";
 import {VoteService} from "../services/vote.service";
 import {VotingTheme} from "../modules/voting-theme";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-voting',
@@ -14,7 +14,8 @@ import {Router} from "@angular/router";
 })
 export class CreateVotingComponent implements OnInit {
 
-  constructor(private houseService:HouseService,private votingService:VoteService,private router:Router) { }
+  constructor(private houseService:HouseService,private votingService:VoteService,private router:Router,
+              private ar:ActivatedRoute) { }
 
   errorTitle:string="";
   errorDescription:string="";
@@ -28,10 +29,13 @@ export class CreateVotingComponent implements OnInit {
   votingThemes:VotingTheme[]=[];
   voting:Voting=new Voting();
   flag:boolean=true;
+  idMC:number=0;
 
   ngOnInit(): void {
+    this.idMC=Number(localStorage.getItem('idMCFromLSForVote'))!;
+
     //находим дома для отметок
-    this.houseService.getHousesForMC(Number(localStorage.getItem("id"))).subscribe(value => {
+    this.houseService.getHousesForMC(Number(localStorage.getItem("id")),this.idMC).subscribe(value => {
       this.houses=value;
     })
 
@@ -109,9 +113,8 @@ export class CreateVotingComponent implements OnInit {
       //прописываем тему
       let themeID = (<HTMLInputElement>document.getElementById("selectTheme")).value;
       this.voting.votingThemeDTO=this.votingThemes.find(x=>x.id.toString()===themeID)!;
-      this.votingService.createVoting(this.voting,Number(localStorage.getItem("id"))).subscribe(value => {
-        this.router.navigate(['privateOffice','menuVoting','vote','true']);
-      });
+      this.votingService.createVoting(this.voting,Number(localStorage.getItem("id")),this.idMC).subscribe();
+      this.router.navigate(['privateOffice','menuVoting','vote','true']);
 
     }
   }

@@ -39,5 +39,9 @@
   box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
   cursor: pointer;
 }
+.author{
+  margin-top: 10px;
+  opacity:0.7;
+}
 
 

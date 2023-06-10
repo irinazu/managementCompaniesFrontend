@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {RequestUpdate} from "../modules/request-update";
 import {RequestService} from "../services/request.service";
 import {Request} from "../modules/request";
@@ -8,6 +8,8 @@ import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {RequestStatus} from "../modules/request-status";
 import {UserSystemService} from "../services/user-system.service";
 import {UserSystem} from "../modules/user-system";
+import * as io from "socket.io-client";
+import {MessageAndUser} from "../modules/message-and-user";
 
 @Component({
   selector: 'app-certain-request',
@@ -15,6 +17,7 @@ import {UserSystem} from "../modules/user-system";
   styleUrls: ['./certain-request.component.css']
 })
 export class CertainRequestComponent implements OnInit {
+  @ViewChild('resultsStart', {read: ElementRef}) resultsStart: ElementRef | undefined;
 
   ngModel: any;
   certainRequest: Request = new Request();
@@ -35,6 +38,7 @@ export class CertainRequestComponent implements OnInit {
   statuses: RequestStatus[] = [];
 
   userSystem:UserSystem=new UserSystem();
+  socket: any;
 
   constructor(private requestService: RequestService,
               private router: ActivatedRoute,
@@ -66,8 +70,26 @@ export class CertainRequestComponent implements OnInit {
     this.userService.findUserByRequest(this.idRequest).subscribe(user=>{
       this.userSystem=user;
     })
+
+    this.subscribeUpdateRequest(this.idRequest);
   }
 
+  subscribeUpdateRequest(id: number){
+    this.socket = io.io("http://localhost:3000", {transports: ["websocket", "polling", "flashsocket"]});
+    this.socket.emit("joinToRoom", id);
+
+    //Добавляет новопришедшие обновления
+    this.socket.on("takeNewUpdateRequest", (newUpdateRequest: RequestUpdate) => {
+      document.getElementById("sign")!.style.display="flex"
+      newUpdateRequest.imageModelsForRequestUpdate=this.createFImg(newUpdateRequest.imageModelsForRequestUpdate);
+      this.certainRequest.requestUpdateDTOS.push(newUpdateRequest);
+
+      setTimeout(() => {
+        document.getElementById("sign")!.style.display="none"
+      }, 20000)
+    })
+
+  }
   //публикуем новое обновление
   createNewUpdateRequest() {
     this.errorComment = "";
@@ -78,11 +100,10 @@ export class CertainRequestComponent implements OnInit {
       this.flag = false;
     }
 
-
     if (this.flag) {
       let newRequestUpdate = new RequestUpdate();
 
-      if(localStorage.getItem('role')==="DISPATCHER"){
+      if(localStorage.getItem('role')!="USER"){
         let reqStatus = (<HTMLInputElement>document.getElementById("selectStatus")).value;
         if(reqStatus!="без статуса"){
           newRequestUpdate.requestStatusDTO=this.statuses.find(x=>x.titleOfStatus===reqStatus);
@@ -105,6 +126,7 @@ export class CertainRequestComponent implements OnInit {
           this.requestService.createNewRequestUpdateImg(this.formData, requestUpdate.id).subscribe(requestUpdateWithImg=>{
             let sizeRequestUpdateDTOS= this.certainRequest.requestUpdateDTOS.length;
             this.certainRequest.requestUpdateDTOS[sizeRequestUpdateDTOS-1].imageModelsForRequestUpdate=requestUpdateWithImg.imageModelsForRequestUpdate;
+            this.socket.emit("updateRequest",this.certainRequest.requestUpdateDTOS[sizeRequestUpdateDTOS-1]);
             this.certainRequest.requestUpdateDTOS[sizeRequestUpdateDTOS-1].imageModelsForRequestUpdate = this.createFImg(this.certainRequest.requestUpdateDTOS[sizeRequestUpdateDTOS-1].imageModelsForRequestUpdate);
 
             //очищаем места хранения картинок
@@ -112,7 +134,12 @@ export class CertainRequestComponent implements OnInit {
             this.formData.delete("fileForRequestUpdate");
             this.selectedFiles = [];
 
+            //уведомление сообщением
+            this.requestService.sendEmailAboutRequest(requestUpdateWithImg.id).subscribe();
           });
+        }else {
+          this.socket.emit("updateRequest",requestUpdate);
+          this.requestService.sendEmailAboutRequest(requestUpdate.id).subscribe();
         }
       })
     }
@@ -193,6 +220,16 @@ export class CertainRequestComponent implements OnInit {
   //открывем или закрываем блок для написания обращений
   openEditor() {
     this.editorFlag = !this.editorFlag;
+  }
+
+  downToUpdateBlock() {
+    document.getElementById("sign")!.style.display="none"
+    setTimeout(() => {
+      this.resultsStart!.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+      });
+    })
   }
 }
 

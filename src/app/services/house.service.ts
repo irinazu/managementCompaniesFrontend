@@ -16,8 +16,8 @@ export class HouseService {
 
 
   //все дома УК по работнику
-  getHousesForMC(idUser:number):Observable<House[]>{
-    return this.httpClient.get<House[]>(`${this.URLForMap}/getHousesForMC/${idUser}`);
+  getHousesForMC(idUser:number,idMC:number):Observable<House[]>{
+    return this.httpClient.get<House[]>(`${this.URLForMap}/getHousesForMC/${idUser}/${idMC}`);
   }
 
   //все дома УК по работнику

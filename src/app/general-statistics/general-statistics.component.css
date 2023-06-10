@@ -247,6 +247,7 @@ table{
 }
 .certainMeteringDevice{
   display: flex;
+  margin-bottom: 10px;
 }
 .line{
   width: 3px;

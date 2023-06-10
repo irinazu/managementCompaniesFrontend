@@ -1,5 +1,5 @@
 .certainChat{
-  width: 50%;
+  width: 60%;
   top:75px;
   position: absolute;
   left: 20%;
@@ -440,6 +440,9 @@
 .blockWithPreviews{
   display: flex;
   padding: 5px 0 5px 60px;
+
+  position: fixed;
+  bottom: 70px;
 }
 
 /*зум*/

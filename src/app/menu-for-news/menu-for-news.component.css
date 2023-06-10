@@ -1,7 +1,10 @@
 .menuForService{
   display: flex;
-  margin-left: -1122px;
+  /*margin-left: -1122px;*/
+  width: 1080px;
+  /*margin-left: 10%;*/
   margin-bottom: 40px;
+
 }
 .menuForService div{
   margin-right: 30px;

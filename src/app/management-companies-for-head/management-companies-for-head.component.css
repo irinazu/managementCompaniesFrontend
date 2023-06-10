@@ -35,23 +35,44 @@
   width: 30px;
 }
 .houses{
-  margin-left: 10px;
-  width: 75px;
   background-color: rgba(86, 190, 159, 0.54);
 }
 .houses:hover{
   background-color: rgba(86, 190, 159, 0.73);
 }
+.workers{
+  background-color: rgba(86, 128, 190, 0.54);
+}
+.workers:hover{
+  background-color: rgba(86, 128, 190, 0.73);
+}
 .news{
-  margin-left: 10px;
-  width: 100px;
   background-color: rgba(128, 86, 190, 0.54);
 }
 .news:hover{
   background-color: rgba(128, 86, 190, 0.7);
 }
-
+.requests{
+  background-color: rgba(190, 86, 86, 0.54);
+}
+.requests:hover{
+  background-color: rgba(190, 86, 86, 0.62);
+}
+.addUser{
+  background-color: rgba(190, 157, 86, 0.54);
+}
+.addUser:hover{
+  background-color: rgba(190, 157, 86, 0.66);
+}
+.votes{
+  background-color: rgba(112, 190, 86, 0.54);
+}
+.votes:hover{
+  background-color: rgba(112, 190, 86, 0.66);
+}
 .generalButton{
+  margin-bottom: 10px;
+  margin-right: 10px;
   font-size: 17px;
   border: none;
   padding: 15px;
@@ -63,16 +84,12 @@
   box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
   cursor: pointer;
 }
-.workers{
-  width: 150px;
-  background-color: rgba(86, 128, 190, 0.54);
-}
-.workers:hover{
-  background-color: rgba(86, 128, 190, 0.73);
-}
 .buttons{
+  margin-left: 10px;
   display: flex;
-  width: 40%;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-right: 10px;
 }
 .noCompanies{
   margin-top: 20px;

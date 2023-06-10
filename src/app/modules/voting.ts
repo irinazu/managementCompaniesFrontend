@@ -2,6 +2,7 @@ import {VotingOption} from "./voting-option";
 import {HouseForSend} from "../modelsForSend/house-for-send";
 import {House} from "./house";
 import {VotingTheme} from "./voting-theme";
+import {UserSystem} from "./user-system";
 
 export class Voting {
   id:number=0;
@@ -19,6 +20,7 @@ export class Voting {
   deleteOptionsMustDeletingFromServer:VotingOption[]=[];
   housesMustAdding:House[]=[];
   housesMustDeleting:House[]=[];
+  notAnsweredUserSystem:UserSystem[]=[];
 
   allMustAnswer:number=0;
   answered:number=0;

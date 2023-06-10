@@ -66,8 +66,8 @@
         <div>Коммунальные и прочие платежи за период: {{monthShow(userCertain.serviceDTOReceipt.monthNumber)}} {{userCertain.serviceDTOReceipt.year}} года</div>
       </div>
       <div class="tableInPdfHeadTitlePayInformation">
-        Реквизиты для оплаты: Наименование организации, р/с 0000000 в Наименовании банка к/с 000000
-        БИК 00000000 ИНН 00000000 КПП 00000000 ОГРН 00000000 ОКТМО 00000000
+        Реквизиты для оплаты: {{managementCompany.title}}, р/с {{managementCompany.checkingAccount}} в {{managementCompany.bankTitle}} к/с {{managementCompany.correspondentAccount}}
+        БИК {{managementCompany.bicBank}} ИНН {{managementCompany.inn}} КПП {{managementCompany.kpp}}
       </div>
     </div>
     <div class="tableInPdfHeadMainData">

@@ -10,7 +10,7 @@
   </div>
   <div class="historyOfRequest">
 
-    <div class="noRequests" *ngIf="requests.length==0">Заявлений нет</div>
+    <div class="noRequests" *ngIf="requests==null">Заявлений нет</div>
 
     <div class="requestCard" *ngFor="let req of requests" [routerLink]="['requestHistory',req.id]">
       <div class="headRequest">

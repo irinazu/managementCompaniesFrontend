@@ -17,23 +17,23 @@
   <input type="email" placeholder="Дом" id="house"  [(ngModel)]="managementCompany.house">
   <div *ngIf="errorHouse.length!=0" class="error">{{errorHouse}}</div>
 
-  <div class="description">БИК банка</div>
+  <div class="description">БИК банка (9 цифр)</div>
   <input type="phone" placeholder="БИК банка" id="bic"  [(ngModel)]="managementCompany.bicBank">
   <div *ngIf="errorBIC.length!=0" class="error">{{errorBIC}}</div>
 
-  <div class="description">КПП</div>
+  <div class="description">КПП  (9 цифр)</div>
   <input type="text" placeholder="КПП" id="kpp"  [(ngModel)]="managementCompany.kpp">
   <div *ngIf="errorKPP.length!=0" class="error">{{errorKPP}}</div>
 
-  <div class="description">ИНН</div>
+  <div class="description">ИНН  (10 цифр)</div>
   <input type="text" placeholder="ИНН" id="inn"  [(ngModel)]="managementCompany.inn">
   <div *ngIf="errorINN.length!=0" class="error">{{errorINN}}</div>
 
-  <div class="description">Лицевой счет</div>
+  <div class="description">Лицевой счет  (20 цифр)</div>
   <input type="text" placeholder="Лицевой счет" id="checkingAccount"  [(ngModel)]="managementCompany.checkingAccount">
   <div *ngIf="errorCheckingAccount.length!=0" class="error">{{errorCheckingAccount}}</div>
 
-  <div class="description">Корреспондентский счет</div>
+  <div class="description">Корреспондентский счет  (20 цифр)</div>
   <input type="text" placeholder="Корреспондентский счет" id="correspondentAccount" [(ngModel)]="managementCompany.correspondentAccount">
   <div *ngIf="errorCorrespondentAccount.length!=0" class="error">{{errorCorrespondentAccount}}</div>
 

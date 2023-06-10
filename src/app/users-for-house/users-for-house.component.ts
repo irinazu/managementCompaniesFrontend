@@ -33,4 +33,16 @@ export class UsersForHouseComponent implements OnInit {
   go(id:number) {
     this.route.navigate(['privateOffice','menuRequests','requests',id.toString()]);
   }
+
+  goToRequestsPersonal(id: number) {
+    localStorage.setItem('modeRequests','personal');
+    localStorage.setItem('modeRequestsIdUser',id.toString());
+    this.route.navigate(['privateOffice','menuRequests','requests',true]);
+  }
+
+  goToServices(id: number) {
+    localStorage.setItem('idUserForPerson',id.toString());
+    let mcId=localStorage.getItem("mcForHouse");
+    this.route.navigate(['privateOffice','housesRequests',mcId,'usersForHouse',this.houseId,'listOfService','generalStatistics']);
+  }
 }

@@ -116,4 +116,9 @@ export class ServicesService {
   getCertainMeteringDeviceType(idMeteringDeviceType: number): Observable<MeteringDevicesType> {
     return this.httpClient.get<MeteringDevicesType>(`${this.URLForMap}/getCertainMeteringDeviceType/${idMeteringDeviceType}`);
   }
+
+  //последние блоки данных по услугам
+  getLastDataForCounters(userId: number): Observable<ServiceModel> {
+    return this.httpClient.get<ServiceModel>(`${this.URLForMap}/getLastDataForCounters/${userId}`);
+  }
 }

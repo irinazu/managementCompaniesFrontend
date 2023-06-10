@@ -1,30 +1,4 @@
-<div class="newVoteDiv">
-
-  <form id="checkBoxWithTheme">
-    <div *ngFor="let theme of setTheme">
-      <input type="checkbox" id={{theme}} name={{theme}} value={{theme}} (change)="changeTheme()">
-      <label for={{theme}}>{{theme}}</label><br>
-    </div>
-  </form>
-
-  <div class="filterForNewVoteDiv">
-    <div class="select-wrapper select-wrapperMargin">
-      <select (change)="changePeriod()" name="select-category" id="selectPeriod" class="select">
-        <option value={{chosen}} *ngFor="let chosen of periods">{{chosen}}</option>
-      </select>
-    </div>
-    <!--<div class="select-wrapper select-wrapperMargin" *ngxPermissionsExcept="'DISPATCHER'">
-      <select (change)="changeCheck()" name="select-category" id="selectCheck" class="select">
-        <option value={{check}} *ngFor="let check of checkConfirms">{{check}}</option>
-      </select>
-    </div>-->
-  </div>
-
-  <button class="createVoting" [routerLink]="'createVoting'" *ngxPermissionsExcept="'USER'">Создать Голосование</button>
-
-  <div *ngIf="votes.length==0" class="noVotes">Голосований нет</div>
-
-  <div class="certainVote" *ngFor="let vote of votes;index as i" [routerLink]="['certainVote',vote.id,mode]">
+  <div class="certainVote">
     <div class="headCertainVote">
       <div style="display: flex">
         <div class="titleWithLine">
@@ -47,18 +21,17 @@
 
     <div class="descriptionCertainVote">
       <div [innerHTML]="vote.description"></div>
-      <div class="gradientBlock"></div>
     </div>
 
     <div class="voteLines">
-      <div class="wrappingOfCertainOption" *ngFor="let option of vote.votingOptionSet" (click)="enterCheckOption(i,option.id,vote.id)">
+      <div class="wrappingOfCertainOption" *ngFor="let option of vote.votingOptionSet" (click)="enterCheckOption(option.id,vote.id)">
         <div class="optionDescription">{{option.option}}</div>
 
         <div class="optionNumberInfo">
-          <div class="certainOption" [style.width] ="countPercent(i,option.voteNumber,vote)+'%'">
+          <div class="certainOption" [style.width] ="countPercent(option.voteNumber,vote)+'%'">
             <img *ngIf="option.answerCheck" src="assets/images/free-icon-check-mark-5291043.png" class="checkMark">
           </div>
-          <div class="percent">{{countPercent(i,option.voteNumber,vote)}}%</div>
+          <div class="percent">{{countPercent(option.voteNumber,vote)}}%</div>
         </div>
 
         <div class="answersUsers" *ngxPermissionsExcept="'USER'">
@@ -82,8 +55,6 @@
       <div class="forWhomCertainVote">
         <div *ngFor="let house of vote.houses" class="certainHouse">#{{house.street}} {{house.numberOfHouse}}</div>
       </div>
-      <!--<img src="assets/images/free-icon-up-arrrows-5053186.png" class="upArrow" (click)="closeVote(i)">-->
     </div>
 
   </div>
-</div>

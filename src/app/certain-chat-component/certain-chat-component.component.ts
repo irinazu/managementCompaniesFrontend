@@ -12,6 +12,7 @@ import {PopupMaxSizeComponent} from "../popup-max-size/popup-max-size.component"
 import {MatDialog} from "@angular/material/dialog";
 import * as io from "socket.io-client";
 import {UserSystemService} from "../services/user-system.service";
+import {MapService} from "../services/map.service";
 
 
 @Component({
@@ -39,10 +40,11 @@ export class CertainChatComponentComponent implements OnInit {
     this.serviceChat.userCloseChat(this.chatId,this.userId).subscribe();
   }
 
+
   messages: MessageAndUser[] = [];
   title: string = "";
   elementPointed: any[] = [];
-  months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сент', 'нояб', 'дек',];
+  months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сент', 'окт', 'нояб', 'дек',];
   socket: any;
   indexForUpdatindMessage: number = -1;
   messageForDelete: number[] = [];
@@ -208,7 +210,7 @@ export class CertainChatComponentComponent implements OnInit {
 
     //Обновляет картинку чата от других пользователей
     this.socket.on("takeNewImgOfChat",(imgOfChat:ImageModel)=>{
-      this.imageOfChat=imgOfChat;
+      this.imageOfChat=this.createFImg(imgOfChat);
     })
   }
 
@@ -315,7 +317,6 @@ export class CertainChatComponentComponent implements OnInit {
     }
     let newMessageInDoc = new MessageAndUser();
     newMessageInDoc.setArgsForUpdate(idForUpdating,messageUpdater.content,this.imgForEditMessage)
-
     this.serviceChat.updateMessage(idForUpdating,messageUpdater).subscribe(value => {
 
       if(this.separateFileForSend.length!=0){
@@ -336,6 +337,8 @@ export class CertainChatComponentComponent implements OnInit {
           this.separateFileForSend=[];
           (<HTMLInputElement>document.getElementById("newMessage")).value = "";
         }, 500)
+      }else {
+        this.socket.emit("updateMessage",newMessageInDoc);
       }
       this.cancelUpdateMessage();
     });
@@ -589,5 +592,12 @@ export class CertainChatComponentComponent implements OnInit {
   closePurposeImg() {
     this.flagPurpose = false;
     document.getElementById("blockWithZoomImgAndCross")!.setAttribute("style", " display: none;")
+  }
+
+  userCheck(mes: MessageAndUser) {
+    if(mes.user_system_id!=this.userId){
+      return false;
+    }
+    return true;
   }
 }

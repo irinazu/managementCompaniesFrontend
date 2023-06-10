@@ -18,10 +18,15 @@ export class NewsRedactionComponent implements OnInit {
   errorHeader:string="";
   errorContent:string="";
   id:number=-1;
+  role: string="";
+  idMC: number=0;
 
   constructor(private newsService:NewsService,private router: ActivatedRoute,private route: Router) { }
 
   ngOnInit(): void {
+    this.idMC=Number(this.router.snapshot.params['idMC']);
+    this.role=localStorage.getItem("role")!;
+
     //получаем все тэги
     this.newsService.getAllTags().subscribe(value => {
       this.tags=value;
@@ -47,7 +52,11 @@ export class NewsRedactionComponent implements OnInit {
     if(this.news.header.length!=0){
       if(this.news.content.length!=0){
         this.newsService.updateNews(this.news).subscribe(value => {
-          this.route.navigate(['privateOffice','menuNews','allNews','all']);
+          if(this.role=="DISPATCHER"){
+            this.route.navigate(['privateOffice','menuNews','allNews','all']);
+          }else {
+            this.route.navigate(['privateOffice','managementCompaniesForHead','menuNews','allNews','allMC',this.idMC]);
+          }
         });
       }else {
         this.errorContent="Статья не должна быть пустой";

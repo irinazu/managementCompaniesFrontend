@@ -1,9 +1,12 @@
 <div class="certainNews">
     <div class="topOfNews">
-      <div class="headerNews">{{news.header}}</div>
+      <div>
+        <div class="headerNews">{{news.header}}</div>
+        <div class="author">Автор публикации: {{news.creator.surname}} {{news.creator.name}} {{news.creator.patronymic}}</div>
+      </div>
       <div>
         <div class="dateNews">{{news.dateOfPublication|date:"dd-MM-yyyy HH:mm"}}</div>
-        <div *ngIf="checkId()">
+        <div *ngIf="checkId()||checkRole()">
           <button class="reductionButton" [routerLink]="['reductionNews',news.id]">Редактровать</button>
         </div>
       </div>

@@ -49,6 +49,7 @@ import {AllChatComponent} from "./all-chat/all-chat.component";
 import {CertainChatComponentComponent} from "./certain-chat-component/certain-chat-component.component";
 import {MeteringDevicesComponent} from "./metering-devices/metering-devices.component";
 import {AddMeteringDeviceComponent} from "./add-metering-device/add-metering-device.component";
+import {CertainVoteComponent} from "./certain-vote/certain-vote.component";
 
 const routes: Routes = [
   {path: '',component:MainPageComponent},
@@ -96,24 +97,65 @@ const routes: Routes = [
       {path: 'managementCompaniesForHead/workers/:idMC',component: WorkersComponent},
       {path: 'managementCompaniesForHead/workers/:idMC/addWorker/:idMC/:idWorker',component: AddWorkerComponent},
 
+      {path: 'managementCompaniesForHead/addUser/:idMC',component: AddUserComponent},
       {path: 'managementCompaniesForHead/housesRequests/:idMC',component: HousesRequestsComponent},
       {path: 'managementCompaniesForHead/housesRequests/:idMC/addHouse/:idMC/:idHouse',component: AddHouseComponent},
 
       {path: 'housesRequests/:idMC',component: HousesRequestsComponent},
       {path: 'housesRequests/:idMC/usersForHouse/:houseId',component: UsersForHouseComponent},
+
+      {path: 'housesRequests/:idMC/usersForHouse/:houseId/listOfService',component:ListOfServicesComponent,children:[
+          {path:'serviceMenuCounter/:id',component:MenuForServiceComponent, children:[
+              {path:'newDataCounter/:id',component:NewDataCounterComponent},
+              {path:'statisticsService/:id',component:StatisticsForServiceComponent},
+              {path:'historyOfService/:id',component:HistoryOfServiceComponent},
+              {path:'debtsOfCertainService/:id',component:DebtsComponent}
+            ]},
+          {path:'generalStatistics',component:GeneralStatisticsComponent},
+          {path:'payments',component:PaymentsComponent},
+        ]},
+
+      {path: 'housesRequests/:idMC/usersForHouse/:houseId/menuRequests',component:MenuForRequestComponent,children:
+          [
+            {path: 'requests/:mode',component:RequestsComponent},
+            {path: 'requests/:mode/createRequest',component:CreateRequestComponent},
+            {path: 'requests/:mode/requestHistory/:id',component: CertainRequestComponent},
+          ]
+      },
+
+      {path: 'housesRequests/:idMC/menuRequests',component:MenuForRequestComponent,children:
+          [
+            {path: 'requests/:mode',component:RequestsComponent},
+            {path: 'requests/:mode/createRequest',component:CreateRequestComponent},
+            {path: 'requests/:mode/requestHistory/:id',component: CertainRequestComponent},
+          ]
+      },
+
+      {path: 'managementCompaniesForHead/menuVoting',component: MenuForVotingComponent,children:
+          [
+            {path: 'vote/:mode',component: NewVoteComponent},
+            {path: 'vote/:mode/certainVote/:idVote/:mode',component: CertainVoteComponent},
+            {path: 'vote/:mode/certainVote/:idVote/:mode/updateVoting/:voteId',component: VotingReductionComponent},
+            {path: 'vote/:mode/createVoting',component:CreateVotingComponent},
+            {path: 'vote/:mode/updateVoting/:voteId',component:VotingReductionComponent},
+
+          ]
+      },
+
       {path: 'housesRequests/:idMC/usersForHouse/:houseId/meteringDevices/:userId',component: MeteringDevicesComponent},
       {path: 'housesRequests/:idMC/usersForHouse/:houseId/meteringDevices/:userId/addMeteringDevices/:meteringDevicesIdType/:idMeteringDevice',component: AddMeteringDeviceComponent},
       {path: 'housesRequests/:idMC/report/:houseId/:modeReport',component: ReportComponent},
+      {path: 'managementCompaniesForHead/housesRequests/:idMC/report/:houseId/:modeReport',component: ReportComponent},
 
       {path: 'privateAccount',component: PersonalAccountComponent},
 
       {path: 'menuNews',component:MenuForNewsComponent,children:
           [
-            {path: 'allNews/:mode',component: AllNewsComponent},
-            {path: 'allNews/:mode/createNews',component: CreateNewsComponent},
-            {path: 'allNews/:mode/reductionNews/:id',component: NewsRedactionComponent},
-            {path: 'allNews/:mode/certainNews/:id',component: CertainNewsComponent},
-            {path: 'allNews/:mode/certainNews/:id/reductionNews/:id',component: NewsRedactionComponent},
+            {path: 'allNews/:mode/:idMC',component: AllNewsComponent},
+            {path: 'allNews/:mode/:idMC/createNews',component: CreateNewsComponent},
+            {path: 'allNews/:mode/:idMC/reductionNews/:id',component: NewsRedactionComponent},
+            {path: 'allNews/:mode/:idMC/certainNews/:id',component: CertainNewsComponent},
+            {path: 'allNews/:mode/:idMC/certainNews/:id/reductionNews/:id',component: NewsRedactionComponent},
 
           ]
       },
@@ -121,6 +163,8 @@ const routes: Routes = [
       {path: 'menuVoting',component: MenuForVotingComponent,children:
           [
             {path: 'vote/:mode',component: NewVoteComponent},
+            {path: 'vote/:mode/certainVote/:idVote/:mode',component: CertainVoteComponent},
+            {path: 'vote/:mode/certainVote/:idVote/:mode/updateVoting/:voteId',component: VotingReductionComponent},
             {path: 'vote/:mode/createVoting',component:CreateVotingComponent},
             {path: 'vote/:mode/updateVoting/:voteId',component:VotingReductionComponent},
 
@@ -129,11 +173,21 @@ const routes: Routes = [
 
 
       {path: 'createNews',component: CreateNewsComponent},
-      {path: 'allNews/:mode',component: AllNewsComponent},
-      {path: 'allNews/:mode/certainNews/:id',component: CertainNewsComponent},
+      {path: 'allNews/:mode/:idMC/',component: AllNewsComponent},
+      {path: 'allNews/:mode/:idMC/certainNews/:id',component: CertainNewsComponent},
 
-      {path: 'managementCompaniesForHead/allNews/:mode',component: AllNewsComponent},
-      {path: 'managementCompaniesForHead/allNews/:mode/certainNews/:id',component: CertainNewsComponent},
+      /*HEAD,ADMIN*/
+
+      {path: 'managementCompaniesForHead/menuNews',component:MenuForNewsComponent,children:
+          [
+            {path: 'allNews/:mode/:idMC',component: AllNewsComponent},
+            {path: 'allNews/:mode/:idMC/createNews',component: CreateNewsComponent},
+            {path: 'allNews/:mode/:idMC/reductionNews/:id',component: NewsRedactionComponent},
+            {path: 'allNews/:mode/:idMC/certainNews/:id/reductionNews/:id',component: NewsRedactionComponent},
+            {path: 'allNews/:mode/:idMC/certainNews/:id',component: CertainNewsComponent},
+
+          ]
+      },
 
       {path: 'listOfService',component:ListOfServicesComponent,children:[
           {path:'serviceMenuCounter/:id',component:MenuForServiceComponent, children:[

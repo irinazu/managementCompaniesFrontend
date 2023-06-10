@@ -23,6 +23,13 @@
   background-color: rgba(86, 190, 159, 0.44);
   border-radius: 3px;
 }
+.userDescription{
+  width: 60%;
+}
+.preregistrationText{
+  opacity: 0.7;
+  margin-top: 5px;
+}
 .nameUserSystem{
   display: flex;
   font-weight: bold;
@@ -34,15 +41,15 @@
   display: flex;
   justify-content: space-between;
 }
-.requestsCertainUserSystem,.meteringDevices{
-  width: 49%;
+.requestsCertainUserSystem,.meteringDevices,.services{
+  width: 33%;
   font-size: 17px;
   border: none;
   padding: 10px;
   border-radius: 4px;
   transition: 0.5s ease-in-out;
 }
-.requestsCertainUserSystem:hover,.meteringDevices:hover{
+.requestsCertainUserSystem:hover,.meteringDevices:hover,.services:hover{
   padding: 10px;
   transition: 0.5s ;
   box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
@@ -60,6 +67,12 @@
 .meteringDevices:hover{
   background-color: rgba(86, 128, 190, 0.82);
 }
+.services{
+  background-color: rgba(176, 86, 190, 0.54);
+}
+.services:hover{
+  background-color: rgba(176, 86, 190, 0.64);
+}
 /*house*/
 .houseForUser{
   margin-bottom: 10px;
@@ -68,4 +81,17 @@
   box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
   padding: 40px;
   font-weight: bold;
+}
+
+/*status*/
+.status{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+.preregistration{
+  width: 60px;
 }

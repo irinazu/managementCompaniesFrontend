@@ -34,9 +34,13 @@ export class AddUserComponent implements OnInit {
   entrances:Entrance[]=[];
   houseChoiceMember:number=0;
   entranceChoiceMember:number=0;
-
+  idMC:number=0;
   ngOnInit(): void {
-    this.houseService.getHousesForMC(Number(localStorage.getItem("id"))).subscribe(value => {
+    this.idMC=Number(this.router.snapshot.params['idMC']);
+    if(!this.idMC){
+      this.idMC=0;
+    }
+    this.houseService.getHousesForMC(Number(localStorage.getItem("id")),this.idMC).subscribe(value => {
       this.housesMC=value;
     })
   }
@@ -82,7 +86,8 @@ export class AddUserComponent implements OnInit {
         if(value){
           this.user=new UserSystem();
           (<HTMLInputElement>document.getElementById("houses_"+this.houseChoiceMember))!.checked=false;
-          (<HTMLInputElement>document.getElementById("entrances_"+this.entrances))!.checked=false;
+          //(<HTMLInputElement>document.getElementById("entrances_"+this.entrances))!.checked=false;
+          this.entrances=[];
 
         }else {
           this.errorExist="Житель с подобным лицевым счетом уже привязан к данной Управляющей компании"

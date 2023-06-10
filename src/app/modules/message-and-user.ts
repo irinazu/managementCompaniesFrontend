@@ -22,8 +22,9 @@ export class MessageAndUser {
     this.date=date;
   }
 
-  setArgsForUpdate(user_system_id:number,content:string,listImgInNumber:number[]){
-    this.user_system_id=user_system_id;
+  setArgsForUpdate(id:number,content:string,listImgInNumber:number[]){
+    this.id=id;
+    //this.user_system_id=user_system_id;
     this.content=content;
     this.listImgInNumber=listImgInNumber;
   }

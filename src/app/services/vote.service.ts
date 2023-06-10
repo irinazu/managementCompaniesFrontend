@@ -30,18 +30,23 @@ export class VoteService {
 
   /*dispatcher*/
   //создание нового голосования
-  createVoting(voting:Voting,idUser:number):Observable<any>{
-    return this.httpClient.post<any>(`${this.URLForMap}/createVoting/${idUser}`,voting);
+  createVoting(voting:Voting,idUser:number,idMC:number):Observable<any>{
+    return this.httpClient.post<any>(`${this.URLForMap}/createVoting/${idUser}/${idMC}`,voting);
   }
 
   //все голосования с mode
-  getAllVoteWithMode(mode:string,idUser:number,role:string):Observable<Voting[]>{
-    return this.httpClient.get<Voting[]>(`${this.URLForMap}/getAllVoteWithMode/${mode}/${idUser}/${role}`);
+  getAllVoteWithMode(mode:string,idUser:number,role:string,idMC:number):Observable<Voting[]>{
+    return this.httpClient.get<Voting[]>(`${this.URLForMap}/getAllVoteWithMode/${mode}/${idUser}/${role}/${idMC}`);
   }
 
   //определенное голосование
   getCertainVoting(idVoting: number) :Observable<Voting>{
     return this.httpClient.get<Voting>(`${this.URLForMap}/getCertainVoting/${idVoting}`);
+  }
+
+  //определенное голосование
+  getCertainVotingForPage(idVoting: number,idUser:number) :Observable<Voting>{
+    return this.httpClient.get<Voting>(`${this.URLForMap}/getCertainVotingForPage/${idVoting}/${idUser}`);
   }
 
   //обновление голосования

@@ -25,7 +25,7 @@ export class HousesRequestsComponent implements OnInit {
   ngOnInit(): void {
     if(localStorage.getItem("role")=="DISPATCHER"||localStorage.getItem("role")=="ACCOUNTANT"){
       //находим все дома
-      this.houseService.getHousesForMC(Number(localStorage.getItem("id"))).subscribe(value => {
+      this.houseService.getHousesForMC(Number(localStorage.getItem("id")),0).subscribe(value => {
         this.houses=value;
       })
 
@@ -46,6 +46,7 @@ export class HousesRequestsComponent implements OnInit {
   }
 
   openUsersForCertainHouse(id: number) {
+    localStorage.setItem("mcForHouse",this.managementCompany.id.toString());
     this.route.navigate(['privateOffice','housesRequests',this.managementCompany.id,'usersForHouse',id]);
   }
 }

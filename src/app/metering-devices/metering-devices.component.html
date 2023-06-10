@@ -12,6 +12,10 @@
     </div>
     <div class="meteringDeviceDetails">
       <div><span class="description">Тип: </span> {{md.meteringDevicesType.title}}</div>
+      <span *ngIf="md.serviceDTO.consumption!=null">
+        <div><span class="description">Дата последних показаний: </span> {{md.serviceDTO.monthNumber+1}}-{{md.serviceDTO.year}}</div>
+        <div><span class="description">Показания: </span> {{md.serviceDTO.consumption}} {{md.serviceDTO.serviceDescription.unit}}</div>
+      </span>
       <span *ngIf="md.series!=null">
         <div><span class="description">Серия: </span> {{md.series}}</div>
         <div><span class="description">Дата установки: </span> {{md.startDate |date:"dd-MM-yyyy"}}</div>

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NewsService} from "../services/news.service";
 import {Tag} from "../modules/tag";
 import {News} from "../modules/news";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-news',
@@ -17,10 +17,14 @@ export class CreateNewsComponent implements OnInit {
   newNews:News=new News();
   errorHeader:string="";
   errorContent:string="";
-
-  constructor(private newsService:NewsService,private router:Router) { }
+  role:string="";
+  idMC:number=0;
+  constructor(private newsService:NewsService,private router:Router,private activeRouter:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.idMC=Number(this.activeRouter.snapshot.params['idMC']);
+
+    this.role=localStorage.getItem("role")!;
     this.newsService.getAllTags().subscribe(value => {
       this.tags=value;
     })
@@ -40,10 +44,12 @@ export class CreateNewsComponent implements OnInit {
       this.newNews.header=header;
       if(this.ngModel!=undefined){
         this.newNews.content=this.ngModel;
-        this.newsService.createNewNews(this.newNews,Number(localStorage.getItem("id"))).subscribe(value => {
-          this.router.navigate(['privateOffice','menuNews','allNews','all']);
-
-        });
+        this.newsService.createNewNews(this.newNews,Number(localStorage.getItem("id")),this.idMC).subscribe();
+        if(this.role=="DISPATCHER"){
+          this.router.navigate(['privateOffice','menuNews','allNews','all',0]);
+        }else {
+          this.router.navigate(['privateOffice','managementCompaniesForHead','menuNews','allNews','allMC',this.idMC]);
+        }
       }else {
         this.errorContent="Статья не должна быть пустой";
       }

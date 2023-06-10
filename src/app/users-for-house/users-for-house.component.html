@@ -6,7 +6,7 @@
   <div class="usersBlock">
     <div *ngFor="let userSystem of userSystems" class="certainUserSystem">
       <div class="blockUserSystem">
-      <div class="verticalLine"></div>
+        <div class="verticalLine"></div>
         <div class="userDescription">
           <div class="nameUserSystem">
             <div>ФИО: {{userSystem.name}}</div>
@@ -18,10 +18,16 @@
           <div>Email: {{userSystem.email}}</div>
           <div>Номер личного счета: {{userSystem.accountNumber}}</div>
         </div>
+        <div class="status" *ngIf="userSystem.email!=null">
+          <img src="assets/images/preregistration.png" class="preregistration">
+          <div class="preregistrationText">Регистрация пройдена</div>
+        </div>
       </div>
-      <div *ngxPermissionsOnly="'DISPATCHER'" class="buttons">
-        <button class="requestsCertainUserSystem" (click)="go(userSystem.id)">Заявления</button>
+      <div *ngxPermissionsExcept="'ACCOUNTANT'" class="buttons">
+        <button class="requestsCertainUserSystem" (click)="goToRequestsPersonal(userSystem.id)" >Заявления</button>
         <button class="meteringDevices" [routerLink]="['meteringDevices',userSystem.id]">Индивидуальные приборы учета</button>
+        <button class="services" (click)="goToServices(userSystem.id)">Услуги</button>
+
       </div>
     </div>
   </div>

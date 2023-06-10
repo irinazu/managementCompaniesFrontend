@@ -20,6 +20,7 @@ export class NewDataCounterComponent implements OnInit {
   noLastData:boolean=false;
   sameDate:boolean=false;
   serviceDescription:ServiceDescription=new ServiceDescription();
+  role:string="";
 
   constructor(private serviceForData:ServicesService,private router:ActivatedRoute) {
     this.router.paramMap.subscribe(paramMap => {
@@ -30,7 +31,12 @@ export class NewDataCounterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userId=Number(localStorage.getItem("id"));
+    this.role=localStorage.getItem("role")!;
+    if(this.role=="USER"){
+      this.userId=Number(localStorage.getItem("id"));
+    }else {
+      this.userId=Number(localStorage.getItem("idUserForPerson"));
+    }
     this.serviceDescriptionId=Number(this.router.snapshot.params['id']);
 
     //находим описание услуги

@@ -59,4 +59,8 @@ export class ManagementCompaniesService {
     return this.httpClient.post<any>(`${this.URLForMap}/addMC/${idHead}`,mc);
   }
 
+  //УК по дому
+  getMCByHouse(idHouse: number):Observable<ManagementCompany>{
+    return this.httpClient.get<ManagementCompany>(`${this.URLForMap}/getMCByHouse/${idHouse}`);
+  }
 }
