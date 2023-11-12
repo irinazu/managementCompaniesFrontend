@@ -43,7 +43,7 @@ export class CertainVoteComponent implements OnInit {
         newOption.userSystemDTOS.push(user);
 
         //обновляем новый выбранный элемент
-        newOption.answerCheck=true;
+        //newOption.answerCheck=true;
         newOption.voteNumber=newOption.voteNumber+1;
       }else {
         let newOption=this.vote.votingOptionSet.find(x=>x.id==optionIdNew)!;
@@ -53,11 +53,11 @@ export class CertainVoteComponent implements OnInit {
         newOption.userSystemDTOS.push(user);
         oldOption.userSystemDTOS.splice(indexUserInOldOption,1);
 
-        oldOption.answerCheck=false;
+        //oldOption.answerCheck=false;
         oldOption.voteNumber=oldOption.voteNumber-1;
 
         //обновляем новый выбранный элемент
-        newOption.answerCheck=true;
+        //newOption.answerCheck=true;
         newOption.voteNumber=newOption.voteNumber+1;
       }
     })
